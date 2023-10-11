@@ -117,8 +117,12 @@
               } else {
                 encodedText = text;
               }
+              calculate();
               pasted = true;
             });
+          }}
+          on:focusout={(e) => {
+            pasted = false;
           }}
         >
           <i>{pasted ? "done" : "content_paste"}</i>
@@ -134,6 +138,9 @@
               copy(decodedText);
             }
             copied = true;
+          }}
+          on:focusout={(e) => {
+            pasted = false;
           }}
         >
           <i>{copied ? "done" : "content_copy"}</i>
