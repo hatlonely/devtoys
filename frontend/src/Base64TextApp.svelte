@@ -168,7 +168,7 @@
   <div class="medium-space" />
 
   <div
-    class={"field textarea label border" +
+    class={"field textarea label border extra" +
       (operation === "decode" ? " fill" : "")}
   >
     <textarea
@@ -181,7 +181,7 @@
   </div>
 
   <div
-    class={"field textarea label border" +
+    class={"field textarea label border extra" +
       (decodeError ? " invalid" : "") +
       (operation === "encode" ? " fill" : "")}
   >
