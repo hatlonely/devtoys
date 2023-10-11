@@ -17,6 +17,8 @@
       value: "decode",
     },
   ];
+
+  let decodeError = "";
 </script>
 
 <main>
@@ -53,10 +55,14 @@
     </button>
   </nav>
 
-  <div class="field textarea label border">
+  <div
+    class={"field textarea label border" +
+      (operation === "decode" ? " fill" : "")}
+  >
     <textarea
       bind:value={plainText}
       name="plainTextArea"
+      disabled={operation === "decode"}
       on:change={(e) => {
         if (operation === "encode") {
           Base64Encode(plainText).then((result) => {
@@ -68,18 +74,29 @@
     <label for="plainTextArea">编码前字符串</label>
   </div>
 
-  <div class="field textarea label border">
+  <div
+    class={"field textarea label border" +
+      (decodeError ? " invalid" : "") +
+      (operation === "encode" ? " fill" : "")}
+  >
     <textarea
       bind:value={encodedText}
       name="encodeTextArea"
+      disabled={operation === "encode"}
       on:change={(e) => {
         if (operation === "decode") {
-          Base64Decode(encodedText).then((result) => {
-            plainText = result;
-          });
+          Base64Decode(encodedText)
+            .then((result) => {
+              plainText = result;
+              decodeError = "";
+            })
+            .catch((err) => {
+              decodeError = err;
+            });
         }
       }}
     />
     <label for="encodeTextArea">解码后字符串</label>
+    <span class="error">{decodeError}</span>
   </div>
 </main>
