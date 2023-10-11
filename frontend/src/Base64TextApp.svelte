@@ -27,11 +27,11 @@
 
   let type_infos = [
     {
-      text: "URL",
+      text: "URL编码",
       value: "url",
     },
     {
-      text: "STD",
+      text: "STD编码",
       value: "std",
     },
   ];
@@ -126,7 +126,7 @@
           }}
         >
           <i>{pasted ? "done" : "content_paste"}</i>
-          <div class="tooltip">paste</div>
+          <div class="tooltip">粘贴</div>
         </button>
         <!-- 复制按钮 -->
         <button
@@ -144,11 +144,28 @@
           }}
         >
           <i>{copied ? "done" : "content_copy"}</i>
-          <div class="tooltip">copy</div>
+          <div class="tooltip">复制</div>
+        </button>
+        <!-- 清空按钮 -->
+        <button
+          class="border square round small"
+          on:click={(e) => {
+            if (operation === "encode") {
+              decodedText = "";
+            } else {
+              encodedText = "";
+            }
+            calculate();
+          }}
+        >
+          <i>{copied ? "done" : "delete"}</i>
+          <div class="tooltip">清空</div>
         </button>
       </nav>
     </div>
   </div>
+
+  <div class="medium-space" />
 
   <div
     class={"field textarea label border" +
