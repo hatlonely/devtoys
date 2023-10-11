@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "beercss": "^3.4.0",
-    "material-dynamic-colors": "^1.0.5"
+    "copy-to-clipboard": "^3.3.3",
+    "material-dynamic-colors": "^1.0.5",
+    "svelte-copy-to-clipboard": "^0.2.5"
   }
 }
