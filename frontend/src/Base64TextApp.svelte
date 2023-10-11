@@ -3,9 +3,12 @@
   import "material-dynamic-colors";
   import { Base64Decode, Base64Encode } from "../wailsjs/go/apps/Base64TextApp";
 
-  let plainText = "";
+  let decodedText = "";
   let encodedText = "";
   let operation = "encode";
+  let type_ = "std";
+  let raw = false;
+  let decodeError = "";
 
   let operation_infos = [
     {
@@ -18,14 +21,24 @@
     },
   ];
 
-  let decodeError = "";
+  let type_infos = [
+    {
+      text: "URL",
+      value: "url",
+    },
+    {
+      text: "STD",
+      value: "std",
+    },
+  ];
 </script>
 
-<main>
+<main class="responsive">
   <h3>Base64文本编解码</h3>
 
-  <div class="field middle-align">
+  <div class="field middle-align no-margin">
     <nav>
+      <div class="s1"><b>操作</b></div>
       {#each operation_infos as info}
         <label class="radio">
           <input
@@ -37,6 +50,33 @@
           <span>{info.text}</span>
         </label>
       {/each}
+    </nav>
+  </div>
+
+  <div class="field middle-align no-margin">
+    <nav>
+      <div class="s1"><b>类型</b></div>
+      {#each type_infos as info}
+        <label class="radio">
+          <input
+            type="radio"
+            name={info.text}
+            value={info.value}
+            bind:group={type_}
+          />
+          <span>{info.text}</span>
+        </label>
+      {/each}
+    </nav>
+  </div>
+
+  <div class="field middle-align no-margin">
+    <nav>
+      <div class="s1"><b>RAW</b></div>
+      <label class="switch">
+        <input type="checkbox" bind:checked={raw} />
+        <span />
+      </label>
     </nav>
   </div>
 
@@ -60,18 +100,18 @@
       (operation === "decode" ? " fill" : "")}
   >
     <textarea
-      bind:value={plainText}
-      name="plainTextArea"
+      bind:value={decodedText}
+      name="decodedTextArea"
       disabled={operation === "decode"}
       on:change={(e) => {
         if (operation === "encode") {
-          Base64Encode(plainText).then((result) => {
+          Base64Encode(decodedText, type_, raw).then((result) => {
             encodedText = result;
           });
         }
       }}
     />
-    <label for="plainTextArea">编码前字符串</label>
+    <label for="decodedTextArea">编码前字符串</label>
   </div>
 
   <div
@@ -85,9 +125,9 @@
       disabled={operation === "encode"}
       on:change={(e) => {
         if (operation === "decode") {
-          Base64Decode(encodedText)
+          Base64Decode(encodedText, type_, raw)
             .then((result) => {
-              plainText = result;
+              decodedText = result;
               decodeError = "";
             })
             .catch((err) => {
