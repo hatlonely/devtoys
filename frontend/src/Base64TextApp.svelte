@@ -158,7 +158,7 @@
             calculate();
           }}
         >
-          <i>{copied ? "done" : "delete"}</i>
+          <i>delete</i>
           <div class="tooltip">清空</div>
         </button>
       </nav>
