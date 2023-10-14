@@ -27,7 +27,6 @@
 	function calculate() {
 		AnalystTimeInfo(input)
 			.then((res) => {
-				console.log(res);
 				info = res;
 				warning = '';
 			})
