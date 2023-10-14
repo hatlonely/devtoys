@@ -177,7 +177,7 @@
 			{/if}
 
 			{#if output}
-				<div class="w-full card p-4 shadow">
+				<div class="w-full card p-4">
 					<button
 						type="button"
 						class="btn btn-sm p-0 float-right"
