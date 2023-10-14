@@ -2,8 +2,8 @@
 	import 'material-symbols';
 	import { AppShell } from '@skeletonlabs/skeleton';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-	import { CodeBlock } from '@skeletonlabs/skeleton';
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/apps/Base64TextApp';
+	import { clipboard } from '@skeletonlabs/skeleton';
 
 	let op = 'encode';
 	let mode = 'std';
@@ -11,6 +11,7 @@
 	let input = '';
 	let output = '';
 	let warning = '';
+	let copied = false;
 
 	function calculate() {
 		if (op === 'encode') {
@@ -40,7 +41,16 @@
 	function updateTextareaHeight(event: Event) {
 		const target = event.target as HTMLTextAreaElement;
 		target.style.height = 'auto';
-		target.style.height = `${target.scrollHeight + 1}px`;
+
+		const screenHeight = window.innerHeight;
+		const textareaBottom = target.getBoundingClientRect().bottom;
+		const textareaHeight = target.offsetHeight;
+
+		if (target.scrollHeight > window.innerHeight / 3) {
+			target.style.height = `${window.innerHeight / 3}px`;
+		} else {
+			target.style.height = `${target.scrollHeight + 1}px`;
+		}
 	}
 
 	$: op, calculate();
@@ -114,13 +124,14 @@
 			<textarea
 				bind:value={input}
 				on:input={calculate}
-				class="textarea"
+				on:input={updateTextareaHeight}
+				class="textarea app-code"
 				rows="4"
 				placeholder="输入要编码/解码的文本"
 			/>
 
 			{#if warning}
-				<div class="alert variant-filled-error">
+				<div class="alert variant-filled-error app-code">
 					<span class="material-symbols-outlined">warning</span>
 					<div class="alert-message" data-toc-ignore>
 						<h3 class="h3" data-toc-ignore>Warning</h3>
@@ -129,7 +140,40 @@
 				</div>
 			{/if}
 
-			<CodeBlock bind:code={output} />
+			{#if output}
+				<div class="w-full card p-4 app-code" data-clipboard="exampleElement">
+					<div class="float-right">
+						<button
+							type="button"
+							class="btn btn-sm"
+							on:click={() => {
+								copied = true;
+								setTimeout(() => {
+									copied = false;
+								}, 2000);
+							}}
+							use:clipboard={output}
+						>
+							<span class="material-symbols-outlined">
+								{copied ? 'done' : 'content_copy'}
+							</span>
+						</button>
+					</div>
+					{output}
+				</div>
+			{/if}
 		</div>
 	</svelte:fragment>
 </AppShell>
+
+<style>
+	.app-code {
+		font-size: 0.8rem;
+		font-family: 'Courier New', Courier, monospace;
+		overflow-wrap: anywhere;
+	}
+
+	.material-symbols-outlined {
+		font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+	}
+</style>
