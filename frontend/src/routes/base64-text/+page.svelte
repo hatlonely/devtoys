@@ -12,6 +12,8 @@
 	let output = '';
 	let warning = '';
 	let copied = false;
+	let pasted = false;
+	let cleared = false;
 
 	function calculate() {
 		if (op === 'encode') {
@@ -36,6 +38,11 @@
 			input = text;
 			calculate();
 		});
+	}
+
+	function clear() {
+		input = '';
+		output = '';
 	}
 
 	function updateTextareaHeight(event: Event) {
@@ -114,13 +121,40 @@
 			</div>
 
 			<div class="flex flex-row-reverse">
-				<button type="button" class="btn btn-sm variant-filled mx-2">
-					<span>清空</span> <span class="material-symbols-outlined">delete</span>
+				<button
+					on:click={clear}
+					on:click={() => {
+						cleared = true;
+						setTimeout(() => {
+							cleared = false;
+						}, 2000);
+					}}
+					type="button"
+					class="btn btn-sm variant-filled mx-2"
+				>
+					<span>清空</span>
+					<span class="material-symbols-outlined">
+						{cleared ? 'done' : 'delete'}
+					</span>
 				</button>
-				<button type="button" class="btn btn-sm variant-filled mx-2">
-					<span>粘贴</span> <span class="material-symbols-outlined">content_paste</span>
+				<button
+					on:click={paste}
+					on:click={() => {
+						pasted = true;
+						setTimeout(() => {
+							pasted = false;
+						}, 2000);
+					}}
+					type="button"
+					class="btn btn-sm variant-filled mx-2"
+				>
+					<span>粘贴</span>
+					<span class="material-symbols-outlined">
+						{pasted ? 'done' : 'content_paste'}
+					</span>
 				</button>
 			</div>
+
 			<textarea
 				bind:value={input}
 				on:input={calculate}
@@ -141,24 +175,22 @@
 			{/if}
 
 			{#if output}
-				<div class="w-full card p-4 app-code" data-clipboard="exampleElement">
-					<div class="float-right">
-						<button
-							type="button"
-							class="btn btn-sm"
-							on:click={() => {
-								copied = true;
-								setTimeout(() => {
-									copied = false;
-								}, 2000);
-							}}
-							use:clipboard={output}
-						>
-							<span class="material-symbols-outlined">
-								{copied ? 'done' : 'content_copy'}
-							</span>
-						</button>
-					</div>
+				<div class="w-full card p-4 app-code shadow">
+					<button
+						type="button"
+						class="btn btn-sm p-0 float-right"
+						on:click={() => {
+							copied = true;
+							setTimeout(() => {
+								copied = false;
+							}, 2000);
+						}}
+						use:clipboard={output}
+					>
+						<span class="material-symbols-outlined">
+							{copied ? 'done' : 'content_copy'}
+						</span>
+					</button>
 					{output}
 				</div>
 			{/if}
