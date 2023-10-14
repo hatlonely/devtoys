@@ -65,20 +65,13 @@
 				<span class="badge-icon variant-soft-secondary mt-2">
 					<span class="material-symbols-outlined">schedule</span>
 				</span>
-				<span class="flex-auto ml-5 w-fit">
+				<span class="flex-auto ml-5">
 					<dt class="font-bold">时间</dt>
 					<dd class="text-sm opacity-50">任意的合法的时间格式均可</dd>
 				</span>
 			</span>
 
-			<span class="flex-auto">
-				<input
-					bind:value={input}
-					on:input={calculate}
-					class="input app-code"
-					placeholder="输入时间"
-				/>
-			</span>
+			<span class="flex-auto" />
 
 			<span class="flex-right">
 				<button
@@ -90,7 +83,7 @@
 						}, 2000);
 					}}
 					type="button"
-					class="btn btn-sm variant-filled mx-2"
+					class="btn btn-sm variant-filled-primary mx-2"
 				>
 					<span>粘贴</span>
 					<span class="material-symbols-outlined">
@@ -107,7 +100,7 @@
 						}, 2000);
 					}}
 					type="button"
-					class="btn btn-sm variant-filled mx-2"
+					class="btn btn-sm variant-filled-primary mx-2"
 				>
 					<span>当前时间</span>
 					<span class="material-symbols-outlined">
@@ -117,6 +110,8 @@
 			</span>
 		</div>
 	</div>
+
+	<input bind:value={input} on:input={calculate} class="input app-code" placeholder="输入时间" />
 
 	{#if warning}
 		<div class="alert variant-filled-error app-code">
@@ -157,7 +152,7 @@
 
 <style>
 	.app-code {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		font-family: 'Roboto Mono', monospace;
 		overflow-wrap: anywhere;
 		white-space: pre-wrap; /* Since CSS 2.1 */

@@ -129,7 +129,7 @@
 				}, 2000);
 			}}
 			type="button"
-			class="btn btn-sm variant-filled mx-2"
+			class="btn btn-sm variant-filled-primary mx-2"
 		>
 			<span>清空</span>
 			<span class="material-symbols-outlined">
@@ -145,7 +145,7 @@
 				}, 2000);
 			}}
 			type="button"
-			class="btn btn-sm variant-filled mx-2"
+			class="btn btn-sm variant-filled-primary mx-2"
 		>
 			<span>粘贴</span>
 			<span class="material-symbols-outlined">
@@ -177,7 +177,7 @@
 		<div class="w-full card p-4">
 			<button
 				type="button"
-				class="btn btn-sm p-0 float-right"
+				class="btn btn-sm p-0 float-right variant-filled-primary"
 				on:click={() => {
 					copied = true;
 					setTimeout(() => {
