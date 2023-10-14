@@ -1,7 +1,7 @@
 <script lang="ts">
 	import 'material-symbols';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/app/App';
+	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
 	import { clipboard } from '@skeletonlabs/skeleton';
 	import '@fontsource/roboto-mono';
 
