@@ -5,27 +5,31 @@
 	import { CodeBlock } from '@skeletonlabs/skeleton';
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/apps/Base64TextApp';
 
+	import { CodeJar } from '@novacbn/svelte-codejar';
+	import hljs from 'highlight.js/lib/core';
+	const highlight = (code, syntax) => hljs.highlightAuto(code).value;
+
+	import { HighlightAuto, LineNumbers } from 'svelte-highlight';
+	import github from 'svelte-highlight/styles/monokai';
+
 	let op = 'encode';
 	let mode = 'std';
 	let align = true;
 	let input = '';
 	let output = '';
-	let warning = '';
 
 	function calculate() {
 		if (op === 'encode') {
 			Base64Encode(input, mode, align).then((res) => {
 				output = res;
-				warning = '';
 			});
 		} else {
 			Base64Decode(input, mode, align)
 				.then((res) => {
 					output = res;
-					warning = '';
 				})
 				.catch((err) => {
-					warning = err;
+					output = err;
 				});
 		}
 	}
@@ -47,6 +51,10 @@
 	$: mode, calculate();
 	$: align, calculate();
 </script>
+
+<svelte:head>
+	{@html github}
+</svelte:head>
 
 <AppShell>
 	<svelte:fragment>
@@ -107,29 +115,35 @@
 				<button type="button" class="btn btn-sm variant-filled mx-2">
 					<span>清空</span> <span class="material-symbols-outlined">delete</span>
 				</button>
-				<button type="button" class="btn btn-sm variant-filled mx-2">
+				<button type="button" on:click={paste} class="btn btn-sm variant-filled mx-2">
 					<span>粘贴</span> <span class="material-symbols-outlined">content_paste</span>
 				</button>
 			</div>
-			<textarea
+			<!-- <textarea
 				bind:value={input}
-				on:input={calculate}
-				class="textarea"
-				rows="4"
+				on:input={(e) => {
+					calculate();
+					updateTextareaHeight(e);
+				}}
+				class="textarea h-auto resize-none"
 				placeholder="输入要编码/解码的文本"
-			/>
+				rows="4"
+			/> -->
 
-			{#if warning}
-				<div class="alert variant-filled-error">
-					<span class="material-symbols-outlined">warning</span>
-					<div class="alert-message" data-toc-ignore>
-						<h3 class="h3" data-toc-ignore>Warning</h3>
-						<p>{warning}</p>
-					</div>
-				</div>
-			{/if}
+			<div class="card shadow-none">
+				<CodeJar
+					class="hljs"
+					{highlight}
+					bind:value={input}
+					on:change={calculate}
+					withLineNumbers={true}
+				/>
+			</div>
 
-			<CodeBlock bind:code={output} />
+			<CodeBlock bind:code={output} lineNumbers={true} />
+			<HighlightAuto bind:code={output} let:highlighted>
+				<LineNumbers {highlighted} wrapLines style="break-normal" />
+			</HighlightAuto>
 		</div>
 	</svelte:fragment>
 </AppShell>
