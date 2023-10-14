@@ -50,10 +50,6 @@
 		const target = event.target as HTMLTextAreaElement;
 		target.style.height = 'auto';
 
-		const screenHeight = window.innerHeight;
-		const textareaBottom = target.getBoundingClientRect().bottom;
-		const textareaHeight = target.offsetHeight;
-
 		if (target.scrollHeight > window.innerHeight / 3) {
 			target.style.height = `${window.innerHeight / 3}px`;
 		} else {
@@ -61,7 +57,12 @@
 		}
 	}
 
-	$: op, calculate();
+	function onOpChange() {
+		input = output;
+		calculate();
+	}
+
+	$: op, onOpChange();
 	$: mode, calculate();
 	$: align, calculate();
 </script>
