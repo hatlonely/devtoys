@@ -33,7 +33,8 @@
 						<span>所有工具</span>
 					</a>
 				</li>
-				<li><a href="/base64-text">Base64 文本</a></li>
+				<li><a href="/base64-text">Base64 编解码</a></li>
+				<li><a href="/unix-timestamp">Unix 时间戳</a></li>
 			</ul>
 		</nav>
 	</svelte:fragment>
