@@ -4,6 +4,7 @@
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/apps/Base64TextApp';
 	import { clipboard } from '@skeletonlabs/skeleton';
+	import '@fontsource/roboto-mono';
 
 	let op = 'encode';
 	let mode = 'std';
@@ -201,7 +202,7 @@
 <style>
 	.app-code {
 		font-size: 0.8rem;
-		font-family: 'Courier New', Courier, monospace;
+		font-family: 'Roboto Mono', monospace;
 		overflow-wrap: anywhere;
 	}
 
