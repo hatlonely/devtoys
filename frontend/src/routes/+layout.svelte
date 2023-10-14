@@ -6,6 +6,8 @@
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	import '@fortawesome/fontawesome-free/css/all.css';
 </script>
 
 <!-- App Shell -->
@@ -17,29 +19,8 @@
 				<strong class="text-xl uppercase">DevToys</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://discord.gg/EXqV7W8MtY"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Discord
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://twitter.com/SkeletonUI"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Twitter
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://github.com/hatlonely/devtoys"
-					target="_blank"
-					rel="noreferrer"
-				>
-					<span class="material-symbols-outlined">github</span>
+				<a href="https://github.com/hatlonely/devtoys" target="_blank" rel="noreferrer">
+					<i class="fa-brands fa-github" />
 				</a>
 			</svelte:fragment>
 		</AppBar>

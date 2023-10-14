@@ -20,6 +20,14 @@ export default {
 						name: 'skeleton',
 						enhancements: true,
 					},
+					{
+						name: 'modern',
+						enhancements: true,
+					},
+					{
+						name: 'crimson',
+						enhancements: true,
+					},
 				],
 			},
 		}),
