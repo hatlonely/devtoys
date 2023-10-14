@@ -69,7 +69,7 @@
 
 <AppShell>
 	<svelte:fragment>
-		<div class="card p-4 w-full text-token space-y-4 mt-2">
+		<div class="p-4 w-full text-token space-y-4 mt-2">
 			<h2 class="h2 my-4">Base64 文本编解/解码工具</h2>
 
 			<div class="w-full text-token card p-4 space-y-4">
@@ -177,7 +177,7 @@
 			{/if}
 
 			{#if output}
-				<div class="w-full card p-4 app-code shadow">
+				<div class="w-full card p-4 shadow">
 					<button
 						type="button"
 						class="btn btn-sm p-0 float-right"
@@ -193,7 +193,7 @@
 							{copied ? 'done' : 'content_copy'}
 						</span>
 					</button>
-					{output}
+					<pre class="app-code">{output}</pre>
 				</div>
 			{/if}
 		</div>
@@ -205,6 +205,11 @@
 		font-size: 0.8rem;
 		font-family: 'Roboto Mono', monospace;
 		overflow-wrap: anywhere;
+		white-space: pre-wrap; /* Since CSS 2.1 */
+		white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+		white-space: -pre-wrap; /* Opera 4-6 */
+		white-space: -o-pre-wrap; /* Opera 7 */
+		word-wrap: break-word; /* Internet Explorer 5.5+ */
 	}
 
 	.material-symbols-outlined {
