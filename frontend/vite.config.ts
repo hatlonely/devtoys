@@ -4,13 +4,6 @@ import { defineConfig } from 'vite';
 
 
 export default defineConfig({
-	server: {
-	fs: {
-		allow: [
-			'wailsjs'
-		],
-	},
-	},
 	plugins: [
 		sveltekit(), 
 		purgeCss(),

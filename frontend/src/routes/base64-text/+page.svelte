@@ -3,7 +3,7 @@
 	import { AppShell } from '@skeletonlabs/skeleton';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import { CodeBlock } from '@skeletonlabs/skeleton';
-	import { Base64Decode, Base64Encode } from '../../../wailsjs/go/apps/Base64TextApp';
+	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/apps/Base64TextApp';
 
 	let op = 'encode';
 	let mode = 'std';
@@ -30,7 +30,7 @@
 
 <AppShell>
 	<svelte:fragment>
-		<div class="card p-4 w-full text-token space-y-4">
+		<div class="card p-4 w-full text-token space-y-4 mt-2">
 			<h2 class="h2 my-4">Base64 文本编解/解码工具</h2>
 
 			<div class="w-full text-token card p-4 space-y-4">
