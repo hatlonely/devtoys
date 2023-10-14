@@ -3,7 +3,7 @@
 	import { AppShell } from '@skeletonlabs/skeleton';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import { CodeBlock } from '@skeletonlabs/skeleton';
-	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/apps/Base64TextApp';
+	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/app/App';
 
 	import { CodeJar } from '@novacbn/svelte-codejar';
 	import hljs from 'highlight.js/lib/core';
