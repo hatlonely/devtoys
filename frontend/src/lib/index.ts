@@ -6,3 +6,4 @@ export { default as RadioGroup } from './components/RadioGroup.svelte';
 export { default as Button } from './components/Button.svelte';
 export { default as Warning } from './components/Warning.svelte';
 export { default as Input } from './components/Input.svelte';
+export { default as DataTable } from './components/DataTable.svelte';

@@ -1,9 +1,8 @@
 <script lang="ts">
 	import 'material-symbols';
 	import { AnalystTimeInfo } from '$lib/wailsjs/go/devtoys/App';
-	import { clipboard } from '@skeletonlabs/skeleton';
 	import '@fontsource/roboto-mono';
-	import { Title, Input } from '$lib';
+	import { Title, Input, DataTable } from '$lib';
 
 	let input = '';
 	let info = {
@@ -41,6 +40,14 @@
 		{ field: 'Relative', label: '相对时间' }
 	];
 
+	const labels = {
+		Timestamp: '当前时间戳',
+		TimestampMill: '当前时间戳（毫秒）',
+		LocalTime: '本地时间',
+		UTCTime: 'UTC 时间',
+		Relative: '相对时间'
+	};
+
 	$: input, calculate();
 </script>
 
@@ -59,46 +66,16 @@
 		/>
 	</div>
 
-	<div class="w-full text-token card p-4 space-y-4">
-		<div class="w-full p-4">
-			{#each display as v}
-				<div class="flex flex-row">
-					<span class="w-1/3">{v.label}</span>
-					<span class="flex-auto app-code">{info[v.field] ? info[v.field] : ''}</span>
-					<button
-						type="button"
-						class="btn btn-sm"
-						on:click={() => {
-							copied[v.field] = true;
-							setTimeout(() => {
-								copied[v.field] = false;
-							}, 2000);
-						}}
-						use:clipboard={info[v.field]}
-					>
-						<span class="material-symbols-outlined">
-							{copied[v.field] ? 'done' : 'content_copy'}
-						</span>
-					</button>
-				</div>
-			{/each}
-		</div>
+	<div class="w-full text-token">
+		<DataTable
+			keys={['label', 'value']}
+			copyable={{ value: true }}
+			rows={['Timestamp', 'TimestampMill', 'LocalTime', 'UTCTime', 'Relative'].map((v) => {
+				return {
+					label: labels[v],
+					value: info[v]
+				};
+			})}
+		/>
 	</div>
 </div>
-
-<style>
-	.app-code {
-		font-size: 1.2rem;
-		font-family: 'Roboto Mono', monospace;
-		overflow-wrap: anywhere;
-		white-space: pre-wrap; /* Since CSS 2.1 */
-		white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-		white-space: -pre-wrap; /* Opera 4-6 */
-		white-space: -o-pre-wrap; /* Opera 7 */
-		word-wrap: break-word; /* Internet Explorer 5.5+ */
-	}
-
-	.material-symbols-outlined {
-		font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
-	}
-</style>
