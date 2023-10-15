@@ -2,9 +2,10 @@
 	import 'material-symbols';
 	import { AnalystTimeInfo } from '$lib/wailsjs/go/devtoys/App';
 	import '@fontsource/roboto-mono';
-	import { Title, Input, DataTable } from '$lib';
+	import { Title, Input, DataTable, InformationWall } from '$lib';
 
 	let input = '';
+	let warning = '';
 	let info = {
 		Timestamp: 0,
 		TimestampMill: 0,
@@ -12,14 +13,6 @@
 		UTCTime: '',
 		Relative: ''
 	};
-	let copied = {
-		Timestamp: false,
-		TimestampMill: false,
-		LocalTime: false,
-		UTCTime: false,
-		Relative: false
-	};
-	let warning = '';
 
 	function calculate() {
 		AnalystTimeInfo(input)
@@ -31,14 +24,6 @@
 				warning = err;
 			});
 	}
-
-	let display = [
-		{ field: 'Timestamp', label: '当前时间戳' },
-		{ field: 'TimestampMill', label: '当前时间戳（毫秒）' },
-		{ field: 'LocalTime', label: '本地时间' },
-		{ field: 'UTCTime', label: 'UTC 时间' },
-		{ field: 'Relative', label: '相对时间' }
-	];
 
 	const labels = {
 		Timestamp: '当前时间戳',
@@ -66,13 +51,9 @@
 		/>
 	</div>
 
-	<div class="w-full text-token">
-		<DataTable
-			fixed={true}
-			keys={['label', 'value']}
-			copyable={{ value: true }}
-			alignRight={{ label: true }}
-			rows={['Timestamp', 'TimestampMill', 'LocalTime', 'UTCTime', 'Relative'].map((v) => {
+	<div class="w-full card p-4 text-token">
+		<InformationWall
+			labelValues={['LocalTime', 'UTCTime', 'Relative', 'Timestamp', 'TimestampMill'].map((v) => {
 				return {
 					label: labels[v],
 					value: info[v]
