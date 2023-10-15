@@ -1,6 +1,12 @@
 dev:
 	wails dev
 
+build:
+	wails build
+
+linux:
+	wails build -platform linux/arm64
+
 windows:
 	wails build -platform windows/amd64 -nsis
 
