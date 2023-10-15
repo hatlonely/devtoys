@@ -1,22 +1,16 @@
 package devtoys
 
 import (
-	"context"
-
 	"github.com/hatlonely/baseconverter"
 	"github.com/pkg/errors"
 )
 
 type NumberBaseConversionApp struct {
-	ctx context.Context
+	BaseApp
 }
 
 func NewNumberBaseConversionApp() *NumberBaseConversionApp {
 	return &NumberBaseConversionApp{}
-}
-
-func (a *NumberBaseConversionApp) Startup(ctx context.Context) {
-	a.ctx = ctx
 }
 
 const baseCharactersLower = "0123456789abcdefghijklmnopqrstuvwxyz"
