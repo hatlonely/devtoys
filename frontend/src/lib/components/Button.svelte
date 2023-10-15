@@ -17,7 +17,7 @@
 		}, 2000);
 	}}
 	type="button"
-	class="btn btn-sm mx-2 variant-soft hover:variant-filled"
+	class="btn btn-sm variant-soft hover:variant-filled"
 >
 	<span>{text}</span>
 	{#if icon}

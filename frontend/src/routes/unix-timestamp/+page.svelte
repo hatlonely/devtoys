@@ -1,9 +1,9 @@
 <script lang="ts">
 	import 'material-symbols';
-	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import { AnalystTimeInfo } from '$lib/wailsjs/go/devtoys/App';
 	import { clipboard } from '@skeletonlabs/skeleton';
 	import '@fontsource/roboto-mono';
+	import { Title, Input } from '$lib';
 
 	let input = '';
 	let info = {
@@ -21,8 +21,6 @@
 		Relative: false
 	};
 	let warning = '';
-	let pasted = false;
-	let cleared = false;
 
 	function calculate() {
 		AnalystTimeInfo(input)
@@ -35,18 +33,6 @@
 			});
 	}
 
-	function paste() {
-		navigator.clipboard.readText().then((text) => {
-			input = text;
-			calculate();
-		});
-	}
-
-	function clear() {
-		input = '';
-		calculate();
-	}
-
 	let display = [
 		{ field: 'Timestamp', label: '当前时间戳' },
 		{ field: 'TimestampMill', label: '当前时间戳（毫秒）' },
@@ -54,74 +40,24 @@
 		{ field: 'UTCTime', label: 'UTC 时间' },
 		{ field: 'Relative', label: '相对时间' }
 	];
+
+	$: input, calculate();
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
-	<h2 class="h2 my-4">Unix 时间戳</h2>
+	<Title title="Unix 时间戳" />
 
-	<div class="w-full text-token card p-4 space-y-4">
-		<div class="w-full text-token p-2 space-x-10 flex flex-row">
-			<span class="flex flex-row">
-				<span class="badge-icon variant-soft-secondary mt-2">
-					<span class="material-symbols-outlined">schedule</span>
-				</span>
-				<span class="flex-auto ml-5">
-					<dt class="font-bold">时间</dt>
-					<dd class="text-sm opacity-50">任意的合法的时间格式均可</dd>
-				</span>
-			</span>
-
-			<span class="flex-auto" />
-
-			<span class="flex-right">
-				<button
-					on:click={paste}
-					on:click={() => {
-						pasted = true;
-						setTimeout(() => {
-							pasted = false;
-						}, 2000);
-					}}
-					type="button"
-					class="btn btn-sm variant-filled-primary mx-2"
-				>
-					<span>粘贴</span>
-					<span class="material-symbols-outlined">
-						{pasted ? 'done' : 'content_paste'}
-					</span>
-				</button>
-
-				<button
-					on:click={clear}
-					on:click={() => {
-						cleared = true;
-						setTimeout(() => {
-							cleared = false;
-						}, 2000);
-					}}
-					type="button"
-					class="btn btn-sm variant-filled-primary mx-2"
-				>
-					<span>当前时间</span>
-					<span class="material-symbols-outlined">
-						{cleared ? 'done' : 'update'}
-					</span>
-				</button>
-			</span>
-		</div>
+	<div class="w-full text-token card p-4">
+		<Input
+			bind:value={input}
+			on:input={calculate}
+			on:clear={calculate}
+			title="时间"
+			placeholder="输入任意时间格式"
+			code={true}
+			{warning}
+		/>
 	</div>
-
-	<input bind:value={input} on:input={calculate} class="input app-code" placeholder="输入时间" />
-
-	{#if warning}
-		<div class="alert variant-filled-error app-code">
-			<span class="material-symbols-outlined">warning</span>
-			<div class="alert-message" data-toc-ignore>
-				<h3 class="h3" data-toc-ignore>Warning</h3>
-				<p>{warning}</p>
-			</div>
-		</div>
-	{/if}
 
 	<div class="w-full text-token card p-4 space-y-4">
 		<div class="w-full p-4">
