@@ -20,7 +20,7 @@
 	bind:value
 	on:input
 	on:input={updateTextareaHeight}
-	class="textarea {code ? 'devtoys-code' : ''}}"
+	class="textarea {code ? 'devtoys-code' : ''}"
 	rows={row}
 	{placeholder}
 />

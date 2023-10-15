@@ -2,7 +2,7 @@
 	import 'material-symbols';
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
 	import { clipboard } from '@skeletonlabs/skeleton';
-	import { Title, RadioGroup, Button, Textarea } from '$lib';
+	import { Title, RadioGroup, Button, Textarea, Warning } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let op = 'encode';
@@ -128,17 +128,14 @@
 		<Button on:click={paste} icon="content_paste" text="粘贴" />
 	</div>
 
-	<Textarea bind:value={input} on:input={calculate} placeholder="输入要编码/解码的文本" />
+	<Textarea
+		bind:value={input}
+		on:input={calculate}
+		placeholder="输入要编码/解码的文本"
+		code={true}
+	/>
 
-	{#if warning}
-		<div class="alert variant-filled-error app-code">
-			<span class="material-symbols-outlined">warning</span>
-			<div class="alert-message" data-toc-ignore>
-				<h3 class="h3" data-toc-ignore>Warning</h3>
-				<p>{warning}</p>
-			</div>
-		</div>
-	{/if}
+	<Warning bind:message={warning} />
 
 	{#if output}
 		<div class="w-full card p-4">
