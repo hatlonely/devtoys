@@ -43,17 +43,6 @@
 		output = '';
 	}
 
-	function updateTextareaHeight(event: Event) {
-		const target = event.target as HTMLTextAreaElement;
-		target.style.height = 'auto';
-
-		if (target.scrollHeight > window.innerHeight / 3) {
-			target.style.height = `${window.innerHeight / 3}px`;
-		} else {
-			target.style.height = `${target.scrollHeight + 1}px`;
-		}
-	}
-
 	function onOpChange() {
 		input = output;
 		calculate();
