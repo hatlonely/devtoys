@@ -4,11 +4,13 @@ go 1.18
 
 require (
 	github.com/agiledragon/gomonkey v2.0.2+incompatible
+	github.com/go-playground/validator/v10 v10.15.5
 	github.com/hatlonely/baseconverter v1.0.0
 	github.com/mergestat/timediff v0.0.3
 	github.com/pkg/errors v0.9.1
 	github.com/smartystreets/goconvey v1.8.1
 	github.com/spf13/cast v1.5.1
+	github.com/thoas/go-funk v0.9.3
 	github.com/wailsapp/wails/v2 v2.6.0
 )
 
@@ -18,7 +20,6 @@ require (
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.15.5 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gopherjs/gopherjs v1.17.2 // indirect
 	github.com/jchv/go-winloader v0.0.0-20210711035445-715c2860da7e // indirect
@@ -35,7 +36,6 @@ require (
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/samber/lo v1.38.1 // indirect
 	github.com/smarty/assertions v1.15.0 // indirect
-	github.com/thoas/go-funk v0.9.3 // indirect
 	github.com/tkrajina/go-reflector v0.5.6 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect

@@ -13,3 +13,15 @@ export function Base64Decode(arg1, arg2, arg3) {
 export function Base64Encode(arg1, arg2, arg3) {
   return window['go']['devtoys']['App']['Base64Encode'](arg1, arg2, arg3);
 }
+
+export function ConvertNumberBase(arg1) {
+  return window['go']['devtoys']['App']['ConvertNumberBase'](arg1);
+}
+
+export function ConvertTextBinaryConversion(arg1) {
+  return window['go']['devtoys']['App']['ConvertTextBinaryConversion'](arg1);
+}
+
+export function Escape(arg1) {
+  return window['go']['devtoys']['App']['Escape'](arg1);
+}
