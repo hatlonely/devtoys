@@ -18,8 +18,8 @@ const baseCharactersUpper = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 type NumberBaseConversionReq struct {
 	Number           string
-	InBase           int
-	ToBase           int
+	InBase           int `validate:"omitempty,gte=2,lte=36"`
+	ToBase           int `validate:"omitempty,gte=2,lte=36"`
 	LowerCase        bool
 	InBaseCharacters string
 	ToBaseCharacters string
@@ -30,6 +30,10 @@ type NumberBaseConversionRes struct {
 }
 
 func (a *NumberBaseConversionApp) ConvertNumberBase(req *NumberBaseConversionReq) (*NumberBaseConversionRes, error) {
+	if err := validate.Struct(req); err != nil {
+		return nil, errors.Wrap(err, "validate.Struct failed")
+	}
+
 	baseCharacters := baseCharactersUpper
 	if req.LowerCase {
 		baseCharacters = baseCharactersLower

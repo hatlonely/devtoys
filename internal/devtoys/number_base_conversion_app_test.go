@@ -1,6 +1,7 @@
 package devtoys
 
 import (
+	"strings"
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
@@ -104,6 +105,18 @@ func TestNumberBaseConversionApp(t *testing.T) {
 			So(err, ShouldBeNil)
 			So(res, ShouldNotBeNil)
 			So(res.Number, ShouldEqual, "ABCDEFABCDEFABCDEFABCDEFABCDEFABCDEF")
+		})
+
+		Convey("hex lower", func() {
+			req := &NumberBaseConversionReq{
+				Number:    strings.ToLower("ABCDEFABCDEFABCDEFABCDEFABCDEFABCDEF"),
+				InBase:    16,
+				ToBase:    10,
+				LowerCase: true,
+			}
+			res, err := app.ConvertNumberBase(req)
+			So(err, ShouldBeNil)
+			So(res.Number, ShouldEqual, "14966277357100432636419616004569301003259375")
 		})
 
 		Convey("When converting use custom base characters", func() {
