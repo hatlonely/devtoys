@@ -1,9 +1,8 @@
 <script lang="ts">
 	import 'material-symbols';
-	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
 	import { clipboard } from '@skeletonlabs/skeleton';
-	import { Title, RadioGroup as RadioGroup2 } from '$lib';
+	import { Title, RadioGroup } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let op = 'encode';
@@ -71,7 +70,7 @@
 	<Title title="Base64 文本编解/解码工具" />
 
 	<div class="w-full text-token card p-4 space-y-4">
-		<RadioGroup2
+		<RadioGroup
 			bind:group={op}
 			name="op"
 			title="转换模式"
@@ -89,7 +88,7 @@
 			]}
 		/>
 
-		<RadioGroup2
+		<RadioGroup
 			bind:group={mode}
 			name="mode"
 			title="编码模式"
@@ -107,7 +106,7 @@
 			]}
 		/>
 
-		<RadioGroup2
+		<RadioGroup
 			bind:group={align}
 			name="align"
 			title="补齐模式"
