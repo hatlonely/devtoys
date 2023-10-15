@@ -3,3 +3,4 @@ export { default as Title } from './components/Title.svelte';
 export { default as Switch } from './components/Switch.svelte';
 export { default as Textarea } from './components/Textarea.svelte';
 export { default as RadioGroup } from './components/RadioGroup.svelte';
+export { default as Button } from './components/Button.svelte';

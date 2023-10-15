@@ -1,13 +1,13 @@
 <script lang="ts">
-	export let onclick: any;
 	export let icon = '';
 	export let iconSet = 'material-symbols';
+	export let text: string;
 
 	let done = false;
 </script>
 
 <button
-	on:click={onclick}
+	on:click
 	on:click={() => {
 		done = true;
 		setTimeout(() => {
@@ -17,7 +17,7 @@
 	type="button"
 	class="btn btn-sm variant-filled-primary mx-2"
 >
-	<span>清空</span>
+	<span>{text}</span>
 	{#if icon}
 		{#if done}
 			<span class="material-symbols-outlined"> done </span>
@@ -25,8 +25,4 @@
 			<span class="material-symbols-outlined">{icon}</span>
 		{/if}
 	{/if}
-
-	<span class="material-symbols-outlined">
-		{done ? 'done' : 'delete'}
-	</span>
 </button>

@@ -2,7 +2,7 @@
 	import 'material-symbols';
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
 	import { clipboard } from '@skeletonlabs/skeleton';
-	import { Title, RadioGroup } from '$lib';
+	import { Title, RadioGroup, Button } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let op = 'encode';
@@ -126,38 +126,8 @@
 	</div>
 
 	<div class="flex flex-row-reverse">
-		<button
-			on:click={clear}
-			on:click={() => {
-				cleared = true;
-				setTimeout(() => {
-					cleared = false;
-				}, 2000);
-			}}
-			type="button"
-			class="btn btn-sm variant-filled-primary mx-2"
-		>
-			<span>清空</span>
-			<span class="material-symbols-outlined">
-				{cleared ? 'done' : 'delete'}
-			</span>
-		</button>
-		<button
-			on:click={paste}
-			on:click={() => {
-				pasted = true;
-				setTimeout(() => {
-					pasted = false;
-				}, 2000);
-			}}
-			type="button"
-			class="btn btn-sm variant-filled-primary mx-2"
-		>
-			<span>粘贴</span>
-			<span class="material-symbols-outlined">
-				{pasted ? 'done' : 'content_paste'}
-			</span>
-		</button>
+		<Button on:click={clear} icon="delete" text="清空" />
+		<Button on:click={paste} icon="content_paste" text="粘贴" />
 	</div>
 
 	<textarea
