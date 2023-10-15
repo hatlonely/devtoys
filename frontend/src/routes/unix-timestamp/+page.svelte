@@ -68,8 +68,10 @@
 
 	<div class="w-full text-token">
 		<DataTable
+			fixed={true}
 			keys={['label', 'value']}
 			copyable={{ value: true }}
+			alignRight={{ label: true }}
 			rows={['Timestamp', 'TimestampMill', 'LocalTime', 'UTCTime', 'Relative'].map((v) => {
 				return {
 					label: labels[v],
