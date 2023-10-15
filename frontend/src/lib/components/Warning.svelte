@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let message: string;
+	import 'material-symbols';
 </script>
 
 {#if message}

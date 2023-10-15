@@ -1,26 +1,23 @@
 <script lang="ts">
-	import 'material-symbols';
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
-	import { clipboard } from '@skeletonlabs/skeleton';
-	import { Title, RadioGroup, Button, Textarea, Warning } from '$lib';
+	import { Title, RadioGroup, Button, Textarea, Warning, TextViewer } from '$lib';
 	import '@fontsource/roboto-mono';
 
-	let op = 'encode';
-	let mode = 'std';
+	let mode = 'encode';
+	let type_ = 'std';
 	let align = true;
 	let input = '';
 	let output = '';
 	let warning = '';
-	let copied = false;
 
 	function calculate() {
-		if (op === 'encode') {
-			Base64Encode(input, mode, align).then((res) => {
+		if (mode === 'encode') {
+			Base64Encode(input, type_, align).then((res) => {
 				output = res;
 				warning = '';
 			});
 		} else {
-			Base64Decode(input, mode, align)
+			Base64Decode(input, type_, align)
 				.then((res) => {
 					output = res;
 					warning = '';
@@ -48,8 +45,8 @@
 		calculate();
 	}
 
-	$: op, onOpChange();
-	$: mode, calculate();
+	$: mode, onOpChange();
+	$: type_, calculate();
 	$: align, calculate();
 </script>
 
@@ -58,8 +55,8 @@
 
 	<div class="w-full text-token card p-4 space-y-4">
 		<RadioGroup
-			bind:group={op}
-			name="op"
+			bind:group={mode}
+			name="mode"
 			title="转换模式"
 			description="选择您想使用的转换模式"
 			icon="sync_alt"
@@ -76,8 +73,8 @@
 		/>
 
 		<RadioGroup
-			bind:group={mode}
-			name="mode"
+			bind:group={type_}
+			name="type_"
 			title="编码模式"
 			description="常规编码/URL安全编码"
 			icon="link"
@@ -126,41 +123,5 @@
 
 	<Warning bind:message={warning} />
 
-	{#if output}
-		<div class="w-full card p-4">
-			<button
-				type="button"
-				class="btn btn-sm p-0 float-right variant-filled-primary"
-				on:click={() => {
-					copied = true;
-					setTimeout(() => {
-						copied = false;
-					}, 2000);
-				}}
-				use:clipboard={output}
-			>
-				<span class="material-symbols-outlined">
-					{copied ? 'done' : 'content_copy'}
-				</span>
-			</button>
-			<pre class="app-code">{output}</pre>
-		</div>
-	{/if}
+	<TextViewer bind:text={output} />
 </div>
-
-<style>
-	.app-code {
-		font-size: 0.8rem;
-		font-family: 'Roboto Mono', monospace;
-		overflow-wrap: anywhere;
-		white-space: pre-wrap; /* Since CSS 2.1 */
-		white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-		white-space: -pre-wrap; /* Opera 4-6 */
-		white-space: -o-pre-wrap; /* Opera 7 */
-		word-wrap: break-word; /* Internet Explorer 5.5+ */
-	}
-
-	.material-symbols-outlined {
-		font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
-	}
-</style>
