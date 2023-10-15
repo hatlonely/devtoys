@@ -104,12 +104,13 @@
 			on:input={calculate}
 			placeholder="输入要编码/解码的文本"
 			code={true}
+			{warning}
 		/>
-
-		<Warning bind:message={warning} />
 	</div>
 
-	<div class="w-full text-token card p-4">
-		<TextViewer bind:text={output} />
-	</div>
+	{#if output}
+		<div class="w-full text-token card p-4">
+			<TextViewer bind:text={output} />
+		</div>
+	{/if}
 </div>

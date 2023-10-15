@@ -1,11 +1,13 @@
 <script lang="ts">
 	import Button from './Button.svelte';
+	import Warning from './Warning.svelte';
 	import { createEventDispatcher } from 'svelte';
 
 	export let value: string;
 	export let row = 4;
 	export let placeholder = '';
 	export let code = false;
+	export let warning = '';
 
 	const dispatch = createEventDispatcher();
 
@@ -48,6 +50,7 @@
 			{placeholder}
 		/>
 	</div>
+	<Warning bind:message={warning} />
 </div>
 
 <style>
