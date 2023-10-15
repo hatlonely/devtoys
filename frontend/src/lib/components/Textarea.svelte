@@ -8,6 +8,7 @@
 	export let placeholder = '';
 	export let code = false;
 	export let warning = '';
+	export let title = '';
 
 	const dispatch = createEventDispatcher();
 
@@ -35,9 +36,14 @@
 </script>
 
 <div class="space-y-2">
-	<div>
-		<Button on:click={paste} icon="content_paste" text="粘贴" />
-		<Button on:click={clear} icon="delete" text="清空" />
+	<div class="flex">
+		<div class="flex flex-auto">
+			<span class="font-bold align-sub">{title}</span>
+		</div>
+		<div class="flex flex-right space-x-2">
+			<Button on:click={paste} icon="content_paste" text="粘贴" />
+			<Button on:click={clear} icon="delete" text="清空" />
+		</div>
 	</div>
 	<div>
 		<textarea
