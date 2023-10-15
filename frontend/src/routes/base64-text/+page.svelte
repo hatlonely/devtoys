@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroup, Button, Textarea, Warning, TextViewer } from '$lib';
+	import { Title, RadioGroup, Textarea, TextViewer } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let mode = 'encode';

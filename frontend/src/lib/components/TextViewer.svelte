@@ -1,32 +1,37 @@
 <script lang="ts">
 	import { clipboard } from '@skeletonlabs/skeleton';
 	import 'material-symbols';
-	import Button from './Button.svelte';
 
 	export let text: string;
+	export let title = '';
 
 	let copied = false;
 </script>
 
 {#if text}
 	<div class="space-y-2">
-		<div>
-			<button
-				type="button"
-				class="btn btn-sm mx-2 variant-soft hover:variant-filled"
-				on:click={() => {
-					copied = true;
-					setTimeout(() => {
-						copied = false;
-					}, 2000);
-				}}
-				use:clipboard={text}
-			>
-				<span>复制</span>
-				<span class="material-symbols-outlined">
-					{copied ? 'done' : 'content_copy'}
-				</span>
-			</button>
+		<div class="flex">
+			<div class="flex flex-auto">
+				<span class="font-bold align-sub">{title}</span>
+			</div>
+			<div class="flex flex-right space-x-2">
+				<button
+					type="button"
+					class="btn btn-sm mx-2 variant-soft hover:variant-filled"
+					on:click={() => {
+						copied = true;
+						setTimeout(() => {
+							copied = false;
+						}, 2000);
+					}}
+					use:clipboard={text}
+				>
+					<span>复制</span>
+					<span class="material-symbols-outlined">
+						{copied ? 'done' : 'content_copy'}
+					</span>
+				</button>
+			</div>
 		</div>
 		<div class="w-full card p-4">
 			<pre class="dt-code">{text}</pre>
