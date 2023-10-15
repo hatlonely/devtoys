@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { clipboard } from '@skeletonlabs/skeleton';
 	import 'material-symbols';
+	import Button from './Button.svelte';
 
 	export let text: string;
 
@@ -8,23 +9,28 @@
 </script>
 
 {#if text}
-	<div class="w-full card p-4">
-		<button
-			type="button"
-			class="btn btn-sm p-0 float-right variant-filled-primary"
-			on:click={() => {
-				copied = true;
-				setTimeout(() => {
-					copied = false;
-				}, 2000);
-			}}
-			use:clipboard={text}
-		>
-			<span class="material-symbols-outlined">
-				{copied ? 'done' : 'content_copy'}
-			</span>
-		</button>
-		<pre class="dt-code">{text}</pre>
+	<div class="space-y-2">
+		<div>
+			<button
+				type="button"
+				class="btn btn-sm mx-2 variant-soft hover:variant-filled"
+				on:click={() => {
+					copied = true;
+					setTimeout(() => {
+						copied = false;
+					}, 2000);
+				}}
+				use:clipboard={text}
+			>
+				<span>复制</span>
+				<span class="material-symbols-outlined">
+					{copied ? 'done' : 'content_copy'}
+				</span>
+			</button>
+		</div>
+		<div class="w-full card p-4">
+			<pre class="dt-code">{text}</pre>
+		</div>
 	</div>
 {/if}
 

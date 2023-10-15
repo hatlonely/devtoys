@@ -109,5 +109,7 @@
 		<Warning bind:message={warning} />
 	</div>
 
-	<TextViewer bind:text={output} />
+	<div class="w-full text-token card p-4">
+		<TextViewer bind:text={output} />
+	</div>
 </div>
