@@ -1,8 +1,13 @@
 <script lang="ts">
+	import Button from './Button.svelte';
+	import { createEventDispatcher } from 'svelte';
+
 	export let value: string;
 	export let row = 4;
 	export let placeholder = '';
 	export let code = false;
+
+	const dispatch = createEventDispatcher();
 
 	function updateTextareaHeight(event: Event) {
 		const target = event.target as HTMLTextAreaElement;
@@ -14,8 +19,21 @@
 			target.style.height = `${target.scrollHeight + 1}px`;
 		}
 	}
+
+	function paste() {
+		navigator.clipboard.readText().then((text) => {
+			value = text;
+		});
+	}
+
+	function clear() {
+		value = '';
+		dispatch('clear', {});
+	}
 </script>
 
+<Button on:click={paste} icon="content_paste" text="粘贴" />
+<Button on:click={clear} icon="delete" text="清空" />
 <textarea
 	bind:value
 	on:input

@@ -28,18 +28,6 @@
 		}
 	}
 
-	function paste() {
-		navigator.clipboard.readText().then((text) => {
-			input = text;
-			calculate();
-		});
-	}
-
-	function clear() {
-		input = '';
-		output = '';
-	}
-
 	function onOpChange() {
 		input = output;
 		calculate();
@@ -48,6 +36,7 @@
 	$: mode, onOpChange();
 	$: type_, calculate();
 	$: align, calculate();
+	$: input, calculate();
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
@@ -107,11 +96,6 @@
 				}
 			]}
 		/>
-	</div>
-
-	<div class="flex flex-row-reverse">
-		<Button on:click={clear} icon="delete" text="清空" />
-		<Button on:click={paste} icon="content_paste" text="粘贴" />
 	</div>
 
 	<Textarea
