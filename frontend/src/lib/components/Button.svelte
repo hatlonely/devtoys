@@ -1,4 +1,6 @@
 <script lang="ts">
+	import 'material-symbols';
+
 	export let icon = '';
 	export let iconSet = 'material-symbols';
 	export let text: string;
@@ -15,7 +17,7 @@
 		}, 2000);
 	}}
 	type="button"
-	class="btn btn-sm variant-filled-primary mx-2"
+	class="btn btn-sm mx-2 variant-soft hover:variant-filled"
 >
 	<span>{text}</span>
 	{#if icon}
@@ -26,3 +28,9 @@
 		{/if}
 	{/if}
 </button>
+
+<style>
+	.material-symbols-outlined {
+		font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+	}
+</style>
