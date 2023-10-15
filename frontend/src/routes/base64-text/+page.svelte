@@ -2,7 +2,7 @@
 	import 'material-symbols';
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
 	import { clipboard } from '@skeletonlabs/skeleton';
-	import { Title, RadioGroup, Button } from '$lib';
+	import { Title, RadioGroup, Button, Textarea } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let op = 'encode';
@@ -12,8 +12,6 @@
 	let output = '';
 	let warning = '';
 	let copied = false;
-	let pasted = false;
-	let cleared = false;
 
 	function calculate() {
 		if (op === 'encode') {
@@ -130,14 +128,7 @@
 		<Button on:click={paste} icon="content_paste" text="粘贴" />
 	</div>
 
-	<textarea
-		bind:value={input}
-		on:input={calculate}
-		on:input={updateTextareaHeight}
-		class="textarea app-code"
-		rows="4"
-		placeholder="输入要编码/解码的文本"
-	/>
+	<Textarea bind:value={input} on:input={calculate} placeholder="输入要编码/解码的文本" />
 
 	{#if warning}
 		<div class="alert variant-filled-error app-code">
