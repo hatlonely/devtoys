@@ -32,17 +32,23 @@
 	}
 </script>
 
-<Button on:click={paste} icon="content_paste" text="粘贴" />
-<Button on:click={clear} icon="delete" text="清空" />
-<textarea
-	bind:value
-	on:input
-	on:input={updateTextareaHeight}
-	class="textarea {code ? 'devtoys-code' : ''}"
-	spellcheck="false"
-	rows={row}
-	{placeholder}
-/>
+<div class="space-y-2">
+	<div>
+		<Button on:click={paste} icon="content_paste" text="粘贴" />
+		<Button on:click={clear} icon="delete" text="清空" />
+	</div>
+	<div>
+		<textarea
+			bind:value
+			on:input
+			on:input={updateTextareaHeight}
+			class="textarea {code ? 'devtoys-code' : ''}"
+			spellcheck="false"
+			rows={row}
+			{placeholder}
+		/>
+	</div>
+</div>
 
 <style>
 	.devtoys-code {

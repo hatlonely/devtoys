@@ -42,7 +42,7 @@
 <div class="w-full text-token px-6 py-3 space-y-4">
 	<Title title="Base64 文本编解/解码工具" />
 
-	<div class="w-full text-token card p-4 space-y-4">
+	<div class="w-full text-token card p-4">
 		<RadioGroup
 			bind:group={mode}
 			name="mode"
@@ -98,14 +98,16 @@
 		/>
 	</div>
 
-	<Textarea
-		bind:value={input}
-		on:input={calculate}
-		placeholder="输入要编码/解码的文本"
-		code={true}
-	/>
+	<div class="w-full text-token card p-4">
+		<Textarea
+			bind:value={input}
+			on:input={calculate}
+			placeholder="输入要编码/解码的文本"
+			code={true}
+		/>
 
-	<Warning bind:message={warning} />
+		<Warning bind:message={warning} />
+	</div>
 
 	<TextViewer bind:text={output} />
 </div>
