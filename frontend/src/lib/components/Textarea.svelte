@@ -39,13 +39,14 @@
 	on:input
 	on:input={updateTextareaHeight}
 	class="textarea {code ? 'devtoys-code' : ''}"
+	spellcheck="false"
 	rows={row}
 	{placeholder}
 />
 
 <style>
 	.devtoys-code {
-		font-size: 0.8rem;
+		font-size: 1rem;
 		font-family: 'Roboto Mono', monospace;
 		overflow-wrap: anywhere;
 		white-space: pre-wrap; /* Since CSS 2.1 */
