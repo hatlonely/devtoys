@@ -36,6 +36,7 @@
 				<li><a href="/base64-text">Base64 编解码</a></li>
 				<li><a href="/unix-timestamp">Unix 时间戳</a></li>
 				<li><a href="/escape">转义</a></li>
+				<li><a href="/text-binary-conversion">文本二进制转换</a></li>
 			</ul>
 		</nav>
 	</svelte:fragment>

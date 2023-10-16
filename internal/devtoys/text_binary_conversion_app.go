@@ -30,7 +30,7 @@ type TextBinaryConversionRes struct {
 	Text string
 }
 
-func (a *TextBinaryConversionApp) ConvertTextBinaryConversion(req *TextBinaryConversionReq) (*TextBinaryConversionRes, error) {
+func (a *TextBinaryConversionApp) ConvertTextBinary(req *TextBinaryConversionReq) (*TextBinaryConversionRes, error) {
 	if err := validate.Struct(req); err != nil {
 		return nil, errors.Wrap(err, "validate.Struct failed")
 	}

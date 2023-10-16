@@ -47,7 +47,7 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 				Text: "hello",
 				To:   "bin",
 			}
-			res, err := app.ConvertTextBinaryConversion(req)
+			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.Text, ShouldEqual, "01101000 01100101 01101100 01101100 01101111")
 		})
@@ -58,7 +58,7 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 				To:           "bin",
 				WithoutSpace: true,
 			}
-			res, err := app.ConvertTextBinaryConversion(req)
+			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.Text, ShouldEqual, "0110100001100101011011000110110001101111")
 		})
@@ -69,7 +69,7 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 				To:              "bin",
 				WithoutFillZero: true,
 			}
-			res, err := app.ConvertTextBinaryConversion(req)
+			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.Text, ShouldEqual, "1101000 1100101 1101100 1101100 1101111")
 		})
@@ -81,7 +81,7 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 				WithoutSpace:    true,
 				WithoutFillZero: true,
 			}
-			res, err := app.ConvertTextBinaryConversion(req)
+			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.Text, ShouldEqual, "11010001100101110110011011001101111")
 		})
@@ -91,7 +91,7 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 				Text: "hello",
 				To:   "hex",
 			}
-			res, err := app.ConvertTextBinaryConversion(req)
+			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.Text, ShouldEqual, "68 65 6C 6C 6F")
 		})
@@ -102,7 +102,7 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 				To:           "hex",
 				WithoutSpace: true,
 			}
-			res, err := app.ConvertTextBinaryConversion(req)
+			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.Text, ShouldEqual, "68656C6C6F")
 		})
@@ -113,7 +113,7 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 				To:              "hex",
 				WithoutFillZero: true,
 			}
-			res, err := app.ConvertTextBinaryConversion(req)
+			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.Text, ShouldEqual, "68 65 6C 6C 6F")
 		})
@@ -125,7 +125,7 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 				WithoutSpace:    true,
 				WithoutFillZero: true,
 			}
-			res, err := app.ConvertTextBinaryConversion(req)
+			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.Text, ShouldEqual, "68656C6C6F")
 		})
@@ -136,7 +136,7 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 				To:        "hex",
 				LowerCase: true,
 			}
-			res, err := app.ConvertTextBinaryConversion(req)
+			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.Text, ShouldEqual, "68 65 6c 6c 6f")
 		})
