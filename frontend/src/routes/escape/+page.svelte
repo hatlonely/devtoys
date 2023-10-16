@@ -6,13 +6,13 @@
 
 	let mode = 'unescape';
 	let type_ = 'string';
-	let input = '';
+	let text = '';
 	let output = '';
 	let warning = '';
 
 	function calculate() {
 		Escape({
-			text: input,
+			text: text,
 			mode,
 			type: type_
 		})
@@ -26,12 +26,13 @@
 	}
 
 	function onModeChange() {
-		input = output;
+		text = output;
 		calculate();
 	}
 
 	$: mode, onModeChange();
 	$: type_, calculate();
+	$: text, calculate();
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
@@ -85,7 +86,7 @@
 
 	<div class="w-full text-token card p-4">
 		<Textarea
-			bind:value={input}
+			bind:value={text}
 			on:input={calculate}
 			placeholder="输入要编码/解码的文本"
 			code={true}
