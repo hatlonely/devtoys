@@ -9,3 +9,4 @@ export { default as Input } from './components/Input.svelte';
 export { default as DataTable } from './components/DataTable.svelte';
 export { default as InformationWall } from './components/InformationWall.svelte';
 export { default as MultiSelector } from './components/MultiSelector.svelte';
+export { default as SingleSelector } from './components/SingleSelector.svelte';

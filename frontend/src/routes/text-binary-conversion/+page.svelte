@@ -11,12 +11,15 @@
 	let lowercase = false;
 	let withoutSpace = false;
 	let withoutFillZero = false;
-	let warning = '';
+	let warning: any = '';
 	let results: any = {};
 
 	async function calculate() {
 		warning = '';
 		for (const key in to) {
+			if (!to[key]) {
+				continue;
+			}
 			try {
 				const res = await ConvertTextBinary({
 					Text: text,
