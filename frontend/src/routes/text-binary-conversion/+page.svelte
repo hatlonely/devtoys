@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Base64Decode, Base64Encode, ConvertTextBinary } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroup, Textarea, TextViewer } from '$lib';
+	import { Title, RadioGroup, Textarea, TextViewer, MultiSelector } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
-	let to = '';
+	let to: Record<string, boolean> = {};
 	let lowercase = false;
 	let withoutSpace = false;
 	let withoutFillZero = false;
@@ -17,40 +17,59 @@
 		base64: ''
 	};
 
-	function calculate() {
-		ConvertTextBinary({
-			Text: text,
-			To: 'bin',
-			LowerCase: lowercase,
-			WithoutSpace: withoutSpace,
-			WithoutFillZero: withoutFillZero
-		})
-			.then((res) => {
-				warning = '';
-				console.log(res);
-				results.bin = res.Text;
-			})
-			.catch((err) => {
+	async function calculate() {
+		warning = '';
+		for (const key in to) {
+			try {
+				const res = await ConvertTextBinary({
+					Text: text,
+					To: key,
+					LowerCase: lowercase,
+					WithoutSpace: withoutSpace,
+					WithoutFillZero: withoutFillZero
+				});
+				results[key] = res.Text;
+			} catch (err) {
 				warning = err;
-			});
+			}
+		}
 	}
 
 	$: text, calculate();
 	$: lowercase, calculate();
 	$: withoutSpace, calculate();
 	$: withoutFillZero, calculate();
+
+	const labelValues = [
+		{
+			label: '二进制',
+			value: 'bin'
+		},
+		{
+			label: '十六进制',
+			value: 'hex'
+		},
+		{
+			label: '十进制',
+			value: 'dec'
+		},
+		{
+			label: 'Base64',
+			value: 'base64'
+		}
+	];
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
-	<Title title="Base64 文本编解/解码工具" />
+	<Title title="文本二进制转换工具" />
 
 	<div class="w-full text-token card p-4">
 		<RadioGroup
 			bind:group={withoutSpace}
 			name="withoutSpace"
+			icon="sync_alt"
 			title="空格"
 			description="是否在结果中使用空格分隔"
-			icon="sync_alt"
 			items={[
 				{
 					label: '使用',
@@ -66,9 +85,9 @@
 		<RadioGroup
 			bind:group={withoutFillZero}
 			name="withoutFillZero"
+			icon="sync_alt"
 			title="填充 0"
 			description="是否在结果中用 0 填充"
-			icon="sync_alt"
 			items={[
 				{
 					label: '填充',
@@ -84,9 +103,9 @@
 		<RadioGroup
 			bind:group={lowercase}
 			name="mode"
+			icon="sync_alt"
 			title="大小写"
 			description="是否使用小写字符编码（仅十六进制有效）"
-			icon="sync_alt"
 			items={[
 				{
 					label: '大写',
@@ -97,6 +116,14 @@
 					value: true
 				}
 			]}
+		/>
+
+		<MultiSelector
+			bind:values={to}
+			icon="sync_alt"
+			title="二进制类型"
+			description="选择要转换的二进制类型"
+			{labelValues}
 		/>
 	</div>
 
@@ -110,9 +137,11 @@
 		/>
 	</div>
 
-	{#if results.bin}
-		<div class="w-full text-token card p-4">
-			<TextViewer title="二进制" bind:text={results.bin} />
-		</div>
-	{/if}
+	{#each labelValues as labelValue}
+		{#if results[labelValue.value]}
+			<div class="w-full text-token card p-4">
+				<TextViewer title={labelValue.label} bind:text={results[labelValue.value]} />
+			</div>
+		{/if}
+	{/each}
 </div>
