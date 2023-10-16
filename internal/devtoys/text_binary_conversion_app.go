@@ -31,6 +31,10 @@ type TextBinaryConversionRes struct {
 }
 
 func (a *TextBinaryConversionApp) ConvertTextBinary(req *TextBinaryConversionReq) (*TextBinaryConversionRes, error) {
+	if req.Text == "" {
+		return &TextBinaryConversionRes{}, nil
+	}
+
 	if err := validate.Struct(req); err != nil {
 		return nil, errors.Wrap(err, "validate.Struct failed")
 	}
