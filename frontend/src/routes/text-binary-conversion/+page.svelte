@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Base64Decode, Base64Encode, ConvertTextBinary } from '$lib/wailsjs/go/devtoys/App';
+	import { ConvertTextBinary } from '$lib/wailsjs/go/devtoys/App';
 	import { Title, RadioGroup, Textarea, TextViewer, MultiSelector } from '$lib';
 	import '@fontsource/roboto-mono';
 
@@ -9,13 +9,7 @@
 	let withoutSpace = false;
 	let withoutFillZero = false;
 	let warning = '';
-
-	let results = {
-		bin: '',
-		hex: '',
-		dec: '',
-		base64: ''
-	};
+	let results: any = {};
 
 	async function calculate() {
 		warning = '';
@@ -33,6 +27,7 @@
 				warning = err;
 			}
 		}
+		console.log(to);
 	}
 
 	$: text, calculate();
@@ -124,6 +119,14 @@
 			title="二进制类型"
 			description="选择要转换的二进制类型"
 			{labelValues}
+			on:select={(e) => {
+				console.log(e.detail);
+				if (e.detail.selected) {
+					calculate();
+				} else {
+					results[e.detail.value] = '';
+				}
+			}}
 		/>
 	</div>
 
@@ -138,9 +141,9 @@
 	</div>
 
 	{#each labelValues as labelValue}
-		{#if results[labelValue.value]}
+		{#if to[labelValue.value]}
 			<div class="w-full text-token card p-4">
-				<TextViewer title={labelValue.label} bind:text={results[labelValue.value]} />
+				<TextViewer title={labelValue.label} text={results[labelValue.value]} />
 			</div>
 		{/if}
 	{/each}

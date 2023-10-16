@@ -1,5 +1,6 @@
 <script lang="ts">
 	import 'material-symbols';
+	import { createEventDispatcher } from 'svelte';
 
 	export let title: string;
 	export let description: string;
@@ -8,8 +9,14 @@
 	export let icon: string;
 	export let iconSet = 'material-symbols';
 
+	const dispatch = createEventDispatcher();
+
 	function filter(key: string): void {
 		values[key] = !values[key];
+		dispatch('select', {
+			value: key,
+			selected: values[key]
+		});
 	}
 </script>
 
@@ -32,7 +39,6 @@
 				on:click={() => {
 					filter(labelValue.value);
 				}}
-				on:keypress
 			>
 				{#if values[labelValue.value]}<span class="material-symbols-outlined">done</span>{/if}
 				<span class="capitalize">{labelValue.label}</span>
