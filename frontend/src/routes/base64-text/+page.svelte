@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
 	import { Title, RadioGroup, Textarea, TextViewer } from '$lib';
+	import { fade } from 'svelte/transition';
 	import '@fontsource/roboto-mono';
 
 	let mode = 'encode';
@@ -109,7 +110,7 @@
 	</div>
 
 	{#if output}
-		<div class="w-full text-token card p-4">
+		<div class="w-full text-token card p-4" in:fade out:fade>
 			<TextViewer bind:text={output} />
 		</div>
 	{/if}

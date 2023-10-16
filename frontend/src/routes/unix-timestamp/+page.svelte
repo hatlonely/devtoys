@@ -1,8 +1,8 @@
 <script lang="ts">
 	import 'material-symbols';
-	import { AnalystTimeInfo } from '$lib/wailsjs/go/devtoys/App';
 	import '@fontsource/roboto-mono';
-	import { Title, Input, DataTable, InformationWall } from '$lib';
+	import { AnalystTimeInfo } from '$lib/wailsjs/go/devtoys/App';
+	import { Title, Input, InformationWall } from '$lib';
 
 	let input = '';
 	let warning = '';

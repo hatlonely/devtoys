@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Escape } from '$lib/wailsjs/go/devtoys/App';
 	import { Title, RadioGroup as RadioGroup2, Textarea, TextViewer } from '$lib';
+	import { fade } from 'svelte/transition';
 	import '@fontsource/roboto-mono';
 
 	let mode = 'unescape';
@@ -93,7 +94,7 @@
 	</div>
 
 	{#if output}
-		<div class="w-full text-token card p-4">
+		<div class="w-full text-token card p-4" in:fade out:fade>
 			<TextViewer bind:text={output} />
 		</div>
 	{/if}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { clipboard } from '@skeletonlabs/skeleton';
+
 	import 'material-symbols';
 
 	export let text: string;
