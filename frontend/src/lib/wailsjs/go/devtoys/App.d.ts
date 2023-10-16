@@ -10,6 +10,6 @@ export function Base64Encode(arg1:string,arg2:string,arg3:boolean):Promise<strin
 
 export function ConvertNumberBase(arg1:devtoys.NumberBaseConversionReq):Promise<devtoys.NumberBaseConversionRes>;
 
-export function ConvertTextBinaryConversion(arg1:devtoys.TextBinaryConversionReq):Promise<devtoys.TextBinaryConversionRes>;
+export function ConvertTextBinary(arg1:devtoys.TextBinaryConversionReq):Promise<devtoys.TextBinaryConversionRes>;
 
 export function Escape(arg1:devtoys.EscapeReq):Promise<devtoys.EscapeRes>;

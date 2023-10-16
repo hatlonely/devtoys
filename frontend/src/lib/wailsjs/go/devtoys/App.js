@@ -18,8 +18,8 @@ export function ConvertNumberBase(arg1) {
   return window['go']['devtoys']['App']['ConvertNumberBase'](arg1);
 }
 
-export function ConvertTextBinaryConversion(arg1) {
-  return window['go']['devtoys']['App']['ConvertTextBinaryConversion'](arg1);
+export function ConvertTextBinary(arg1) {
+  return window['go']['devtoys']['App']['ConvertTextBinary'](arg1);
 }
 
 export function Escape(arg1) {

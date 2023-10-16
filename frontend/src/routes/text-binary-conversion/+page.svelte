@@ -1,42 +1,44 @@
 <script lang="ts">
-	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
+	import { Base64Decode, Base64Encode, ConvertTextBinary } from '$lib/wailsjs/go/devtoys/App';
 	import { Title, RadioGroup, Textarea, TextViewer } from '$lib';
 	import '@fontsource/roboto-mono';
 
-	let mode = 'encode';
-	let type_ = 'std';
-	let align = true;
-	let input = '';
-	let output = '';
+	let text = '';
+	let to = '';
+	let lowercase = false;
+	let withoutSpace = false;
+	let withoutFillZero = false;
 	let warning = '';
 
+	let results = {
+		bin: '',
+		hex: '',
+		dec: '',
+		base64: ''
+	};
+
 	function calculate() {
-		if (mode === 'encode') {
-			Base64Encode(input, type_, align).then((res) => {
-				output = res;
+		ConvertTextBinary({
+			Text: text,
+			To: 'bin',
+			LowerCase: lowercase,
+			WithoutSpace: withoutSpace,
+			WithoutFillZero: withoutFillZero
+		})
+			.then((res) => {
 				warning = '';
+				console.log(res);
+				results.bin = res.Text;
+			})
+			.catch((err) => {
+				warning = err;
 			});
-		} else {
-			Base64Decode(input, type_, align)
-				.then((res) => {
-					output = res;
-					warning = '';
-				})
-				.catch((err) => {
-					warning = err;
-				});
-		}
 	}
 
-	function onOpChange() {
-		input = output;
-		calculate();
-	}
-
-	$: mode, onOpChange();
-	$: type_, calculate();
-	$: align, calculate();
-	$: input, calculate();
+	$: text, calculate();
+	$: lowercase, calculate();
+	$: withoutSpace, calculate();
+	$: withoutFillZero, calculate();
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
@@ -44,55 +46,55 @@
 
 	<div class="w-full text-token card p-4">
 		<RadioGroup
-			bind:group={mode}
-			name="mode"
-			title="转换模式"
-			description="选择您想使用的转换模式"
+			bind:group={withoutSpace}
+			name="withoutSpace"
+			title="空格"
+			description="是否在结果中使用空格分隔"
 			icon="sync_alt"
 			items={[
 				{
-					label: '编码',
-					value: 'encode'
-				},
-				{
-					label: '解码',
-					value: 'decode'
-				}
-			]}
-		/>
-
-		<RadioGroup
-			bind:group={type_}
-			name="type_"
-			title="编码模式"
-			description="常规编码/URL安全编码"
-			icon="link"
-			items={[
-				{
-					label: '常规',
-					value: 'std'
-				},
-				{
-					label: 'URL',
-					value: 'url'
-				}
-			]}
-		/>
-
-		<RadioGroup
-			bind:group={align}
-			name="align"
-			title="补齐模式"
-			description="末尾是否使用 = 补齐"
-			icon="equal"
-			items={[
-				{
-					label: '开启',
-					value: true
-				},
-				{
-					label: '关闭',
+					label: '使用',
 					value: false
+				},
+				{
+					label: '不用',
+					value: true
+				}
+			]}
+		/>
+
+		<RadioGroup
+			bind:group={withoutFillZero}
+			name="withoutFillZero"
+			title="填充 0"
+			description="是否在结果中用 0 填充"
+			icon="sync_alt"
+			items={[
+				{
+					label: '填充',
+					value: false
+				},
+				{
+					label: '不填',
+					value: true
+				}
+			]}
+		/>
+
+		<RadioGroup
+			bind:group={lowercase}
+			name="mode"
+			title="大小写"
+			description="是否使用小写字符编码（仅十六进制有效）"
+			icon="sync_alt"
+			items={[
+				{
+					label: '大写',
+					value: false
+				},
+				{
+					label: '小写',
+					value: true
 				}
 			]}
 		/>
@@ -100,7 +102,7 @@
 
 	<div class="w-full text-token card p-4">
 		<Textarea
-			bind:value={input}
+			bind:value={text}
 			on:input={calculate}
 			placeholder="输入要编码/解码的文本"
 			code={true}
@@ -108,9 +110,9 @@
 		/>
 	</div>
 
-	{#if output}
+	{#if results.bin}
 		<div class="w-full text-token card p-4">
-			<TextViewer bind:text={output} />
+			<TextViewer title="二进制" bind:text={results.bin} />
 		</div>
 	{/if}
 </div>
