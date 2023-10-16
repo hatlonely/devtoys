@@ -27,7 +27,6 @@
 				warning = err;
 			}
 		}
-		console.log(to);
 	}
 
 	$: text, calculate();
@@ -120,7 +119,6 @@
 			description="选择要转换的二进制类型"
 			{labelValues}
 			on:select={(e) => {
-				console.log(e.detail);
 				if (e.detail.selected) {
 					calculate();
 				} else {
