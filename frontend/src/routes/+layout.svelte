@@ -7,6 +7,7 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	import '@fortawesome/fontawesome-free/css/all.css';
+	import { Icon } from '$lib';
 </script>
 
 <AppShell slotSidebarLeft="bg-surface-500/5 w-56 p-4">
@@ -29,17 +30,46 @@
 			<ul>
 				<li>
 					<a href="/">
-						<span class="material-symbols-outlined"> home </span>
+						<span><Icon name="home" class="icon" /></span>
 						<span>所有工具</span>
 					</a>
 				</li>
-				<li><a href="/base64-text">Base64 编解码</a></li>
-				<li><a href="/unix-timestamp">Unix 时间戳</a></li>
-				<li><a href="/escape">转义</a></li>
-				<li><a href="/text-binary-conversion">文本二进制转换</a></li>
-				<li><a href="/number-base-conversion">进制转换</a></li>
-				<li><a href="/hash">哈希散列</a></li>
-				<li />
+				<li>
+					<a href="/base64-text">
+						<span><Icon name="delete" class="icon" /></span>
+						<span>Base64 编解码</span>
+					</a>
+				</li>
+				<li>
+					<a href="/unix-timestamp">
+						<span><Icon name="timestamp" class="icon" /></span>
+						<span>Unix 时间戳</span>
+					</a>
+				</li>
+				<li>
+					<a href="/escape">
+						<span><Icon name="timestamp" class="icon" /></span>
+						<span>转义</span>
+					</a>
+				</li>
+				<li>
+					<a href="/text-binary-conversion">
+						<span><Icon name="timestamp" class="icon" /></span>
+						<span>文本二进制转换</span>
+					</a>
+				</li>
+				<li>
+					<a href="/number-base-conversion">
+						<span><Icon name="timestamp" class="icon" /></span>
+						<span>进制转换</span>
+					</a>
+				</li>
+				<li>
+					<a href="/hash">
+						<span><Icon name="timestamp" class="icon" /></span>
+						<span>哈希散列</span>
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</svelte:fragment>

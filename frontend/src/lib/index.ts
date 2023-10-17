@@ -10,3 +10,5 @@ export { default as DataTable } from './components/DataTable.svelte';
 export { default as InformationWall } from './components/InformationWall.svelte';
 export { default as MultiSelector } from './components/MultiSelector.svelte';
 export { default as SingleSelector } from './components/SingleSelector.svelte';
+export { default as ToolItem } from './components/ToolItem.svelte';
+export { default as Icon } from './icons/Icon.svelte';

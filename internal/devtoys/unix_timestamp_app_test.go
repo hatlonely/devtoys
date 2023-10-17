@@ -20,9 +20,6 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 		})
 		defer patches.Reset()
 
-		type args struct {
-			timestr string
-		}
 		tests := []struct {
 			name string
 			args *UnixTimestampReq
