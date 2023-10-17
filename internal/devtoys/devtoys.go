@@ -10,6 +10,7 @@ type App struct {
 	NumberBaseConversionApp
 	EscapeApp
 	TextBinaryConversionApp
+	HashApp
 }
 
 func NewApp() *App {
@@ -19,6 +20,7 @@ func NewApp() *App {
 		NumberBaseConversionApp: *NewNumberBaseConversionApp(),
 		EscapeApp:               *NewEscapeApp(),
 		TextBinaryConversionApp: *NewTextBinaryConversionApp(),
+		HashApp:                 *NewHashApp(),
 	}
 }
 
@@ -28,4 +30,5 @@ func (a *App) Startup(ctx context.Context) {
 	a.NumberBaseConversionApp.Startup(ctx)
 	a.EscapeApp.Startup(ctx)
 	a.TextBinaryConversionApp.Startup(ctx)
+	a.HashApp.Startup(ctx)
 }

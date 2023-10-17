@@ -18,6 +18,10 @@ export function Escape(arg1) {
   return window['go']['devtoys']['App']['Escape'](arg1);
 }
 
+export function Hash(arg1) {
+  return window['go']['devtoys']['App']['Hash'](arg1);
+}
+
 export function UnixTimestamp(arg1) {
   return window['go']['devtoys']['App']['UnixTimestamp'](arg1);
 }

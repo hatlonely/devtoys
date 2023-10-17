@@ -38,6 +38,8 @@
 				<li><a href="/escape">转义</a></li>
 				<li><a href="/text-binary-conversion">文本二进制转换</a></li>
 				<li><a href="/number-base-conversion">进制转换</a></li>
+				<li><a href="/hash">哈希散列</a></li>
+				<li />
 			</ul>
 		</nav>
 	</svelte:fragment>
