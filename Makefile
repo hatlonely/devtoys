@@ -15,3 +15,8 @@ macos-amd64:
 
 macos-arm64:
 	wails build -platform darwin/arm64
+
+clean:
+	rm -rf build/
+	rm -rf frontend/pkg
+	rm -rf frontend/src/lib/wailsjs

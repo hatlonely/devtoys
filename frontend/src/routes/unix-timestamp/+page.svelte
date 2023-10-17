@@ -1,7 +1,7 @@
 <script lang="ts">
 	import 'material-symbols';
 	import '@fontsource/roboto-mono';
-	import { AnalystTimeInfo } from '$lib/wailsjs/go/devtoys/App';
+	import { UnixTimestamp } from '$lib/wailsjs/go/devtoys/App';
 	import { Title, Input, InformationWall } from '$lib';
 
 	let input = '';
@@ -15,7 +15,9 @@
 	};
 
 	function calculate() {
-		AnalystTimeInfo(input)
+		UnixTimestamp({
+			Text: input
+		})
 			.then((res) => {
 				info = res;
 				warning = '';

@@ -1,32 +1,30 @@
 <script lang="ts">
-	import { Base64Decode, Base64Encode } from '$lib/wailsjs/go/devtoys/App';
+	import { Base64Text } from '$lib/wailsjs/go/devtoys/App';
 	import { Title, RadioGroup, Textarea, TextViewer } from '$lib';
 	import { fade } from 'svelte/transition';
 	import '@fontsource/roboto-mono';
 
 	let mode = 'encode';
 	let type_ = 'std';
-	let align = true;
+	let padding = true;
 	let input = '';
 	let output = '';
 	let warning = '';
 
 	function calculate() {
-		if (mode === 'encode') {
-			Base64Encode(input, type_, align).then((res) => {
-				output = res;
+		Base64Text({
+			Text: input,
+			Mode: mode,
+			Type: type_,
+			Padding: padding
+		})
+			.then((res) => {
+				output = res.Text;
 				warning = '';
+			})
+			.catch((err) => {
+				warning = err;
 			});
-		} else {
-			Base64Decode(input, type_, align)
-				.then((res) => {
-					output = res;
-					warning = '';
-				})
-				.catch((err) => {
-					warning = err;
-				});
-		}
 	}
 
 	function onOpChange() {
@@ -36,7 +34,7 @@
 
 	$: mode, onOpChange();
 	$: type_, calculate();
-	$: align, calculate();
+	$: padding, calculate();
 	$: input, calculate();
 </script>
 
@@ -81,8 +79,8 @@
 		/>
 
 		<RadioGroup
-			bind:group={align}
-			name="align"
+			bind:group={padding}
+			name="padding"
 			title="补齐模式"
 			description="末尾是否使用 = 补齐"
 			icon="equal"
