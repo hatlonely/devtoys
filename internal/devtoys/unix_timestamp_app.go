@@ -22,7 +22,11 @@ func (a *UnixTimestampApp) Startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-type TimeInfo struct {
+type UnixTimestampReq struct {
+	Time string
+}
+
+type UnixTimestampRes struct {
 	Timestamp     int64
 	TimestampMill int64
 	LocalTime     string
@@ -30,13 +34,13 @@ type TimeInfo struct {
 	Relative      string
 }
 
-func (a *UnixTimestampApp) AnalystTimeInfo(timestr string) (*TimeInfo, error) {
-	t, err := strToTimeE(timestr)
+func (a *UnixTimestampApp) UnixTimestamp(req *UnixTimestampReq) (*UnixTimestampRes, error) {
+	t, err := strToTimeE(req.Time)
 	if err != nil {
 		return nil, errors.Wrap(err, "cast.ToTimeE failed")
 	}
 
-	return &TimeInfo{
+	return &UnixTimestampRes{
 		Timestamp:     t.Unix(),
 		TimestampMill: t.UnixMilli(),
 		LocalTime:     t.Local().Format(time.RFC3339),

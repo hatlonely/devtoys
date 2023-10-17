@@ -25,15 +25,15 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 		}
 		tests := []struct {
 			name string
-			args args
-			want *TimeInfo
+			args *UnixTimestampReq
+			want *UnixTimestampRes
 		}{
 			{
 				name: "timestamp",
-				args: args{
-					timestr: "1629264000",
+				args: &UnixTimestampReq{
+					Time: "1629264000",
 				},
-				want: &TimeInfo{
+				want: &UnixTimestampRes{
 					Timestamp:     1629264000,
 					TimestampMill: 1629264000000,
 					LocalTime:     "2021-08-18T13:20:00+08:00",
@@ -43,10 +43,10 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 			},
 			{
 				name: "timestamp with milliseconds",
-				args: args{
-					timestr: "1629264000000",
+				args: &UnixTimestampReq{
+					Time: "1629264000000",
 				},
-				want: &TimeInfo{
+				want: &UnixTimestampRes{
 					Timestamp:     1629264000,
 					TimestampMill: 1629264000000,
 					LocalTime:     "2021-08-18T13:20:00+08:00",
@@ -56,10 +56,10 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 			},
 			{
 				name: "timestamp with microseconds",
-				args: args{
-					timestr: "1629264000000000",
+				args: &UnixTimestampReq{
+					Time: "1629264000000000",
 				},
-				want: &TimeInfo{
+				want: &UnixTimestampRes{
 					Timestamp:     1629264000,
 					TimestampMill: 1629264000000,
 					LocalTime:     "2021-08-18T13:20:00+08:00",
@@ -69,10 +69,10 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 			},
 			{
 				name: "timestamp with nanoseconds",
-				args: args{
-					timestr: "1629264000000000000",
+				args: &UnixTimestampReq{
+					Time: "1629264000000000000",
 				},
-				want: &TimeInfo{
+				want: &UnixTimestampRes{
 					Timestamp:     1629264000,
 					TimestampMill: 1629264000000,
 					LocalTime:     "2021-08-18T13:20:00+08:00",
@@ -82,10 +82,10 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 			},
 			{
 				name: "RFC3339",
-				args: args{
-					timestr: "2021-08-18T05:20:00Z",
+				args: &UnixTimestampReq{
+					Time: "2021-08-18T05:20:00Z",
 				},
-				want: &TimeInfo{
+				want: &UnixTimestampRes{
 					Timestamp:     1629264000,
 					TimestampMill: 1629264000000,
 					LocalTime:     "2021-08-18T13:20:00+08:00",
@@ -95,10 +95,10 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 			},
 			{
 				name: "RFC3339 with milliseconds",
-				args: args{
-					timestr: "2021-08-18T05:20:00.000Z",
+				args: &UnixTimestampReq{
+					Time: "2021-08-18T05:20:00.000Z",
 				},
-				want: &TimeInfo{
+				want: &UnixTimestampRes{
 					Timestamp:     1629264000,
 					TimestampMill: 1629264000000,
 					LocalTime:     "2021-08-18T13:20:00+08:00",
@@ -108,10 +108,10 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 			},
 			{
 				name: "RFC3339 with timezone",
-				args: args{
-					timestr: "2021-08-18T13:20:00+08:00",
+				args: &UnixTimestampReq{
+					Time: "2021-08-18T13:20:00+08:00",
 				},
-				want: &TimeInfo{
+				want: &UnixTimestampRes{
 					Timestamp:     1629264000,
 					TimestampMill: 1629264000000,
 					LocalTime:     "2021-08-18T13:20:00+08:00",
@@ -121,10 +121,10 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 			},
 			{
 				name: "RFC3339 with timezone and milliseconds",
-				args: args{
-					timestr: "2021-08-18T13:20:00.000+08:00",
+				args: &UnixTimestampReq{
+					Time: "2021-08-18T13:20:00.000+08:00",
 				},
-				want: &TimeInfo{
+				want: &UnixTimestampRes{
 					Timestamp:     1629264000,
 					TimestampMill: 1629264000000,
 					LocalTime:     "2021-08-18T13:20:00+08:00",
@@ -134,10 +134,10 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 			},
 			{
 				name: "floating-point timestamp",
-				args: args{
-					timestr: "1629264000.123456",
+				args: &UnixTimestampReq{
+					Time: "1629264000.123456",
 				},
-				want: &TimeInfo{
+				want: &UnixTimestampRes{
 					Timestamp:     1629264000,
 					TimestampMill: 1629264000123,
 					LocalTime:     "2021-08-18T13:20:00+08:00",
@@ -149,8 +149,7 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 
 		for _, tt := range tests {
 			Convey(tt.name, func() {
-
-				got, err := a.AnalystTimeInfo(tt.args.timestr)
+				got, err := a.UnixTimestamp(tt.args)
 				So(err, ShouldBeNil)
 				So(got.Timestamp, ShouldEqual, tt.want.Timestamp)
 				So(got.TimestampMill, ShouldEqual, tt.want.TimestampMill)
