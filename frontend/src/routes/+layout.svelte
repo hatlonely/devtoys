@@ -7,7 +7,9 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	import '@fortawesome/fontawesome-free/css/all.css';
-	import { Icon } from '$lib';
+	import { Icon, ThemeSelector } from '$lib';
+
+	document.body.setAttribute('data-theme', 'crimson');
 </script>
 
 <AppShell slotSidebarLeft="bg-surface-500/5 w-56 p-4">
@@ -17,6 +19,8 @@
 				<strong class="text-xl uppercase">DevToys</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
+				<ThemeSelector />
+
 				<a href="https://github.com/hatlonely/devtoys" target="_blank" rel="noreferrer">
 					<i class="fa-brands fa-github" />
 				</a>
