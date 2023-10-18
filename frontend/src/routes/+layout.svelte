@@ -38,9 +38,10 @@
 						<span>所有工具</span>
 					</a>
 				</li>
+				<hr />
 				<li>
 					<a href="/base64-text">
-						<span><Icon name="delete" class="icon" /></span>
+						<span><Icon name="base64" class="icon" /></span>
 						<span>Base64 编解码</span>
 					</a>
 				</li>
@@ -52,8 +53,8 @@
 				</li>
 				<li>
 					<a href="/escape">
-						<span><Icon name="timestamp" class="icon" /></span>
-						<span>转义</span>
+						<span><Icon name="escape" class="icon" /></span>
+						<span>字符串转义</span>
 					</a>
 				</li>
 				<li>
@@ -65,7 +66,7 @@
 				<li>
 					<a href="/number-base-conversion">
 						<span><Icon name="timestamp" class="icon" /></span>
-						<span>进制转换</span>
+						<span>数值进制转换</span>
 					</a>
 				</li>
 				<li>

@@ -4,11 +4,18 @@
 	export let icon: string;
 	export let title: string;
 	export let description: string;
+	export let link: string;
 </script>
 
-<div class="card w-40 p-8">
-	<span><span><Icon name={icon} class="icon-lg" /></span></span>
+<div class="w-48 h-72 card m-4 p-8 content-center">
+	<a href={link}>
+		<div class="flex justify-center"><Icon name={icon} class="icon-xl" /></div>
 
-	<span>{title}</span>
-	<span>{description}</span>
+		<div class="mt-8">
+			<span>
+				<dt class="font-bold text-center">{title}</dt>
+				<dd class="text-sm opacity-50 text-center mt-3">{description}</dd>
+			</span>
+		</div>
+	</a>
 </div>
