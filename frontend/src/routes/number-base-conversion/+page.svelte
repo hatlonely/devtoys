@@ -91,13 +91,13 @@
 			]}
 		/>
 
-		<SingleSelector
-			bind:value={inBase}
+		<RadioGroup
+			bind:group={inBase}
+			name="mode"
 			icon="sync_alt"
 			title="输入进制类型"
 			description="选择输入的二进制类型"
-			{labelValues}
-			on:select={onSelectInBase}
+			items={labelValues}
 		/>
 
 		<MultiSelector
@@ -128,7 +128,7 @@
 
 	{#each labelValues as labelValue}
 		{#if toBases[labelValue.value] && results[labelValue.value]}
-			<div class="w-full text-token card p-4" in:fade out:fade>
+			<div class="w-full text-token card p-4">
 				<TextViewer title={labelValue.label} text={results[labelValue.value]} />
 			</div>
 		{/if}
