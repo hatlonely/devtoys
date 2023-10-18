@@ -59,19 +59,19 @@
 				</li>
 				<li>
 					<a href="/text-binary-conversion">
-						<span><Icon name="timestamp" class="icon" /></span>
+						<span><Icon name="text" class="icon" /></span>
 						<span>文本二进制转换</span>
 					</a>
 				</li>
 				<li>
 					<a href="/number-base-conversion">
-						<span><Icon name="timestamp" class="icon" /></span>
+						<span><Icon name="number" class="icon" /></span>
 						<span>数值进制转换</span>
 					</a>
 				</li>
 				<li>
 					<a href="/hash">
-						<span><Icon name="timestamp" class="icon" /></span>
+						<span><Icon name="hash" class="icon" /></span>
 						<span>哈希散列</span>
 					</a>
 				</li>

@@ -21,19 +21,19 @@
 			link: '/escape'
 		},
 		{
-			icon: 'home',
+			icon: 'text',
 			title: '文本二进制转换',
 			description: '查看文本的二进制、八进制、十六进制标识',
 			link: '/text-binary-conversion'
 		},
 		{
-			icon: 'home',
+			icon: 'number',
 			title: '数值进制转换',
 			description: '数值二进制、八进制、十进制、十六进制转换',
 			link: '/number-base-conversion'
 		},
 		{
-			icon: 'home',
+			icon: 'hash',
 			title: '哈希散列',
 			description: 'MD5、SHA1、SHA256、SHA512、SHA3、RIPEMD160、HMAC 哈希散列工具',
 			link: '/hash'
