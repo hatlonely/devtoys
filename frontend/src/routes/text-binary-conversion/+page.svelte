@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { ConvertTextBinary } from '$lib/wailsjs/go/devtoys/App';
 	import { Title, RadioGroup, Textarea, TextViewer, MultiSelector } from '$lib';
-	import { fade } from 'svelte/transition';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -146,7 +145,7 @@
 
 	{#each labelValues as labelValue}
 		{#if to[labelValue.value] && results[labelValue.value]}
-			<div class="w-full text-token card p-4" in:fade out:fade>
+			<div class="w-full text-token card p-4">
 				<TextViewer title={labelValue.label} text={results[labelValue.value]} />
 			</div>
 		{/if}

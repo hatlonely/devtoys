@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Hash } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroup, Textarea, TextViewer, MultiSelector } from '$lib';
+	import { Title, RadioGroup, Textarea, TextViewer, Input } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -92,8 +92,8 @@
 			bind:group={hmac}
 			name="hamc"
 			icon="sync_alt"
-			title="编码类型"
-			description="输出结果的编码类型"
+			title="HMAC"
+			description="HMAC 模式，需要输入密码"
 			items={[
 				{
 					label: '开启',
@@ -107,7 +107,15 @@
 		/>
 
 		{#if hmac}
-			<input bind:value={key} type="text" class="input text-sm" placeholder="输入密钥" />
+			<Input
+				bind:value={key}
+				on:input={calculate}
+				on:clear={calculate}
+				title="HMAC 密码"
+				placeholder="输入密码"
+				code={true}
+				{warning}
+			/>
 		{/if}
 	</div>
 
