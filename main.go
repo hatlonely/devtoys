@@ -12,6 +12,9 @@ import (
 //go:embed all:frontend/build
 var assets embed.FS
 
+//go:embed frontend/static/favicon.png
+var icon []byte
+
 func main() {
 	// Create an instance of the app structure
 	app := devtoys.NewApp()

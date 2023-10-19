@@ -5,3 +5,4 @@ vendor/
 pkg/
 *.bk/
 .vscode/
+build/
