@@ -1,15 +1,13 @@
 <script lang="ts">
 	import '../app.postcss';
+	import '@fortawesome/fontawesome-free/css/all.css';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
+
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
-	import '@fortawesome/fontawesome-free/css/all.css';
 	import { Icon, ThemeSelector } from '$lib';
-
-	document.body.setAttribute('data-theme', 'crimson');
 </script>
 
 <AppShell slotSidebarLeft="bg-surface-500/5 w-56 p-4">
