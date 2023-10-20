@@ -9,47 +9,47 @@ import (
 	"github.com/pkg/errors"
 )
 
-type StringApp struct {
+type StringConversionApp struct {
 	BaseApp
 }
 
-func NewStringApp() *StringApp {
-	return &StringApp{}
+func NewStringConversionApp() *StringConversionApp {
+	return &StringConversionApp{}
 }
 
-type StringReq struct {
+type ConvertStringReq struct {
 	Text string
 	Type string
 }
 
-type StringRes struct {
+type ConvertStringRes struct {
 	Text string
 }
 
-func (a *StringApp) ConvertString(req *StringReq) (*StringRes, error) {
+func (a *StringConversionApp) ConvertString(req *ConvertStringReq) (*ConvertStringRes, error) {
 	switch req.Type {
 	case "title":
-		return &StringRes{Text: titleCase(req.Text)}, nil
+		return &ConvertStringRes{Text: titleCase(req.Text)}, nil
 	case "lower":
-		return &StringRes{Text: lowerCase(req.Text)}, nil
+		return &ConvertStringRes{Text: lowerCase(req.Text)}, nil
 	case "upper":
-		return &StringRes{Text: upperCase(req.Text)}, nil
+		return &ConvertStringRes{Text: upperCase(req.Text)}, nil
 	case "sentence":
-		return &StringRes{Text: sentenceCase(req.Text)}, nil
+		return &ConvertStringRes{Text: sentenceCase(req.Text)}, nil
 	case "camel":
-		return &StringRes{Text: camelCase(req.Text)}, nil
+		return &ConvertStringRes{Text: camelCase(req.Text)}, nil
 	case "pascal":
-		return &StringRes{Text: pascalCase(req.Text)}, nil
+		return &ConvertStringRes{Text: pascalCase(req.Text)}, nil
 	case "snake":
-		return &StringRes{Text: snakeCase(req.Text)}, nil
+		return &ConvertStringRes{Text: snakeCase(req.Text)}, nil
 	case "kebab":
-		return &StringRes{Text: kebabCase(req.Text)}, nil
+		return &ConvertStringRes{Text: kebabCase(req.Text)}, nil
 	case "snakeCaseAllCaps":
-		return &StringRes{Text: snakeCaseAllCaps(req.Text)}, nil
+		return &ConvertStringRes{Text: snakeCaseAllCaps(req.Text)}, nil
 	case "kebabCaseAllCaps":
-		return &StringRes{Text: kebabCaseAllCaps(req.Text)}, nil
+		return &ConvertStringRes{Text: kebabCaseAllCaps(req.Text)}, nil
 	case "train":
-		return &StringRes{Text: trainCase(req.Text)}, nil
+		return &ConvertStringRes{Text: trainCase(req.Text)}, nil
 	default:
 		return nil, errors.Errorf("unknown type: %v", req.Type)
 	}
