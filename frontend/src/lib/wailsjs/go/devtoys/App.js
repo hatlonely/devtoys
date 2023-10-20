@@ -10,6 +10,10 @@ export function ConvertNumberBase(arg1) {
   return window['go']['devtoys']['App']['ConvertNumberBase'](arg1);
 }
 
+export function ConvertString(arg1) {
+  return window['go']['devtoys']['App']['ConvertString'](arg1);
+}
+
 export function ConvertTextBinary(arg1) {
   return window['go']['devtoys']['App']['ConvertTextBinary'](arg1);
 }

@@ -6,6 +6,8 @@ export function Base64Text(arg1:devtoys.Base64TextReq):Promise<devtoys.Base64Tex
 
 export function ConvertNumberBase(arg1:devtoys.NumberBaseConversionReq):Promise<devtoys.NumberBaseConversionRes>;
 
+export function ConvertString(arg1:devtoys.StringReq):Promise<devtoys.StringRes>;
+
 export function ConvertTextBinary(arg1:devtoys.TextBinaryConversionReq):Promise<devtoys.TextBinaryConversionRes>;
 
 export function Escape(arg1:devtoys.EscapeReq):Promise<devtoys.EscapeRes>;
