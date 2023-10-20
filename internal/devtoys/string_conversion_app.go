@@ -19,7 +19,7 @@ func NewStringConversionApp() *StringConversionApp {
 
 type ConvertStringReq struct {
 	Text string
-	Type string
+	Type string `validate:"required,oneof=title lower upper sentence camel pascal snake kebab snakeCaseAllCaps kebabCaseAllCaps train"`
 }
 
 type ConvertStringRes struct {

@@ -37,16 +37,6 @@
 		}
 	}
 
-	async function onSelectInBase(e: any) {
-		try {
-			const res = await convertNumberBase(e.detail.oldValue, e.detail.newValue);
-			console.log(res);
-			text = res.Number;
-		} catch (err) {
-			warning = err;
-		}
-	}
-
 	$: text, calculate();
 	$: lowercase, calculate();
 
