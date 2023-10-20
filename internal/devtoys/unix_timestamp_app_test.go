@@ -2,6 +2,7 @@ package devtoys
 
 import (
 	"context"
+	"fmt"
 	"testing"
 	"time"
 
@@ -153,6 +154,8 @@ func TestUnixTimestampApp_AnalystTimeInfo(t *testing.T) {
 				So(got.LocalTime, ShouldEqual, tt.want.LocalTime)
 				So(got.UTCTime, ShouldEqual, tt.want.UTCTime)
 				So(got.Relative, ShouldEqual, tt.want.Relative)
+				So(got.TimeZone, ShouldEqual, "")
+				fmt.Println(got.TimeZone)
 			})
 		}
 	})

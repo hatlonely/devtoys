@@ -5,14 +5,8 @@
 	import { Title, Input, InformationWall } from '$lib';
 
 	let text = '';
-	let warning = '';
-	let info = {
-		Timestamp: 0,
-		TimestampMill: 0,
-		LocalTime: '',
-		UTCTime: '',
-		Relative: ''
-	};
+	let warning: any = '';
+	let info = {};
 
 	async function calculate() {
 		warning = '';
@@ -26,13 +20,25 @@
 		}
 	}
 
-	const labels = {
-		Timestamp: '当前时间戳',
-		TimestampMill: '当前时间戳（毫秒）',
-		LocalTime: '本地时间',
-		UTCTime: 'UTC 时间',
-		Relative: '相对时间'
-	};
+	const labelValues = [
+		{ value: 'Timestamp', label: '当前时间戳' },
+		{ value: 'TimestampMill', label: '当前时间戳（毫秒）' },
+		{ value: 'Relative', label: '相对时间' },
+		{ value: 'LocalTime', label: '本地时间' },
+		{ value: 'UTCTime', label: 'UTC 时间' },
+		{ value: 'ANSIC', label: 'ANSIC' },
+		{ value: 'UnixDate', label: 'UnixDate' },
+		{ value: 'RubyDate', label: 'RubyDate' },
+		{ value: 'RFC822', label: 'RFC822' },
+		{ value: 'RFC822Z', label: 'RFC822Z' },
+		{ value: 'RFC850', label: 'RFC850' },
+		{ value: 'RFC1123', label: 'RFC1123' },
+		{ value: 'RFC1123Z', label: 'RFC1123Z' },
+		{ value: 'RFC3339', label: 'RFC3339' },
+		{ value: 'RFC3339Nano', label: 'RFC3339Nano' },
+		{ value: 'Kitchen', label: 'Kitchen' },
+		{ value: 'Stamp', label: 'Stamp' }
+	];
 
 	$: text, calculate();
 </script>
@@ -54,10 +60,10 @@
 
 	<div class="w-full card p-4 text-token">
 		<InformationWall
-			labelValues={['LocalTime', 'UTCTime', 'Relative', 'Timestamp', 'TimestampMill'].map((v) => {
+			labelValues={labelValues.map((v) => {
 				return {
-					label: labels[v],
-					value: info[v]
+					label: v.label,
+					value: info[v.value]
 				};
 			})}
 		/>

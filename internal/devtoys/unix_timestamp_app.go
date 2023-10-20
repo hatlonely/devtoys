@@ -32,6 +32,18 @@ type UnixTimestampRes struct {
 	LocalTime     string
 	UTCTime       string
 	Relative      string
+	ANSIC         string
+	UnixDate      string
+	RubyDate      string
+	RFC822        string
+	RFC822Z       string
+	RFC850        string
+	RFC1123       string
+	RFC1123Z      string
+	RFC3339       string
+	RFC3339Nano   string
+	Kitchen       string
+	Stamp         string
 }
 
 func (a *UnixTimestampApp) UnixTimestamp(req *UnixTimestampReq) (*UnixTimestampRes, error) {
@@ -46,6 +58,18 @@ func (a *UnixTimestampApp) UnixTimestamp(req *UnixTimestampReq) (*UnixTimestampR
 		LocalTime:     t.Local().Format(time.RFC3339),
 		UTCTime:       t.UTC().Format(time.RFC3339),
 		Relative:      timediff.TimeDiff(t),
+		ANSIC:         t.Format(time.ANSIC),
+		UnixDate:      t.Format(time.UnixDate),
+		RubyDate:      t.Format(time.RubyDate),
+		RFC822:        t.Format(time.RFC822),
+		RFC822Z:       t.Format(time.RFC822Z),
+		RFC850:        t.Format(time.RFC850),
+		RFC1123:       t.Format(time.RFC1123),
+		RFC1123Z:      t.Format(time.RFC1123Z),
+		RFC3339:       t.Format(time.RFC3339),
+		RFC3339Nano:   t.Format(time.RFC3339Nano),
+		Kitchen:       t.Format(time.Kitchen),
+		Stamp:         t.Format(time.Stamp),
 	}, nil
 }
 
