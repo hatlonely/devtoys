@@ -4,7 +4,7 @@
 	import { UnixTimestamp } from '$lib/wailsjs/go/devtoys/App';
 	import { Title, Input, InformationWall } from '$lib';
 
-	let input = '';
+	let text = '';
 	let warning = '';
 	let info = {
 		Timestamp: 0,
@@ -14,17 +14,16 @@
 		Relative: ''
 	};
 
-	function calculate() {
-		UnixTimestamp({
-			Text: input
-		})
-			.then((res) => {
-				info = res;
-				warning = '';
-			})
-			.catch((err) => {
-				warning = err;
+	async function calculate() {
+		warning = '';
+		try {
+			let res = await UnixTimestamp({
+				Time: text
 			});
+			info = res;
+		} catch (err) {
+			warning = err;
+		}
 	}
 
 	const labels = {
@@ -35,7 +34,7 @@
 		Relative: '相对时间'
 	};
 
-	$: input, calculate();
+	$: text, calculate();
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
@@ -43,7 +42,7 @@
 
 	<div class="w-full text-token card p-4">
 		<Input
-			bind:value={input}
+			bind:value={text}
 			on:input={calculate}
 			on:clear={calculate}
 			title="时间"
