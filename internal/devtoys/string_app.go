@@ -6,6 +6,7 @@ import (
 	"unicode"
 
 	"github.com/hatlonely/go-kit/strx"
+	"github.com/pkg/errors"
 )
 
 type StringApp struct {
@@ -25,8 +26,33 @@ type StringRes struct {
 	Text string
 }
 
-func (a *StringApp) String(req *StringReq) (*StringRes, error) {
-	return nil, nil
+func (a *StringApp) ConvertString(req *StringReq) (*StringRes, error) {
+	switch req.Type {
+	case "title":
+		return &StringRes{Text: titleCase(req.Text)}, nil
+	case "lower":
+		return &StringRes{Text: lowerCase(req.Text)}, nil
+	case "upper":
+		return &StringRes{Text: upperCase(req.Text)}, nil
+	case "sentence":
+		return &StringRes{Text: sentenceCase(req.Text)}, nil
+	case "camel":
+		return &StringRes{Text: camelCase(req.Text)}, nil
+	case "pascal":
+		return &StringRes{Text: pascalCase(req.Text)}, nil
+	case "snake":
+		return &StringRes{Text: snakeCase(req.Text)}, nil
+	case "kebab":
+		return &StringRes{Text: kebabCase(req.Text)}, nil
+	case "snakeCaseAllCaps":
+		return &StringRes{Text: snakeCaseAllCaps(req.Text)}, nil
+	case "kebabCaseAllCaps":
+		return &StringRes{Text: kebabCaseAllCaps(req.Text)}, nil
+	case "train":
+		return &StringRes{Text: trainCase(req.Text)}, nil
+	default:
+		return nil, errors.Errorf("unknown type: %v", req.Type)
+	}
 }
 
 func titleCase(text string) string {
