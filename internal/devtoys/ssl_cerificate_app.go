@@ -2,10 +2,10 @@ package devtoys
 
 import (
 	"context"
+	"crypto/rsa"
 	"crypto/x509"
+	"encoding/hex"
 	"encoding/pem"
-	"fmt"
-	"reflect"
 
 	"github.com/pkg/errors"
 )
@@ -52,7 +52,15 @@ type Certificate struct {
 	CRLDistributionPoints []string // CRL 分发点
 	IssuingCertificateURL []string // 颁发者证书 URL
 	OCSPServer            []string // OCSP 服务器地址
+	SignatureAlgorithm    string   // 签名算法
+	PublicKeyAlgorithm    string   // 公钥算法
 	PublicKey             string   // 公钥
+	AuthorityKeyId        string   // 颁发者公钥标识
+	SubjectKeyId          string   // 使用者公钥标识
+
+	Md5    string
+	Sha1   string
+	Sha256 string
 }
 
 type SSLCertificateRes struct {
@@ -71,13 +79,36 @@ func (a *SSLCertificateApp) SSLCertificate(req *SSLCertificateReq) (*SSLCertific
 		return nil, errors.Errorf("x509.ParseCertificate failed")
 	}
 
-	fmt.Println(cert.PublicKeyAlgorithm)
-	fmt.Println(reflect.TypeOf(cert.PublicKey))
+	publicKey := ""
+	switch k := cert.PublicKey.(type) {
+	case *rsa.PublicKey:
+		buf, err := x509.MarshalPKIXPublicKey(k)
+		if err != nil {
+			break
+		}
+		pem := pem.EncodeToMemory(&pem.Block{
+			Type:  "PUBLIC KEY",
+			Bytes: buf,
+		})
+		publicKey = string(pem)
+	}
 
 	certificate := &Certificate{
-		DNSNames:  cert.DNSNames,
-		NotBefore: cert.NotBefore.Format("2006-01-02 15:04:05"),
-		NotAfter:  cert.NotAfter.Format("2006-01-02 15:04:05"),
+		SerialNumber:          cert.SerialNumber.String(),
+		DNSNames:              cert.DNSNames,
+		NotBefore:             cert.NotBefore.Format("2006-01-02 15:04:05"),
+		NotAfter:              cert.NotAfter.Format("2006-01-02 15:04:05"),
+		CRLDistributionPoints: cert.CRLDistributionPoints,
+		IssuingCertificateURL: cert.IssuingCertificateURL,
+		OCSPServer:            cert.OCSPServer,
+		SignatureAlgorithm:    cert.SignatureAlgorithm.String(),
+		PublicKeyAlgorithm:    cert.PublicKeyAlgorithm.String(),
+		PublicKey:             publicKey,
+		AuthorityKeyId:        byteToHex(cert.AuthorityKeyId),
+		SubjectKeyId:          byteToHex(cert.SubjectKeyId),
+		Md5:                   hex.EncodeToString(md5sum(cert.Raw)),
+		Sha1:                  hex.EncodeToString(sha1sum(cert.Raw)),
+		Sha256:                hex.EncodeToString(sha256sum(cert.Raw)),
 	}
 
 	return &SSLCertificateRes{

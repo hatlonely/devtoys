@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/hatlonely/go-kit/strx"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 var cert = `-----BEGIN CERTIFICATE-----
@@ -53,4 +54,17 @@ func TestX509(t *testing.T) {
 	block, _ := pem.Decode([]byte(cert))
 	cert, _ := x509.ParseCertificate(block.Bytes)
 	fmt.Println(strx.JsonMarshalIndent(cert))
+}
+
+func TestSSLCertificateApp(t *testing.T) {
+	Convey("Test SSLCertificateApp.SSLCertificate", t, func() {
+		app := NewSSLCertificateApp()
+
+		res, err := app.SSLCertificate(&SSLCertificateReq{
+			Text: cert,
+		})
+		So(err, ShouldBeNil)
+		So(res, ShouldNotBeNil)
+		fmt.Println(strx.JsonMarshalIndent(res))
+	})
 }

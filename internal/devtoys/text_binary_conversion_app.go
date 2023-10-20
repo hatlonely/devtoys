@@ -99,6 +99,21 @@ func strToHex(str string) string {
 	return buf.String()[:buf.Len()-1]
 }
 
+func byteToHex(str []byte) string {
+	var buf bytes.Buffer
+
+	for _, c := range str {
+		v := strconv.FormatInt(int64(c), 16)
+		for i := 0; i < (2-len(v)%2)%2; i++ {
+			buf.WriteByte('0')
+		}
+		buf.WriteString(v)
+		buf.WriteByte(' ')
+	}
+
+	return buf.String()[:buf.Len()-1]
+}
+
 func strToDec(str string) string {
 	var buf bytes.Buffer
 
