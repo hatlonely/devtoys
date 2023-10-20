@@ -8,6 +8,44 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	import { Icon, ThemeSelector } from '$lib';
+
+	const toolList = [
+		{
+			href: '/base64-text',
+			icon: 'base64',
+			title: 'Base64 编解码'
+		},
+		{
+			href: '/unix-timestamp',
+			icon: 'timestamp',
+			title: 'Unix 时间戳'
+		},
+		{
+			href: '/escape',
+			icon: 'escape',
+			title: '字符串转义'
+		},
+		{
+			href: '/text-binary-conversion',
+			icon: 'text',
+			title: '文本二进制转换'
+		},
+		{
+			href: '/number-base-conversion',
+			icon: 'number',
+			title: '数值进制转换'
+		},
+		{
+			href: '/hash',
+			icon: 'hash',
+			title: '哈希散列'
+		},
+		{
+			href: '/string-conversion',
+			icon: 'string',
+			title: '字符串转换'
+		}
+	];
 </script>
 
 <AppShell slotSidebarLeft="bg-surface-500/5 w-56 p-4">
@@ -37,42 +75,14 @@
 					</a>
 				</li>
 				<hr />
-				<li>
-					<a href="/base64-text">
-						<span><Icon name="base64" class="icon" /></span>
-						<span>Base64 编解码</span>
-					</a>
-				</li>
-				<li>
-					<a href="/unix-timestamp">
-						<span><Icon name="timestamp" class="icon" /></span>
-						<span>Unix 时间戳</span>
-					</a>
-				</li>
-				<li>
-					<a href="/escape">
-						<span><Icon name="escape" class="icon" /></span>
-						<span>字符串转义</span>
-					</a>
-				</li>
-				<li>
-					<a href="/text-binary-conversion">
-						<span><Icon name="text" class="icon" /></span>
-						<span>文本二进制转换</span>
-					</a>
-				</li>
-				<li>
-					<a href="/number-base-conversion">
-						<span><Icon name="number" class="icon" /></span>
-						<span>数值进制转换</span>
-					</a>
-				</li>
-				<li>
-					<a href="/hash">
-						<span><Icon name="hash" class="icon" /></span>
-						<span>哈希散列</span>
-					</a>
-				</li>
+				{#each toolList as tool}
+					<li>
+						<a href={tool.href}>
+							<span><Icon name={tool.icon} class="icon" /></span>
+							<span>{tool.title}</span>
+						</a>
+					</li>
+				{/each}
 			</ul>
 		</nav>
 	</svelte:fragment>

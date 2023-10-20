@@ -19,7 +19,7 @@ func NewStringConversionApp() *StringConversionApp {
 
 type ConvertStringReq struct {
 	Text string
-	Type string `validate:"required,oneof=title lower upper sentence camel pascal snake kebab snakeCaseAllCaps kebabCaseAllCaps train"`
+	Type string `validate:"required,oneof=title lower upper sentence camel pascal snake kebab snakeAllCaps kebabAllCaps train"`
 }
 
 type ConvertStringRes struct {
@@ -44,9 +44,9 @@ func (a *StringConversionApp) ConvertString(req *ConvertStringReq) (*ConvertStri
 		return &ConvertStringRes{Text: snakeCase(req.Text)}, nil
 	case "kebab":
 		return &ConvertStringRes{Text: kebabCase(req.Text)}, nil
-	case "snakeCaseAllCaps":
+	case "snakeAllCaps":
 		return &ConvertStringRes{Text: snakeCaseAllCaps(req.Text)}, nil
-	case "kebabCaseAllCaps":
+	case "kebabAllCaps":
 		return &ConvertStringRes{Text: kebabCaseAllCaps(req.Text)}, nil
 	case "train":
 		return &ConvertStringRes{Text: trainCase(req.Text)}, nil
