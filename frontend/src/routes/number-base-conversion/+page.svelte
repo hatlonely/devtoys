@@ -14,6 +14,14 @@
 	let results: any = {};
 
 	async function convertNumberBase(inBase: string, toBase: string) {
+		if (lowercase) {
+			inBase = inBase.toLowerCase();
+			toBase = toBase.toLowerCase();
+		} else {
+			inBase = inBase.toUpperCase();
+			toBase = toBase.toUpperCase();
+		}
+
 		return await ConvertNumberBase({
 			Number: text,
 			LowerCase: lowercase,
@@ -23,6 +31,7 @@
 	}
 
 	async function calculate() {
+		console.log('calculate', inBase, lowercase);
 		warning = '';
 		for (const toBase in toBases) {
 			if (!toBases[toBase]) {
@@ -39,6 +48,7 @@
 
 	$: text, calculate();
 	$: lowercase, calculate();
+	$: inBase, calculate();
 
 	const labelValues = [
 		{
@@ -86,7 +96,7 @@
 			name="mode"
 			icon="sync_alt"
 			title="输入进制类型"
-			description="选择输入的二进制类型"
+			description="选择输入的进制类型"
 			items={labelValues}
 		/>
 
@@ -94,7 +104,7 @@
 			bind:values={toBases}
 			icon="sync_alt"
 			title="输出进制类型"
-			description="选择输出的二进制类型"
+			description="选择输出的进制类型"
 			{labelValues}
 			on:select={(e) => {
 				if (e.detail.selected) {
