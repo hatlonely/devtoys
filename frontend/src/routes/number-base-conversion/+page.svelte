@@ -31,7 +31,6 @@
 	}
 
 	async function calculate() {
-		console.log('calculate', inBase, lowercase);
 		warning = '';
 		for (const toBase in toBases) {
 			if (!toBases[toBase]) {
