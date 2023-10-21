@@ -13,7 +13,7 @@
 		{
 			href: '/base64-text',
 			icon: 'base64',
-			title: 'Base64 编解码'
+			title: 'Base64 文本编解码'
 		},
 		{
 			href: '/unix-timestamp',

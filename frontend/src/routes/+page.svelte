@@ -4,8 +4,8 @@
 	let toolItems = [
 		{
 			icon: 'base64',
-			title: 'Base64 编解码',
-			description: 'Base64 编解码工具',
+			title: 'Base64 文本编解码',
+			description: 'Base64 文本编解码工具',
 			href: '/base64-text'
 		},
 		{
