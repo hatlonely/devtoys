@@ -37,7 +37,7 @@
 	}
 </script>
 
-<svelte:window on:keydown|preventDefault={shortcut} />
+<svelte:window on:keydown={shortcut} />
 
 <AppShell slotSidebarLeft="bg-surface-500/5 w-56 p-4">
 	<svelte:fragment slot="header">
