@@ -53,10 +53,21 @@
 	];
 
 	let title = '所有工具';
-	function setTitle(title_: string) {
-		title = title_;
+
+	function shortcut(e: KeyboardEvent) {
+		console.log(e.code);
+		switch (e.code) {
+			// 按下 F11 全屏显示
+			case 'F11':
+				document.fullscreenElement
+					? document.exitFullscreen()
+					: document.documentElement.requestFullscreen();
+				break;
+		}
 	}
 </script>
+
+<svelte:window on:keydown|preventDefault={shortcut} />
 
 <AppShell slotSidebarLeft="bg-surface-500/5 w-56 p-4">
 	<svelte:fragment slot="header">
@@ -91,7 +102,7 @@
 						<a
 							href={tool.href}
 							on:click={() => {
-								setTitle(tool.title);
+								title = tool.title;
 							}}
 						>
 							<span><Icon name={tool.icon} class="icon" /></span>
