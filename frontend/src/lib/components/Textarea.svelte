@@ -95,8 +95,14 @@
 					<svelte:fragment slot="message">{uploadMessage}</svelte:fragment>
 					<svelte:fragment slot="meta">{uploadMeta}</svelte:fragment>
 				</FileDropzone>
-			{:else}
+			{:else if files[0].type.startsWith('text/')}
 				<TextViewer text={value} />
+			{:else if files[0].type.startsWith('image/')}
+				<img src={URL.createObjectURL(files[0])} alt={files[0].name} />
+			{:else if files[0].type === 'application/x-x509-ca-cert'}
+				<TextViewer text={value} />
+			{:else}
+				<TextViewer text={files[0].name} />
 			{/if}
 		{:else}
 			<textarea
