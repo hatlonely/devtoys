@@ -174,6 +174,7 @@
 			placeholder="输入 https 证书"
 			code={true}
 			warning={warningText}
+			enableUpload={true}
 		/>
 	</div>
 

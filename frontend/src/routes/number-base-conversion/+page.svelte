@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { ConvertNumberBase } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroup, Textarea, TextViewer, MultiSelector, SingleSelector } from '$lib';
-	import { fade } from 'svelte/transition';
+	import { Title, RadioGroup, Textarea, TextViewer, MultiSelector, Input } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -116,10 +115,10 @@
 	</div>
 
 	<div class="w-full text-token card p-4">
-		<Textarea
+		<Input
 			bind:value={text}
 			on:input={calculate}
-			placeholder="输入要编码/解码的文本"
+			placeholder="输入要转换的数字"
 			code={true}
 			{warning}
 		/>

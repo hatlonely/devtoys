@@ -10,6 +10,7 @@
 	export let code = false;
 	export let warning = '';
 	export let title = '';
+	export let enableUpload = false;
 
 	export let uploadMessage = '点击或者拖拽文件';
 	export let uploadMeta = 'txt';
@@ -82,13 +83,15 @@
 			<span class="font-bold align-sub">{title}</span>
 		</div>
 		<div class="flex flex-right space-x-2">
-			<Button on:click={toggleUpload} icon="upload_file" text="文件" />
+			{#if enableUpload}
+				<Button on:click={toggleUpload} icon="upload_file" text="文件" />
+			{/if}
 			<Button on:click={paste} icon="content_paste" text="粘贴" />
 			<Button on:click={clear} icon="delete" text="清空" />
 		</div>
 	</div>
 	<div>
-		{#if upload}
+		{#if enableUpload && upload}
 			<FileDropzone name="files" bind:files on:change={onUpload}>
 				<svelte:fragment slot="lead">
 					<span class="material-symbols-outlined text-4xl"> upload_file </span>

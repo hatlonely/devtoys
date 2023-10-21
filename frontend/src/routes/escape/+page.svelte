@@ -88,7 +88,7 @@
 		<Textarea
 			bind:value={text}
 			on:input={calculate}
-			placeholder="输入要编码/解码的文本"
+			placeholder="输入要转义/反转义的文本"
 			code={true}
 			{warning}
 		/>

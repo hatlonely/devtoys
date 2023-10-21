@@ -102,6 +102,7 @@
 			bind:value={input}
 			on:input={calculate}
 			placeholder="输入要编码/解码的文本"
+			enableUpload={true}
 			code={true}
 			{warning}
 		/>
