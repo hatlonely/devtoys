@@ -14,3 +14,4 @@ export { default as ToolItem } from './components/ToolItem.svelte';
 export { default as Icon } from './icons/Icon.svelte';
 export { default as ThemeSelector } from './components/ThemeSelector.svelte';
 export { default as InputItem } from './components/InputItem.svelte';
+export { default as NumberInputItem } from './components/NumberInputItem.svelte';

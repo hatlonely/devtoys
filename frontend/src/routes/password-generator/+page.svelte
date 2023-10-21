@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { GeneratePassword } from '$lib/wailsjs/go/devtoys/App';
-	import { RadioGroup, TextViewer, Input, InputItem } from '$lib';
+	import { RadioGroup, TextViewer, Input, NumberInputItem } from '$lib';
 
 	let length = 16;
 	let enableDigit = true;
@@ -56,7 +56,7 @@
 
 <div class="w-full text-token px-6 py-3 space-y-4">
 	<div class="w-full text-token card p-4">
-		<InputItem
+		<NumberInputItem
 			bind:value={length}
 			title="密码长度"
 			description="密码长度范围（1-128）"
