@@ -154,8 +154,8 @@
 		<Textarea
 			bind:value={text}
 			on:input={calculate}
-			title="输入"
-			placeholder="输入要转换的文本"
+			title="证书"
+			placeholder="输入 https 证书"
 			code={true}
 			{warning}
 		/>
