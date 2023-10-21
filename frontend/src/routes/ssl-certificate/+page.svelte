@@ -60,7 +60,7 @@
 				},
 				{
 					label: '域名',
-					value: res.Subject.CommonName
+					value: res?.Subject?.CommonName
 				},
 				{
 					label: '省份',
@@ -101,7 +101,7 @@
 				},
 				{
 					label: '颁发机构',
-					value: res.Issuer.CommonName
+					value: res?.Issuer?.CommonName
 				}
 			]
 		};
@@ -112,25 +112,25 @@
 			title: '证书信息',
 			names: ['label', 'value'],
 			rows: [
-				{ label: '证书序列号', value: res.Certificate.SerialNumber },
-				{ label: '证书生效时间', value: res.Certificate.NotBefore },
-				{ label: '证书失效时间', value: res.Certificate.NotAfter },
-				{ label: '签名算法', value: res.Certificate.SignatureAlgorithm },
-				{ label: '公钥算法', value: res.Certificate.PublicKeyAlgorithm },
+				{ label: '证书序列号', value: res?.Certificate?.SerialNumber },
+				{ label: '证书生效时间', value: res?.Certificate?.NotBefore },
+				{ label: '证书失效时间', value: res?.Certificate?.NotAfter },
+				{ label: '签名算法', value: res?.Certificate?.SignatureAlgorithm },
+				{ label: '公钥算法', value: res?.Certificate?.PublicKeyAlgorithm },
 				{
 					label: '公钥',
-					value: res.Certificate.PublicKey,
+					value: res?.Certificate?.PublicKey,
 					_meta: {
 						value: {
 							code: true
 						}
 					}
 				},
-				{ label: '颁发者公钥标识', value: res.Certificate.AuthorityKeyId },
-				{ label: '使用者公钥标识', value: res.Certificate.SubjectKeyId },
-				{ label: 'MD5', value: res.Certificate.Md5 },
-				{ label: 'SHA1', value: res.Certificate.Sha1 },
-				{ label: 'SHA256', value: res.Certificate.Sha256 },
+				{ label: '颁发者公钥标识', value: res?.Certificate?.AuthorityKeyId },
+				{ label: '使用者公钥标识', value: res?.Certificate?.SubjectKeyId },
+				{ label: 'MD5', value: res?.Certificate?.Md5 },
+				{ label: 'SHA1', value: res?.Certificate?.Sha1 },
+				{ label: 'SHA256', value: res?.Certificate?.Sha256 },
 				{
 					label: 'DNS 域名',
 					value: res?.Certificate?.DNSNames?.join(', ')
