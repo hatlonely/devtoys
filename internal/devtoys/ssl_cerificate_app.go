@@ -67,6 +67,8 @@ type Certificate struct {
 }
 
 type SSLCertificateRes struct {
+	Text string
+
 	Subject     *Subject
 	Issuer      *Issuer
 	Certificate *Certificate
@@ -153,6 +155,8 @@ func (a *SSLCertificateApp) SSLCertificate(req *SSLCertificateReq) (*SSLCertific
 	}
 
 	return &SSLCertificateRes{
+		Text: req.Text,
+
 		Issuer: &Issuer{
 			Country:          cert.Issuer.Country,
 			Organization:     cert.Issuer.Organization,

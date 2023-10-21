@@ -23,6 +23,8 @@
 				Text: text
 			});
 			result = res;
+			text = res.Text;
+
 			subjectTable = calculateSubjectTable(res);
 			issuerTable = calculateIssuerTable(res);
 			certificateTable = calculateCertificateTable(res);
