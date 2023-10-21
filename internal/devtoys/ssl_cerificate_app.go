@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	"encoding/pem"
 	"net/http"
+	"strings"
 
 	"github.com/pkg/errors"
 )
@@ -75,6 +76,14 @@ type SSLCertificateRes struct {
 }
 
 func fetchCertificate(link string) (string, error) {
+	if strings.HasPrefix(link, "http://") {
+		link = strings.Replace(link, "http://", "https://", 1)
+	}
+
+	if !strings.HasPrefix(link, "https://") {
+		link = "https://" + link
+	}
+
 	client := &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{

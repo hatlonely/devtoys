@@ -45,6 +45,7 @@
 			on:input
 			on:keyup={enter}
 			class="input {code ? 'devtoys-code' : ''}"
+			spellcheck="false"
 			{placeholder}
 		/>
 	</div>
