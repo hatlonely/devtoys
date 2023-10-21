@@ -14,4 +14,6 @@ export function Escape(arg1:devtoys.EscapeReq):Promise<devtoys.EscapeRes>;
 
 export function Hash(arg1:devtoys.HashReq):Promise<devtoys.HashRes>;
 
+export function SSLCertificate(arg1:devtoys.SSLCertificateReq):Promise<devtoys.SSLCertificateRes>;
+
 export function UnixTimestamp(arg1:devtoys.UnixTimestampReq):Promise<devtoys.UnixTimestampRes>;

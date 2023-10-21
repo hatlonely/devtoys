@@ -44,6 +44,11 @@
 			href: '/string-conversion',
 			icon: 'string',
 			title: '字符串转换'
+		},
+		{
+			href: '/ssl-certificate',
+			icon: 'https',
+			title: 'https 证书'
 		}
 	];
 </script>

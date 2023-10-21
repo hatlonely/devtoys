@@ -12,6 +12,7 @@ type App struct {
 	TextBinaryConversionApp
 	HashApp
 	StringConversionApp
+	SSLCertificateApp
 }
 
 func NewApp() *App {
@@ -23,6 +24,7 @@ func NewApp() *App {
 		TextBinaryConversionApp: *NewTextBinaryConversionApp(),
 		HashApp:                 *NewHashApp(),
 		StringConversionApp:     *NewStringConversionApp(),
+		SSLCertificateApp:       *NewSSLCertificateApp(),
 	}
 }
 
@@ -34,4 +36,5 @@ func (a *App) Startup(ctx context.Context) {
 	a.TextBinaryConversionApp.Startup(ctx)
 	a.HashApp.Startup(ctx)
 	a.StringConversionApp.Startup(ctx)
+	a.SSLCertificateApp.Startup(ctx)
 }

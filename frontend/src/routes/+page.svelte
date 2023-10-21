@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Icon, ToolItem, Title } from '$lib';
+	import { ToolItem, Title } from '$lib';
 
 	let toolItems = [
 		{
@@ -35,7 +35,7 @@
 		{
 			icon: 'hash',
 			title: '哈希散列',
-			description: 'MD5、SHA1、SHA256、SHA512、SHA3、RIPEMD160、HMAC 哈希散列工具',
+			description: 'MD5、SHA1、SHA256、SHA512、HMAC 哈希散列工具',
 			href: '/hash'
 		},
 		{
@@ -43,6 +43,12 @@
 			title: '字符串转换',
 			description: '字符串大小写转换、驼峰转换、下划线转换、中划线转换',
 			href: '/string-conversion'
+		},
+		{
+			icon: 'https',
+			title: 'https 证书',
+			description: 'https 证书解析工具',
+			href: '/ssl-certificate'
 		}
 	];
 </script>
