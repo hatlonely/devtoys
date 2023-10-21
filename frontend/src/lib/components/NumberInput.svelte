@@ -14,7 +14,7 @@
 	<div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
 		<button
 			on:click={decrement}
-			class="btn bg-gray-300 hover:text-gray-700 hover:bg-gray-400 h-full w-10 rounded-r cursor-pointer outline-none"
+			class="btn bg-gray-300 hover:text-gray-700 hover:bg-gray-400 h-full w-10 rounded-r cursor-pointer"
 		>
 			<span class="material-symbols-outlined"> remove </span>
 		</button>
@@ -22,7 +22,7 @@
 			type="number"
 			class="input outline-none border-transparent rounded-none text-center w-full bg-gray-300 font-semibold text-md hover:text-black focus:text-black md:text-basecursor-default flex items-center text-gray-700 outline-none"
 			name="custom-input-number"
-			{value}
+			bind:value
 		/>
 		<button
 			on:click={increment}

@@ -87,7 +87,7 @@
 <div class="space-y-2">
 	<div class="flex">
 		<div class="flex flex-auto">
-			<span class="font-bold align-sub">{title}</span>
+			<span class="font-bold devtoys-align-center">{title}</span>
 		</div>
 		<div class="flex flex-right space-x-2">
 			{#each extraButton as button}
@@ -141,6 +141,13 @@
 </div>
 
 <style>
+	.devtoys-align-center {
+		display: inline-flex;
+		align-items: center;
+		vertical-align: bottom;
+		height: 100%;
+	}
+
 	.devtoys-code {
 		font-size: 1rem;
 		font-family: 'Roboto Mono', monospace;
