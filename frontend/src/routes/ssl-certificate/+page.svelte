@@ -5,14 +5,16 @@
 
 	let text = '';
 	let link = '';
-	let warning: any = '';
+	let warningLink: any = '';
+	let warningText: any = '';
 	let result = '';
 	let subjectTable: any = {};
 	let issuerTable: any = {};
 	let certificateTable: any = {};
 
 	async function calculate() {
-		warning = '';
+		warningLink = '';
+		warningText = '';
 		if (!text && !link) {
 			result = '';
 			return;
@@ -29,7 +31,11 @@
 			issuerTable = calculateIssuerTable(res);
 			certificateTable = calculateCertificateTable(res);
 		} catch (err) {
-			warning = err;
+			if (link != '') {
+				warningLink = err;
+			} else {
+				warningText = err;
+			}
 		}
 	}
 
@@ -37,7 +43,7 @@
 
 	function calculateSubjectTable(res: any) {
 		return {
-			title: '域名信息',
+			title: 'https 证书',
 			names: ['label', 'value'],
 			rows: [
 				{
@@ -156,7 +162,7 @@
 			title="网址"
 			placeholder="输入 https 网址"
 			code={true}
-			{warning}
+			warning={warningLink}
 		/>
 	</div>
 
@@ -167,7 +173,7 @@
 			title="证书"
 			placeholder="输入 https 证书"
 			code={true}
-			{warning}
+			warning={warningText}
 		/>
 	</div>
 

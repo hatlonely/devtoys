@@ -2,6 +2,7 @@
 	import Button from './Button.svelte';
 	import Warning from './Warning.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { FileDropzone } from '@skeletonlabs/skeleton';
 
 	export let value: string;
 	export let row = 4;
@@ -9,6 +10,12 @@
 	export let code = false;
 	export let warning = '';
 	export let title = '';
+
+	export let uploadMessage = '点击或者拖拽文件';
+	export let uploadMeta = 'txt';
+
+	let upload = false;
+	let files: FileList;
 
 	const dispatch = createEventDispatcher();
 
@@ -33,6 +40,40 @@
 		value = '';
 		dispatch('clear', {});
 	}
+
+	function toggleUpload() {
+		upload = !upload;
+	}
+
+	function readFile(file: File): Promise<string> {
+		return new Promise<string>((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onload = () => {
+				resolve(reader.result as string);
+			};
+			reader.onerror = () => {
+				reject(reader.error);
+			};
+			reader.readAsText(file);
+		});
+	}
+
+	async function readFiles(files: FileList): Promise<string[]> {
+		const contents: string[] = [];
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+			const content = await readFile(file);
+			contents.push(content);
+			break;
+		}
+		return contents;
+	}
+
+	async function onUpload(e: Event): Promise<void> {
+		value = await readFile(files[0]);
+		upload = false;
+		dispatch('upload', { value });
+	}
 </script>
 
 <div class="space-y-2">
@@ -41,20 +82,31 @@
 			<span class="font-bold align-sub">{title}</span>
 		</div>
 		<div class="flex flex-right space-x-2">
+			<Button on:click={toggleUpload} icon="upload_file" text="文件" />
 			<Button on:click={paste} icon="content_paste" text="粘贴" />
 			<Button on:click={clear} icon="delete" text="清空" />
 		</div>
 	</div>
 	<div>
-		<textarea
-			bind:value
-			on:input
-			on:input={updateTextareaHeight}
-			class="textarea {code ? 'devtoys-code' : ''}"
-			spellcheck="false"
-			rows={row}
-			{placeholder}
-		/>
+		{#if upload}
+			<FileDropzone name="files" bind:files on:change={onUpload}>
+				<svelte:fragment slot="lead">
+					<span class="material-symbols-outlined text-4xl"> upload_file </span>
+				</svelte:fragment>
+				<svelte:fragment slot="message">{uploadMessage}</svelte:fragment>
+				<svelte:fragment slot="meta">{uploadMeta}</svelte:fragment>
+			</FileDropzone>
+		{:else}
+			<textarea
+				bind:value
+				on:input
+				on:input={updateTextareaHeight}
+				class="textarea {code ? 'devtoys-code' : ''}"
+				spellcheck="false"
+				rows={row}
+				{placeholder}
+			/>
+		{/if}
 	</div>
 	<Warning bind:message={warning} />
 </div>
