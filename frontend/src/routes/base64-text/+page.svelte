@@ -103,6 +103,7 @@
 			on:input={calculate}
 			placeholder="输入要编码/解码的文本"
 			enableUpload={true}
+			uploadAccept="text/*,application/x-x509-ca-cert,image/svg+xml"
 			code={true}
 			{warning}
 		/>

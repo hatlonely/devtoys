@@ -14,7 +14,7 @@
 	export let enableUpload = false;
 
 	export let uploadMessage = '点击或者拖拽文件';
-	export let uploadMeta = 'txt';
+	export let uploadAccept = 'text/*';
 
 	let upload = false;
 	let files: FileList;
@@ -63,8 +63,19 @@
 	}
 
 	async function onUpload(): Promise<void> {
-		console.log(files);
-		value = await readFile(files![0]);
+		warning = '';
+		if (!files || files.length === 0) {
+			return;
+		}
+
+		const file = files[0];
+		const acceptTypes = uploadAccept.split(',');
+		if (!acceptTypes.some((type) => file.type.match(type.trim()))) {
+			warning = `不支持的文件类型：${file.type}`;
+			return;
+		}
+
+		value = await readFile(file);
 		uploadDone = true;
 		dispatch('upload', { value });
 	}
@@ -88,12 +99,12 @@
 	<div>
 		{#if enableUpload && upload}
 			{#if !uploadDone}
-				<FileDropzone name="files" bind:files on:change={onUpload}>
+				<FileDropzone name="files" accept={uploadAccept} bind:files on:change={onUpload}>
 					<svelte:fragment slot="lead">
-						<span class="material-symbols-outlined text-4xl"> upload_file </span>
+						<span class="material-symbols-outlined text-6xl"> upload_file </span>
 					</svelte:fragment>
 					<svelte:fragment slot="message">{uploadMessage}</svelte:fragment>
-					<svelte:fragment slot="meta">{uploadMeta}</svelte:fragment>
+					<svelte:fragment slot="meta">支持的文件类型：{uploadAccept}</svelte:fragment>
 				</FileDropzone>
 			{:else if files[0].type.startsWith('text/')}
 				<TextViewer text={value} />
