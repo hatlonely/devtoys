@@ -107,7 +107,15 @@
 				{ label: '证书失效时间', value: res.Certificate.NotAfter },
 				{ label: '签名算法', value: res.Certificate.SignatureAlgorithm },
 				{ label: '公钥算法', value: res.Certificate.PublicKeyAlgorithm },
-				{ label: '公钥', value: res.Certificate.PublicKey },
+				{
+					label: '公钥',
+					value: res.Certificate.PublicKey,
+					_meta: {
+						value: {
+							code: true
+						}
+					}
+				},
 				{ label: '颁发者公钥标识', value: res.Certificate.AuthorityKeyId },
 				{ label: '使用者公钥标识', value: res.Certificate.SubjectKeyId },
 				{ label: 'MD5', value: res.Certificate.Md5 },
@@ -129,7 +137,10 @@
 						? res.Certificate.IssuingCertificateURL.join(', ')
 						: ''
 				},
-				{ label: 'OCSP 服务器地址', value: res.Certificate.OCSPServer.join(', ') }
+				{
+					label: 'OCSP 服务器地址',
+					value: res.Certificate.OCSPServer ? res.Certificate.OCSPServer.join(', ') : ''
+				}
 			]
 		};
 	}

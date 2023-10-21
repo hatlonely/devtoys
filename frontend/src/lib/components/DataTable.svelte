@@ -6,8 +6,6 @@
 	export let names: string[] = [];
 	export let rows: any[] = [];
 	export let fixed: boolean = false;
-
-	let copied = {};
 </script>
 
 <table class="table table-hover {fixed ? 'table-fixed' : 'table-auto'}">
@@ -32,7 +30,11 @@
 			<tr>
 				{#each names as name}
 					<td>
-						<span>{row[name]}</span>
+						{#if row['_meta']?.[name]?.code}
+							<pre><code>{row[name]}</code></pre>
+						{:else}
+							<span>{row[name]}</span>
+						{/if}
 					</td>
 				{/each}
 			</tr>
