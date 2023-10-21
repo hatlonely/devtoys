@@ -3,9 +3,11 @@ package devtoys
 import (
 	"context"
 	"crypto/rsa"
+	"crypto/tls"
 	"crypto/x509"
 	"encoding/hex"
 	"encoding/pem"
+	"net/http"
 
 	"github.com/pkg/errors"
 )
@@ -23,7 +25,8 @@ func (a *SSLCertificateApp) Startup(ctx context.Context) {
 }
 
 type SSLCertificateReq struct {
-	Text string
+	Link string
+	Text string `validate:"requiredwithout=Link"`
 }
 
 type Subject struct {
@@ -69,7 +72,45 @@ type SSLCertificateRes struct {
 	Certificate *Certificate
 }
 
+func fetchCertificate(link string) (string, error) {
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		},
+	}
+
+	resp, err := client.Get(link)
+	if err != nil {
+		return "", errors.Wrap(err, "client.Get failed")
+	}
+	defer resp.Body.Close()
+
+	certs := resp.TLS.PeerCertificates
+	if len(certs) == 0 {
+		return "", errors.New("no certificates found")
+	}
+	cert := certs[0]
+
+	pemCert := pem.EncodeToMemory(&pem.Block{
+		Type:  "CERTIFICATE",
+		Bytes: cert.Raw,
+	})
+
+	return string(pemCert), nil
+}
+
 func (a *SSLCertificateApp) SSLCertificate(req *SSLCertificateReq) (*SSLCertificateRes, error) {
+	var err error
+
+	if req.Link != "" {
+		req.Text, err = fetchCertificate(req.Link)
+		if err != nil {
+			return nil, errors.WithMessage(err, "fetchCertificate")
+		}
+	}
+
 	block, _ := pem.Decode([]byte(req.Text))
 	if block == nil {
 		return nil, errors.New("pem.Decode failed")

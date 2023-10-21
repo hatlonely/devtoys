@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { SSLCertificate } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, Textarea, TextViewer, DataTable } from '$lib';
+	import { Title, Textarea, Input, DataTable } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
+	let link = '';
 	let warning: any = '';
 	let result = '';
 	let subjectTable: any = {};
@@ -12,12 +13,13 @@
 
 	async function calculate() {
 		warning = '';
-		if (!text) {
+		if (!text && !link) {
 			result = '';
 			return;
 		}
 		try {
 			let res = await SSLCertificate({
+				Link: link,
 				Text: text
 			});
 			result = res;
@@ -148,7 +150,17 @@
 
 <div class="w-full text-token px-6 py-3 space-y-4">
 	<Title title="字符串转换" />
-	<!-- <div class="w-full text-token card p-4" /> -->
+	<div class="w-full text-token card p-4">
+		<Input
+			bind:value={link}
+			on:enter={calculate}
+			on:clear={calculate}
+			title="网址"
+			placeholder="输入 https 网址"
+			code={true}
+			{warning}
+		/>
+	</div>
 
 	<div class="w-full text-token card p-4">
 		<Textarea

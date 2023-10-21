@@ -56,6 +56,12 @@ func TestX509(t *testing.T) {
 	fmt.Println(strx.JsonMarshalIndent(cert))
 }
 
+func TestFetchCertificate(t *testing.T) {
+	txt, err := fetchCertificate("https://www.baidu.com")
+	fmt.Println(err)
+	fmt.Println(txt)
+}
+
 func TestSSLCertificateApp(t *testing.T) {
 	Convey("Test SSLCertificateApp.SSLCertificate", t, func() {
 		app := NewSSLCertificateApp()

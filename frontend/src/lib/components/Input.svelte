@@ -21,6 +21,12 @@
 		value = '';
 		dispatch('clear', {});
 	}
+
+	function enter(e: any) {
+		if (e.key === 'Enter' || e.keyCode === 13) {
+			dispatch('enter', {});
+		}
+	}
 </script>
 
 <div class="space-y-2">
@@ -34,7 +40,13 @@
 		</div>
 	</div>
 	<div>
-		<input bind:value on:input class="input {code ? 'devtoys-code' : ''}" {placeholder} />
+		<input
+			bind:value
+			on:input
+			on:keyup={enter}
+			class="input {code ? 'devtoys-code' : ''}"
+			{placeholder}
+		/>
 	</div>
 	<Warning bind:message={warning} />
 </div>
