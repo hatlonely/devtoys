@@ -1,5 +1,6 @@
 <script lang="ts">
 	import 'material-symbols';
+	import { Icon } from '$lib';
 
 	export let icon = '';
 	export let iconSet = 'material-symbols';
@@ -25,6 +26,8 @@
 			<span class="material-symbols-outlined"> done </span>
 		{:else if iconSet == 'material-symbols'}
 			<span class="material-symbols-outlined">{icon}</span>
+		{:else if iconSet == 'custom'}
+			<Icon name={icon} class="icon-md" />
 		{/if}
 	{/if}
 </button>

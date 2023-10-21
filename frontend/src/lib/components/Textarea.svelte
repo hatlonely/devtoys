@@ -11,6 +11,7 @@
 	export let code = false;
 	export let warning = '';
 	export let title = '';
+	export let extraButton: any = [];
 
 	export let enableUpload = false;
 	export let uploadMessage = '点击或者拖拽文件';
@@ -89,11 +90,20 @@
 			<span class="font-bold align-sub">{title}</span>
 		</div>
 		<div class="flex flex-right space-x-2">
+			{#each extraButton as button}
+				<Button
+					on:click={button.onClick}
+					icon={button.icon}
+					iconSet={button.iconSet}
+					text={button.text}
+				/>
+			{/each}
+
 			{#if enableUpload}
-				<Button on:click={toggleUpload} icon="upload_file" text="文件" />
+				<Button on:click={toggleUpload} icon="upload" text="文件" />
 			{/if}
 			<Button on:click={paste} icon="content_paste" text="粘贴" />
-			<Button on:click={clear} icon="delete" text="清空" />
+			<Button on:click={clear} icon="clear" text="清空" />
 		</div>
 	</div>
 	<div>

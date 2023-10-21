@@ -155,6 +155,16 @@
 			placeholder="输入字符集合"
 			code={true}
 			{warning}
+			extraButton={[
+				{
+					icon: 'submit',
+					iconSet: 'custom',
+					text: '生成',
+					onClick: () => {
+						calculate();
+					}
+				}
+			]}
 		/>
 	</div>
 
