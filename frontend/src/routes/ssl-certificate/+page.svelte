@@ -172,12 +172,18 @@
 	</div>
 
 	{#if result}
-		<DataTable title={subjectTable.title} names={subjectTable.names} rows={subjectTable.rows} />
-		<DataTable title={issuerTable.title} names={issuerTable.names} rows={issuerTable.rows} />
+		<DataTable
+			title={subjectTable.title}
+			names={subjectTable.names}
+			rows={subjectTable.rows}
+			fixed
+		/>
+		<DataTable title={issuerTable.title} names={issuerTable.names} rows={issuerTable.rows} fixed />
 		<DataTable
 			title={certificateTable.title}
 			names={certificateTable.names}
 			rows={certificateTable.rows}
+			fixed
 		/>
 	{/if}
 </div>

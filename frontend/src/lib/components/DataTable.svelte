@@ -29,11 +29,13 @@
 		{#each rows as row, i}
 			<tr>
 				{#each names as name}
-					<td>
-						{#if row['_meta']?.[name]?.code}
-							<pre><code>{row[name]}</code></pre>
-						{:else}
-							<span>{row[name]}</span>
+					<td class="">
+						{#if row[name]}
+							{#if row['_meta']?.[name]?.code}
+								<pre><code>{row[name]}</code></pre>
+							{:else}
+								<span>{row[name]}</span>
+							{/if}
 						{/if}
 					</td>
 				{/each}
