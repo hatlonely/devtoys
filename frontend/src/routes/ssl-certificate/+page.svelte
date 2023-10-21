@@ -43,7 +43,7 @@
 
 	function calculateSubjectTable(res: any) {
 		return {
-			title: 'https 证书',
+			title: '域名信息',
 			names: ['label', 'value'],
 			rows: [
 				{
@@ -153,7 +153,7 @@
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
-	<Title title="字符串转换" />
+	<Title title="https 证书" />
 	<div class="w-full text-token card p-4">
 		<Input
 			bind:value={link}
