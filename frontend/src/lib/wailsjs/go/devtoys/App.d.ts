@@ -12,6 +12,8 @@ export function ConvertTextBinary(arg1:devtoys.TextBinaryConversionReq):Promise<
 
 export function Escape(arg1:devtoys.EscapeReq):Promise<devtoys.EscapeRes>;
 
+export function GeneratePassword(arg1:devtoys.GeneratePasswordReq):Promise<devtoys.GeneratePasswordRes>;
+
 export function Hash(arg1:devtoys.HashReq):Promise<devtoys.HashRes>;
 
 export function SSLCertificate(arg1:devtoys.SSLCertificateReq):Promise<devtoys.SSLCertificateRes>;

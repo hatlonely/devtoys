@@ -29,7 +29,7 @@
 	}
 </script>
 
-<div class="space-y-2">
+<div class="mb-2">
 	<div class="flex">
 		<div class="flex flex-auto">
 			<span class="font-bold align-sub">{title}</span>
@@ -39,7 +39,7 @@
 			<Button on:click={clear} icon="delete" text="清空" />
 		</div>
 	</div>
-	<div>
+	<div class="mt-2">
 		<input
 			bind:value
 			on:input

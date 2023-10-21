@@ -13,6 +13,7 @@ type App struct {
 	HashApp
 	StringConversionApp
 	SSLCertificateApp
+	PasswordGeneratorApp
 }
 
 func NewApp() *App {
@@ -25,6 +26,7 @@ func NewApp() *App {
 		HashApp:                 *NewHashApp(),
 		StringConversionApp:     *NewStringConversionApp(),
 		SSLCertificateApp:       *NewSSLCertificateApp(),
+		PasswordGeneratorApp:    *NewPasswordGeneratorApp(),
 	}
 }
 
@@ -37,4 +39,5 @@ func (a *App) Startup(ctx context.Context) {
 	a.HashApp.Startup(ctx)
 	a.StringConversionApp.Startup(ctx)
 	a.SSLCertificateApp.Startup(ctx)
+	a.PasswordGeneratorApp.Startup(ctx)
 }
