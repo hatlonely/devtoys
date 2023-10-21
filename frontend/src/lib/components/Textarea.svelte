@@ -59,19 +59,8 @@
 		});
 	}
 
-	async function readFiles(files: FileList): Promise<string[]> {
-		const contents: string[] = [];
-		for (let i = 0; i < files.length; i++) {
-			const file = files[i];
-			const content = await readFile(file);
-			contents.push(content);
-			break;
-		}
-		return contents;
-	}
-
 	async function onUpload(e: Event): Promise<void> {
-		value = await readFile(files[0]);
+		value = await readFile(files![0]);
 		upload = false;
 		dispatch('upload', { value });
 	}
