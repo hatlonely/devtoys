@@ -3,6 +3,7 @@
 	import Warning from './Warning.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { FileDropzone } from '@skeletonlabs/skeleton';
+	import TextViewer from './TextViewer.svelte';
 
 	export let value: string;
 	export let row = 4;
@@ -17,6 +18,7 @@
 
 	let upload = false;
 	let files: FileList;
+	let uploadDone = false;
 
 	const dispatch = createEventDispatcher();
 
@@ -39,6 +41,7 @@
 
 	function clear() {
 		value = '';
+		uploadDone = false;
 		dispatch('clear', {});
 	}
 
@@ -59,11 +62,14 @@
 		});
 	}
 
-	async function onUpload(e: Event): Promise<void> {
+	async function onUpload(): Promise<void> {
+		console.log(files);
 		value = await readFile(files![0]);
-		upload = false;
+		uploadDone = true;
 		dispatch('upload', { value });
 	}
+
+	$: files, onUpload;
 </script>
 
 <div class="space-y-2">
@@ -81,13 +87,17 @@
 	</div>
 	<div>
 		{#if enableUpload && upload}
-			<FileDropzone name="files" bind:files on:change={onUpload}>
-				<svelte:fragment slot="lead">
-					<span class="material-symbols-outlined text-4xl"> upload_file </span>
-				</svelte:fragment>
-				<svelte:fragment slot="message">{uploadMessage}</svelte:fragment>
-				<svelte:fragment slot="meta">{uploadMeta}</svelte:fragment>
-			</FileDropzone>
+			{#if !uploadDone}
+				<FileDropzone name="files" bind:files on:change={onUpload}>
+					<svelte:fragment slot="lead">
+						<span class="material-symbols-outlined text-4xl"> upload_file </span>
+					</svelte:fragment>
+					<svelte:fragment slot="message">{uploadMessage}</svelte:fragment>
+					<svelte:fragment slot="meta">{uploadMeta}</svelte:fragment>
+				</FileDropzone>
+			{:else}
+				<TextViewer text={value} />
+			{/if}
 		{:else}
 			<textarea
 				bind:value
