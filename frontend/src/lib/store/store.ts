@@ -55,4 +55,5 @@ export const store = {
     toolItems,
 };
 
-export const activeToolItemHref = writable('');
+export const activeToolItemHref = writable('/');
+export const title = writable('所有工具');
