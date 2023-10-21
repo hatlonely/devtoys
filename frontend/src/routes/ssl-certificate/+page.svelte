@@ -131,15 +131,11 @@
 				},
 				{
 					label: 'CRL 分发点',
-					value: res.Certificate.CRLDistributionPoints
-						? res?.Certificate?.CRLDistributionPoints?.join(', ')
-						: ''
+					value: res?.Certificate?.CRLDistributionPoints?.join(', ')
 				},
 				{
 					label: '颁发者证书 URL',
-					value: res.Certificate.IssuingCertificateURL
-						? res?.Certificate?.IssuingCertificateURL?.join(', ')
-						: ''
+					value: res?.Certificate?.IssuingCertificateURL?.join(', ')
 				},
 				{
 					label: 'OCSP 服务器地址',
