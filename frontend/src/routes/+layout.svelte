@@ -51,14 +51,20 @@
 			title: 'https 证书'
 		}
 	];
+
+	let title = '所有工具';
+	function setTitle(title_: string) {
+		title = title_;
+	}
 </script>
 
 <AppShell slotSidebarLeft="bg-surface-500/5 w-56 p-4">
 	<svelte:fragment slot="header">
-		<AppBar>
+		<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
 			<svelte:fragment slot="lead">
 				<strong class="text-xl uppercase">DevToys</strong>
 			</svelte:fragment>
+			{title}
 			<svelte:fragment slot="trail">
 				<ThemeSelector />
 
@@ -82,7 +88,12 @@
 				<hr />
 				{#each toolList as tool}
 					<li>
-						<a href={tool.href}>
+						<a
+							href={tool.href}
+							on:click={() => {
+								setTitle(tool.title);
+							}}
+						>
 							<span><Icon name={tool.icon} class="icon" /></span>
 							<span>{tool.title}</span>
 						</a>

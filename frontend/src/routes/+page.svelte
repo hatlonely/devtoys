@@ -54,7 +54,7 @@
 </script>
 
 <div class="w-full text-token px-6 py-3">
-	<Title title="所有工具" />
+	<!-- <Title title="所有工具" /> -->
 
 	<div class="flex flex-wrap">
 		{#each toolItems as toolItem}
