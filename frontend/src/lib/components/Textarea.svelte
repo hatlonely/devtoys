@@ -11,8 +11,8 @@
 	export let code = false;
 	export let warning = '';
 	export let title = '';
-	export let enableUpload = false;
 
+	export let enableUpload = false;
 	export let uploadMessage = '点击或者拖拽文件';
 	export let uploadAccept = 'text/*';
 
