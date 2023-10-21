@@ -48,6 +48,12 @@ const toolItems = [
         title: 'https 证书',
         description: 'https 证书解析工具',
         href: '/ssl-certificate'
+    },
+    {
+        icon: 'password',
+        title: '密码生成',
+        description: '密码生成工具',
+        href: '/password-generator'
     }
 ];
 
