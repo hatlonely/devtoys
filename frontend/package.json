@@ -59,11 +59,13 @@
     "@mui/icons-material": "^5.14.13",
     "codejar-linenumbers": "^1.0.0",
     "font-awesome": "^4.7.0",
+    "json-to-pretty-yaml": "^1.2.2",
     "material-icons": "^1.13.12",
     "material-symbols": "^0.13.0",
     "pretty-print-json": "^2.0.4",
     "prismjs": "^1.29.0",
     "sql-formatter": "^13.0.0",
-    "svelte-icons": "^2.1.0"
+    "svelte-icons": "^2.1.0",
+    "yaml": "^2.3.3"
   }
 }

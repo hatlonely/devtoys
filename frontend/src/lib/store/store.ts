@@ -67,6 +67,12 @@ const toolItems = [
         title: 'SQL 格式化',
         description: 'SQL 格式化工具',
         href: '/sql-formatter',
+    },
+    {
+        icon: 'yaml',
+        title: 'JSON <-> YAML',
+        description: 'JSON YAML 转换工具',
+        href: '/json-to-yaml',
     }
 ];
 
