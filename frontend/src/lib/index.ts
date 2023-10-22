@@ -15,3 +15,4 @@ export { default as Icon } from './icons/Icon.svelte';
 export { default as ThemeSelector } from './components/ThemeSelector.svelte';
 export { default as InputItem } from './components/InputItem.svelte';
 export { default as NumberInputItem } from './components/NumberInputItem.svelte';
+export { default as CodeViewer } from './components/CodeViewer.svelte';
