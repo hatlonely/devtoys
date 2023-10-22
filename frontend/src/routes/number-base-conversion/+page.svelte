@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ConvertNumberBase } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroupItem, Textarea, TextViewer, MultiSelector, Input } from '$lib';
+	import { Title, RadioGroupItem, Textarea, TextViewer, MultiSelector, TextInputItem } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -115,7 +115,7 @@
 	</div>
 
 	<div class="w-full text-token card p-4">
-		<Input
+		<TextInputItem
 			bind:value={text}
 			on:input={calculate}
 			placeholder="输入要转换的数字"

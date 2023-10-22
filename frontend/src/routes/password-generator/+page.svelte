@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { GeneratePassword } from '$lib/wailsjs/go/devtoys/App';
-	import { RadioGroupItem, TextViewer, Input, NumberInputItem } from '$lib';
+	import { RadioGroupItem, TextViewer, TextInputItem, NumberInputItem } from '$lib';
 
 	let length = 16;
 	let enableDigit = true;
@@ -136,7 +136,7 @@
 		/>
 
 		{#if enableSpecific}
-			<Input
+			<TextInputItem
 				bind:value={specific}
 				title="自定义特殊字符"
 				placeholder="输入特殊字符集合"
@@ -147,7 +147,7 @@
 	</div>
 
 	<div class="w-full text-token card p-4">
-		<Input
+		<TextInputItem
 			bind:value={characterSet}
 			on:input={calculate}
 			on:clear={calculate}

@@ -5,7 +5,7 @@ export { default as Textarea } from './components/Textarea.svelte';
 export { default as RadioGroupItem } from './components/RadioGroupItem.svelte';
 export { default as Button } from './components/Button.svelte';
 export { default as Warning } from './components/Warning.svelte';
-export { default as Input } from './components/Input.svelte';
+export { default as TextInputItem } from './components/TextInputItem.svelte';
 export { default as DataTable } from './components/DataTable.svelte';
 export { default as InformationWall } from './components/InformationWall.svelte';
 export { default as MultiSelector } from './components/MultiSelector.svelte';

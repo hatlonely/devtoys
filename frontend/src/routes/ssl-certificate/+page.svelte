@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { SSLCertificate } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, Textarea, Input, DataTable } from '$lib';
+	import { Title, Textarea, TextInputItem, DataTable } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -155,7 +155,7 @@
 <div class="w-full text-token px-6 py-3 space-y-4">
 	<!-- <Title title="https 证书" /> -->
 	<div class="w-full text-token card p-4">
-		<Input
+		<TextInputItem
 			bind:value={link}
 			on:enter={calculate}
 			on:clear={calculate}

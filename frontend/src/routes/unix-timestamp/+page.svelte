@@ -2,7 +2,7 @@
 	import 'material-symbols';
 	import '@fontsource/roboto-mono';
 	import { UnixTimestamp } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, Input, InformationWall } from '$lib';
+	import { Title, TextInputItem, InformationWall } from '$lib';
 
 	let text = '';
 	let warning: any = '';
@@ -47,7 +47,7 @@
 	<!-- <Title title="Unix 时间戳" /> -->
 
 	<div class="w-full text-token card p-4">
-		<Input
+		<TextInputItem
 			bind:value={text}
 			on:input={calculate}
 			on:clear={calculate}

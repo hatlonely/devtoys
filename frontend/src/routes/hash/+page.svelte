@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Hash } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroupItem, Textarea, TextViewer, Input } from '$lib';
+	import { Title, RadioGroupItem, Textarea, TextViewer, TextInputItem } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -107,7 +107,7 @@
 		/>
 
 		{#if hmac}
-			<Input
+			<TextInputItem
 				bind:value={key}
 				on:input={calculate}
 				on:clear={calculate}
