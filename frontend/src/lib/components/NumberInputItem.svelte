@@ -1,13 +1,10 @@
 <script lang="ts">
 	import 'material-symbols';
-	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import NumberInput from './NumberInput.svelte';
 
 	export let value: any;
 	export let title: string;
 	export let description: string;
-	export let code = false;
-	export let placeholder = '';
 	export let icon: string;
 	export let iconSet = 'material-symbols';
 </script>
@@ -23,13 +20,6 @@
 		<dd class="text-sm opacity-50">{description}</dd>
 	</span>
 	<span>
-		<!-- <input
-			bind:value
-			on:input
-			class="input {code ? 'devtoys-code' : ''}"
-			spellcheck="false"
-			{placeholder}
-		/> -->
 		<NumberInput bind:value />
 	</span>
 </div>
