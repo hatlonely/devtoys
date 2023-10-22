@@ -25,16 +25,6 @@
 		document.body.setAttribute('data-theme', s?.App?.Theme);
 	});
 
-	let activeToolItemHref_value = '';
-	activeToolItemHref.subscribe((href) => {
-		activeToolItemHref_value = href;
-	});
-
-	let title_value = '';
-	title.subscribe((t) => {
-		title_value = t;
-	});
-
 	function setTitleAndActiveToolItem(t: string, href: string) {
 		title.set(t);
 		activeToolItemHref.set(href);
@@ -49,7 +39,7 @@
 			<svelte:fragment slot="lead">
 				<strong class="text-xl uppercase">DevToys</strong>
 			</svelte:fragment>
-			{title_value}
+			{$title}
 			<svelte:fragment slot="trail">
 				<ThemeSelector />
 
@@ -67,7 +57,7 @@
 				<li>
 					<a
 						href="/"
-						class:variant-filled-primary={activeToolItemHref_value === '/'}
+						class:variant-filled-primary={$activeToolItemHref === '/'}
 						on:click={() => {
 							setTitleAndActiveToolItem('所有工具', '/');
 						}}
@@ -80,7 +70,7 @@
 				{#each store.toolItems as tool}
 					<li>
 						<a
-							class:variant-filled-primary={activeToolItemHref_value === tool.href}
+							class:variant-filled-primary={$activeToolItemHref === tool.href}
 							href={tool.href}
 							on:click={() => {
 								setTitleAndActiveToolItem(tool.title, tool.href);
