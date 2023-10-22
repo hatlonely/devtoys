@@ -6,3 +6,4 @@ pkg/
 *.bk/
 .vscode/
 build/windows/
+.idea/
