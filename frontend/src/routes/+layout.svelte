@@ -4,7 +4,7 @@
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
-	import { store, activeToolItemHref, title } from '$lib/store/store';
+	import { store, activeToolItemHref, title, setting } from '$lib/store/store';
 	import { Icon, ThemeSelector } from '$lib';
 
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
@@ -20,6 +20,10 @@
 				break;
 		}
 	}
+
+	setting.subscribe((s) => {
+		document.body.setAttribute('data-theme', s?.App?.Theme);
+	});
 
 	let activeToolItemHref_value = '';
 	activeToolItemHref.subscribe((href) => {
