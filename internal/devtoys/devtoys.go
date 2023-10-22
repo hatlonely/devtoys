@@ -107,6 +107,9 @@ func getAppConfigPath() (string, error) {
 func readSetting(filename string) (*Options, error) {
 	f, err := os.Open(filename)
 	if err != nil {
+		if os.IsNotExist(err) {
+			return &Options{}, nil
+		}
 		return nil, errors.Wrap(err, "failed to open config file")
 	}
 	defer f.Close()
