@@ -2,6 +2,12 @@ package devtoys
 
 import (
 	"context"
+	"encoding/json"
+	"os"
+	"path/filepath"
+
+	"github.com/hatlonely/go-kit/config"
+	"github.com/pkg/errors"
 )
 
 type AppOptions struct {
@@ -26,7 +32,7 @@ type App struct {
 	PasswordGeneratorApp
 }
 
-func NewApp() *App {
+func NewAppWithOptions(options *Options) *App {
 	return &App{
 		Base64TextApp:           *NewBase64TextApp(),
 		UnixTimestampApp:        *NewUnixTimestampApp(),
@@ -37,7 +43,51 @@ func NewApp() *App {
 		StringConversionApp:     *NewStringConversionApp(),
 		SSLCertificateApp:       *NewSSLCertificateApp(),
 		PasswordGeneratorApp:    *NewPasswordGeneratorApp(),
+		options:                 options,
 	}
+}
+
+func NewAppWithConfig(filename string) (*App, error) {
+	cfg, err := config.NewConfigWithSimpleFile(filename)
+	if err != nil {
+		return nil, err
+	}
+
+	var options Options
+	if err := cfg.Unmarshal(&options); err != nil {
+		return nil, err
+	}
+
+	return NewAppWithOptions(&options), nil
+}
+
+func NewApp() (*App, error) {
+	configDir, err := os.UserConfigDir()
+	if err != nil {
+		return nil, errors.Wrap(err, "os.UserConfigDir failed")
+	}
+
+	fp := filepath.Join(configDir, "devtoys", "setting.json")
+
+	// 如果文件不存在，则创建一个空的文件，文件内容为空的 options
+	if _, err := os.Stat(fp); os.IsNotExist(err) {
+		if err := os.MkdirAll(filepath.Dir(fp), 0755); err != nil {
+			return nil, errors.Wrap(err, "failed to create config directory")
+		}
+
+		f, err := os.Create(fp)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to create config file")
+		}
+		defer f.Close()
+
+		options := &Options{}
+		if err := json.NewEncoder(f).Encode(options); err != nil {
+			return nil, errors.Wrap(err, "failed to write options to config file")
+		}
+	}
+
+	return NewAppWithConfig(fp)
 }
 
 func (a *App) Startup(ctx context.Context) {
