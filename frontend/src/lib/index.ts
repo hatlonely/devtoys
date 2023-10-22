@@ -2,7 +2,7 @@
 export { default as Title } from './components/Title.svelte';
 export { default as TextViewer } from './components/TextViewer.svelte';
 export { default as Textarea } from './components/Textarea.svelte';
-export { default as RadioGroupItem } from './components/RadioGroup.svelte';
+export { default as RadioGroupItem } from './components/RadioGroupItem.svelte';
 export { default as Button } from './components/Button.svelte';
 export { default as Warning } from './components/Warning.svelte';
 export { default as Input } from './components/Input.svelte';
