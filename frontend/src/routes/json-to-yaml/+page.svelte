@@ -2,28 +2,37 @@
 	import { CodeEditor, CodeViewer, RadioGroupItem, NumberInputItem } from '$lib';
 	import YAML from 'yaml';
 
-	let json = '';
-	let yaml = '';
+	let in_ = '';
+	let to = '';
 	let indent = 2;
 	let warning: any = '';
 
 	async function calculate() {
-		if (json === '') {
-			yaml = '';
+		if (in_ === '') {
+			to = '';
 			return;
 		}
 
-		try {
-			yaml = YAML.stringify(JSON.parse(json), {
-				indent
-			});
-			warning = '';
-		} catch (err) {
-			warning = err;
+		if (in_.match(/^[{\[]/)) {
+			try {
+				to = YAML.stringify(JSON.parse(in_), {
+					indent
+				});
+				warning = '';
+			} catch (err) {
+				warning = err;
+			}
+		} else {
+			try {
+				to = JSON.stringify(YAML.parse(in_), null, indent);
+				warning = '';
+			} catch (err) {
+				warning = err;
+			}
 		}
 	}
 
-	$: json, calculate();
+	$: in_, calculate();
 	$: indent, calculate();
 </script>
 
@@ -38,12 +47,12 @@
 	</div>
 
 	<div class="w-full text-token card p-4">
-		<CodeEditor title="输入" bind:value={json} on:input={calculate} {warning} />
+		<CodeEditor title="输入" bind:value={in_} on:input={calculate} {warning} />
 	</div>
 
-	{#if yaml}
+	{#if to}
 		<div class="w-full text-token card p-4">
-			<CodeViewer title="输出" value={yaml} />
+			<CodeViewer title="输出" value={to} />
 		</div>
 	{/if}
 </div>
