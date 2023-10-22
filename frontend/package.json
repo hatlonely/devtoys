@@ -61,6 +61,7 @@
     "font-awesome": "^4.7.0",
     "material-icons": "^1.13.12",
     "material-symbols": "^0.13.0",
+    "pretty-print-json": "^2.0.4",
     "prismjs": "^1.29.0",
     "svelte-icons": "^2.1.0"
   }

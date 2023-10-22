@@ -55,6 +55,12 @@ const toolItems = [
         title: '密码生成',
         description: '密码生成工具',
         href: '/password-generator'
+    },
+    {
+        icon: 'json',
+        title: 'JSON 格式化',
+        description: 'JSON 格式化工具',
+        href: '/json-formatter',
     }
 ];
 
