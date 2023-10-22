@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/thoas/go-funk"
 )
 
 type TextBinaryConversionApp struct {
@@ -19,12 +18,11 @@ func NewTextBinaryConversionApp() *TextBinaryConversionApp {
 }
 
 type TextBinaryConversionReq struct {
-	In              string
-	InType          string `validate:"required,oneof=bin hex dec raw"`
-	ToType          string `validate:"required,oneof=bin hex dec raw"`
-	AsByte          bool
-	LowerCase       bool
-	WithoutFillZero bool
+	In        string
+	InType    string `validate:"required,oneof=bin hex dec raw"`
+	ToType    string `validate:"required,oneof=bin hex dec raw"`
+	AsByte    bool
+	LowerCase bool
 }
 
 type TextBinaryConversionRes struct {
@@ -61,12 +59,6 @@ func (a *TextBinaryConversionApp) ConvertTextBinary(req *TextBinaryConversionReq
 
 	if !req.LowerCase && req.ToType == "hex" {
 		text = strings.ToUpper(text)
-	}
-
-	if req.WithoutFillZero {
-		text = strings.Join(funk.Map(strings.Split(text, " "), func(v string) string {
-			return strings.TrimLeft(v, "0")
-		}).([]string), " ")
 	}
 
 	return &TextBinaryConversionRes{

@@ -44,38 +44,6 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 			So(res.To, ShouldEqual, "01101000 01100101 01101100 01101100 01101111")
 		})
 
-		Convey("bin without space", func() {
-			req := &TextBinaryConversionReq{
-				In:     "hello",
-				ToType: "bin",
-			}
-			res, err := app.ConvertTextBinary(req)
-			So(err, ShouldBeNil)
-			So(res.To, ShouldEqual, "0110100001100101011011000110110001101111")
-		})
-
-		Convey("bin without fill zero", func() {
-			req := &TextBinaryConversionReq{
-				In:              "hello",
-				ToType:          "bin",
-				WithoutFillZero: true,
-			}
-			res, err := app.ConvertTextBinary(req)
-			So(err, ShouldBeNil)
-			So(res.To, ShouldEqual, "1101000 1100101 1101100 1101100 1101111")
-		})
-
-		Convey("bin without space and fill zero", func() {
-			req := &TextBinaryConversionReq{
-				In:              "hello",
-				ToType:          "bin",
-				WithoutFillZero: true,
-			}
-			res, err := app.ConvertTextBinary(req)
-			So(err, ShouldBeNil)
-			So(res.To, ShouldEqual, "11010001100101110110011011001101111")
-		})
-
 		Convey("hex", func() {
 			req := &TextBinaryConversionReq{
 				In:     "hello",
@@ -84,38 +52,6 @@ func TestConvertTextBinaryConversion(t *testing.T) {
 			res, err := app.ConvertTextBinary(req)
 			So(err, ShouldBeNil)
 			So(res.To, ShouldEqual, "68 65 6C 6C 6F")
-		})
-
-		Convey("hex without space", func() {
-			req := &TextBinaryConversionReq{
-				In:     "hello",
-				ToType: "hex",
-			}
-			res, err := app.ConvertTextBinary(req)
-			So(err, ShouldBeNil)
-			So(res.To, ShouldEqual, "68656C6C6F")
-		})
-
-		Convey("hex without fill zero", func() {
-			req := &TextBinaryConversionReq{
-				In:              "hello",
-				ToType:          "hex",
-				WithoutFillZero: true,
-			}
-			res, err := app.ConvertTextBinary(req)
-			So(err, ShouldBeNil)
-			So(res.To, ShouldEqual, "68 65 6C 6C 6F")
-		})
-
-		Convey("hex without space and fill zero", func() {
-			req := &TextBinaryConversionReq{
-				In:              "hello",
-				ToType:          "hex",
-				WithoutFillZero: true,
-			}
-			res, err := app.ConvertTextBinary(req)
-			So(err, ShouldBeNil)
-			So(res.To, ShouldEqual, "68656C6C6F")
 		})
 
 		Convey("hex lower case", func() {
