@@ -4,7 +4,17 @@ import (
 	"context"
 )
 
+type AppOptions struct {
+	Theme string
+}
+
+type Options struct {
+	App AppOptions
+}
+
 type App struct {
+	options *Options
+
 	Base64TextApp
 	UnixTimestampApp
 	NumberBaseConversionApp
@@ -40,4 +50,12 @@ func (a *App) Startup(ctx context.Context) {
 	a.StringConversionApp.Startup(ctx)
 	a.SSLCertificateApp.Startup(ctx)
 	a.PasswordGeneratorApp.Startup(ctx)
+}
+
+func (a *App) GetSetting() *Options {
+	return a.options
+}
+
+func (a *App) SetSetting(options *Options) {
+	a.options = options
 }
