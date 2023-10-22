@@ -78,6 +78,7 @@
 	export let enableUpload = false;
 	export let uploadMessage = '点击或者拖拽文件';
 	export let uploadAccept = 'text/*';
+	export let asByte = false;
 
 	let upload = false;
 	let files: FileList;
@@ -100,6 +101,47 @@
 	function toggleUpload() {
 		upload = !upload;
 	}
+
+	function readFile(file: File): Promise<string> {
+		return new Promise<string>((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onload = () => {
+				resolve(reader.result as string);
+			};
+			reader.onerror = () => {
+				reject(reader.error);
+			};
+			reader.readAsText(file);
+		});
+	}
+
+	async function onUpload(): Promise<void> {
+		warning = '';
+		if (!files || files.length === 0) {
+			return;
+		}
+
+		const file = files[0];
+		const acceptTypes = uploadAccept.split(',');
+		if (!acceptTypes.some((type) => file.type.match(type.trim()))) {
+			warning = `不支持的文件类型：${file.type}`;
+			return;
+		}
+
+		const content = await readFile(file);
+		if (file.type.startsWith('text/')) {
+			value = content;
+			asByte = false;
+		} else {
+			value = btoa(content);
+			asByte = true;
+		}
+
+		uploadDone = true;
+		dispatch('upload', { value });
+	}
+
+	$: files, onUpload;
 </script>
 
 <div class="space-y-2">
@@ -138,11 +180,11 @@
 					<svelte:fragment slot="meta">支持的文件类型：{uploadAccept}</svelte:fragment>
 				</FileDropzone>
 			{:else if files[0].type.startsWith('text/')}
-				<CodeViewer {value} />
+				<CodeViewer title={files[0].name} {value} />
 			{:else if files[0].type.startsWith('image/')}
 				<img src={URL.createObjectURL(files[0])} alt={files[0].name} />
 			{:else if files[0].type === 'application/x-x509-ca-cert'}
-				<CodeViewer {value} />
+				<CodeViewer title={files[0].name} {value} />
 			{:else}
 				<CodeViewer value={files[0].name} />
 			{/if}

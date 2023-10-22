@@ -117,13 +117,13 @@
 					<svelte:fragment slot="meta">支持的文件类型：{uploadAccept}</svelte:fragment>
 				</FileDropzone>
 			{:else if files[0].type.startsWith('text/')}
-				<TextViewer text={value} />
+				<TextViewer title={files[0].name} text={value} />
 			{:else if files[0].type.startsWith('image/')}
 				<img src={URL.createObjectURL(files[0])} alt={files[0].name} />
 			{:else if files[0].type === 'application/x-x509-ca-cert'}
-				<TextViewer text={value} />
+				<TextViewer title={files[0].name} text={value} />
 			{:else}
-				<TextViewer text={files[0].name} />
+				<TextViewer title={files[0].name} text={files[0].name} />
 			{/if}
 		{:else}
 			<textarea

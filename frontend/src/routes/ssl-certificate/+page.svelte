@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { SSLCertificate } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, Textarea, TextInputItem, DataTable } from '$lib';
+	import { CodeEditor, Textarea, TextInputItem, DataTable } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
