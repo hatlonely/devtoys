@@ -66,7 +66,6 @@
 	export let value = '';
 	export let syntax = '';
 	export let withLineNumbers = true;
-	export let disabled = false;
 
 	let copied = false;
 	let codeJar: any;
