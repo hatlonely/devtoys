@@ -1,5 +1,7 @@
 <script lang="ts">
 	import Icon from '../icons/Icon.svelte';
+	import { setting } from '$lib/store/store';
+	import { SetSetting } from '$lib/wailsjs/go/devtoys/App';
 	import { popup, LightSwitch } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
 
@@ -27,6 +29,11 @@
 	function setTheme(theme: string) {
 		document.body.setAttribute('data-theme', theme);
 		currentTheme = theme;
+		setting.update((s) => {
+			s.App.Theme = theme;
+			SetSetting(s);
+			return s;
+		});
 	}
 </script>
 
