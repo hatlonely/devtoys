@@ -14,10 +14,13 @@ var assets embed.FS
 
 func main() {
 	// Create an instance of the app structure
-	app := devtoys.NewApp()
+	app, err := devtoys.NewApp()
+	if err != nil {
+		println("Error:", err.Error())
+	}
 
 	// Create application with options
-	err := wails.Run(&options.App{
+	err = wails.Run(&options.App{
 		Title:  "devtoys",
 		Width:  1024,
 		Height: 768,

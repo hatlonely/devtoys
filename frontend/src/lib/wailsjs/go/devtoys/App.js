@@ -30,8 +30,16 @@ export function Hash(arg1) {
   return window['go']['devtoys']['App']['Hash'](arg1);
 }
 
+export function ReadSetting() {
+  return window['go']['devtoys']['App']['ReadSetting']();
+}
+
 export function SSLCertificate(arg1) {
   return window['go']['devtoys']['App']['SSLCertificate'](arg1);
+}
+
+export function SaveSetting() {
+  return window['go']['devtoys']['App']['SaveSetting']();
 }
 
 export function UnixTimestamp(arg1) {

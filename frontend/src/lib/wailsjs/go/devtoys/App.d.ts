@@ -16,6 +16,10 @@ export function GeneratePassword(arg1:devtoys.GeneratePasswordReq):Promise<devto
 
 export function Hash(arg1:devtoys.HashReq):Promise<devtoys.HashRes>;
 
+export function ReadSetting():Promise<devtoys.Options>;
+
 export function SSLCertificate(arg1:devtoys.SSLCertificateReq):Promise<devtoys.SSLCertificateRes>;
+
+export function SaveSetting():Promise<void>;
 
 export function UnixTimestamp(arg1:devtoys.UnixTimestampReq):Promise<devtoys.UnixTimestampRes>;

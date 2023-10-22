@@ -82,7 +82,9 @@ func NewApp() (*App, error) {
 		defer f.Close()
 
 		options := &Options{}
-		if err := json.NewEncoder(f).Encode(options); err != nil {
+		enc := json.NewEncoder(f)
+		enc.SetIndent("", "  ")
+		if err := enc.Encode(options); err != nil {
 			return nil, errors.Wrap(err, "failed to write options to config file")
 		}
 	}
@@ -102,10 +104,36 @@ func (a *App) Startup(ctx context.Context) {
 	a.PasswordGeneratorApp.Startup(ctx)
 }
 
-func (a *App) GetSetting() *Options {
+func (a *App) ReadSetting() *Options {
 	return a.options
 }
 
-func (a *App) SetSetting(options *Options) {
-	a.options = options
+func (a *App) SaveSetting() error {
+	configDir, err := os.UserConfigDir()
+	if err != nil {
+		return errors.Wrap(err, "os.UserConfigDir failed")
+	}
+
+	fp := filepath.Join(configDir, "devtoys", "setting.json")
+
+	// 如果文件不存在，则创建一个空的文件，文件内容为空的 options
+	if _, err := os.Stat(fp); os.IsNotExist(err) {
+		if err := os.MkdirAll(filepath.Dir(fp), 0755); err != nil {
+			return errors.Wrap(err, "failed to create config directory")
+		}
+	}
+
+	f, err := os.Create(fp)
+	if err != nil {
+		return errors.Wrap(err, "failed to create config file")
+	}
+	defer f.Close()
+
+	enc := json.NewEncoder(f)
+	enc.SetIndent("", "  ")
+	if err := enc.Encode(a.options); err != nil {
+		return errors.Wrap(err, "failed to write options to config file")
+	}
+
+	return nil
 }
