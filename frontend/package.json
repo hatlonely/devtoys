@@ -63,6 +63,7 @@
     "material-symbols": "^0.13.0",
     "pretty-print-json": "^2.0.4",
     "prismjs": "^1.29.0",
+    "sql-formatter": "^13.0.0",
     "svelte-icons": "^2.1.0"
   }
 }

@@ -61,6 +61,12 @@ const toolItems = [
         title: 'JSON 格式化',
         description: 'JSON 格式化工具',
         href: '/json-formatter',
+    },
+    {
+        icon: 'sql',
+        title: 'SQL 格式化',
+        description: 'SQL 格式化工具',
+        href: '/sql-formatter',
     }
 ];
 
