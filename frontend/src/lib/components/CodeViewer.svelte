@@ -66,8 +66,10 @@
 	export let value = '';
 	export let syntax = '';
 	export let withLineNumbers = true;
+	export let disabled = false;
 
 	let copied = false;
+	let codeJar: any;
 </script>
 
 {#if value}
@@ -96,11 +98,12 @@
 			</div>
 		</div>
 		<CodeJar
-			class="hljs devtoys-code p-4 rounded-xl"
+			class="hljs devtoys-code p-4 rounded-xl disabled"
 			{withLineNumbers}
 			{syntax}
 			{highlight}
 			{value}
+			bind:this={codeJar}
 		/>
 	</div>
 {/if}
