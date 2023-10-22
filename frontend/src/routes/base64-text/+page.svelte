@@ -39,8 +39,6 @@
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
-	<!-- <Title title="Base64 文本编解/解码工具" /> -->
-
 	<div class="w-full text-token card p-4">
 		<RadioGroupItem
 			bind:group={mode}
