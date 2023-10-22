@@ -37,7 +37,7 @@
 
 	{#if json}
 		<div class="w-full text-token card p-4">
-			<CodeViewer value={json} />
+			<CodeViewer title="输出" value={json} />
 		</div>
 	{/if}
 </div>
