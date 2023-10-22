@@ -70,7 +70,7 @@ const toolItems = [
     },
     {
         icon: 'yaml',
-        title: 'JSON <-> YAML',
+        title: 'JSON YAML 转换',
         description: 'JSON YAML 转换工具',
         href: '/json-to-yaml',
     }
