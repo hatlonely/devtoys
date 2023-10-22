@@ -1,107 +1,63 @@
 <script lang="ts">
 	import { ConvertTextBinary } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroupItem, Textarea, TextViewer, MultiSelector } from '$lib';
+	import { RadioGroupItem, Textarea, TextViewer, MultiSelector } from '$lib';
 	import '@fontsource/roboto-mono';
 
-	let text = '';
-	let to: Record<string, boolean> = {
-		hex: true
-	};
+	let in_ = '';
+	let to = '';
+	let inType = 'raw';
+	let toType = 'hex';
+	let asByte = false;
 	let lowercase = false;
-	let withoutSpace = false;
-	let withoutFillZero = false;
 	let warning: any = '';
-	let results: any = {};
 
 	async function calculate() {
 		warning = '';
-		for (const key in to) {
-			if (!to[key]) {
-				continue;
-			}
-			try {
-				const res = await ConvertTextBinary({
-					Text: text,
-					To: key,
-					LowerCase: lowercase,
-					WithoutSpace: withoutSpace,
-					WithoutFillZero: withoutFillZero
-				});
-				results[key] = res.Text;
-			} catch (err) {
-				warning = err;
-			}
+		try {
+			const res = await ConvertTextBinary({
+				In: in_,
+				InType: inType,
+				ToType: toType,
+				AsByte: asByte,
+				LowerCase: lowercase
+			});
+			to = res.To;
+		} catch (err) {
+			warning = err;
 		}
 	}
 
-	$: text, calculate();
+	$: in_, calculate();
+	$: inType, calculate();
+	$: toType, calculate();
+	$: asByte, calculate();
 	$: lowercase, calculate();
-	$: withoutSpace, calculate();
-	$: withoutFillZero, calculate();
 
 	const labelValues = [
 		{
-			label: '二进制',
-			value: 'bin'
+			label: '原始',
+			value: 'raw'
 		},
 		{
-			label: '十六进制',
-			value: 'hex'
+			label: '二进制',
+			value: 'bin'
 		},
 		{
 			label: '十进制',
 			value: 'dec'
 		},
 		{
-			label: 'Base64',
-			value: 'base64'
+			label: '十六进制',
+			value: 'hex'
 		}
 	];
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
-	<!-- <Title title="文本二进制转换工具" /> -->
-
 	<div class="w-full text-token card p-4">
 		<RadioGroupItem
-			bind:group={withoutSpace}
-			name="withoutSpace"
-			icon="sync_alt"
-			title="空格"
-			description="是否在结果中使用空格分隔"
-			items={[
-				{
-					label: '使用',
-					value: false
-				},
-				{
-					label: '不用',
-					value: true
-				}
-			]}
-		/>
-
-		<RadioGroupItem
-			bind:group={withoutFillZero}
-			name="withoutFillZero"
-			icon="sync_alt"
-			title="填充 0"
-			description="是否在结果中用 0 填充"
-			items={[
-				{
-					label: '填充',
-					value: false
-				},
-				{
-					label: '不填',
-					value: true
-				}
-			]}
-		/>
-
-		<RadioGroupItem
 			bind:group={lowercase}
-			name="mode"
+			name="lowercase"
 			icon="sync_alt"
 			title="大小写"
 			description="是否使用小写字符编码（仅十六进制有效）"
@@ -117,25 +73,47 @@
 			]}
 		/>
 
-		<MultiSelector
-			bind:values={to}
+		<RadioGroupItem
+			bind:group={asByte}
+			name="asByte"
 			icon="sync_alt"
-			title="二进制类型"
-			description="选择要转换的二进制类型"
-			{labelValues}
-			on:select={(e) => {
-				if (e.detail.selected) {
-					calculate();
-				} else {
-					results[e.detail.value] = '';
+			title="文本模式"
+			description="二进制模式还是 Unicode 文本模式"
+			items={[
+				{
+					label: '文本',
+					value: false
+				},
+				{
+					label: '二进制',
+					value: true
 				}
-			}}
+			]}
+		/>
+
+		<RadioGroupItem
+			bind:group={inType}
+			name="inType"
+			icon="sync_alt"
+			title="输入类型"
+			description="输入的二进制类型"
+			items={labelValues}
+		/>
+
+		<RadioGroupItem
+			bind:group={toType}
+			name="inType"
+			icon="sync_alt"
+			title="输出类型"
+			description="输出的二进制类型"
+			items={labelValues}
 		/>
 	</div>
 
 	<div class="w-full text-token card p-4">
 		<Textarea
-			bind:value={text}
+			title="输入"
+			bind:value={in_}
 			on:input={calculate}
 			placeholder="输入要转换的文本"
 			code={true}
@@ -143,11 +121,9 @@
 		/>
 	</div>
 
-	{#each labelValues as labelValue}
-		{#if to[labelValue.value] && results[labelValue.value]}
-			<div class="w-full text-token card p-4">
-				<TextViewer title={labelValue.label} text={results[labelValue.value]} />
-			</div>
-		{/if}
-	{/each}
+	{#if to}
+		<div class="w-full text-token card p-4">
+			<TextViewer title="输出" text={to} />
+		</div>
+	{/if}
 </div>
