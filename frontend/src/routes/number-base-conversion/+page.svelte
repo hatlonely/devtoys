@@ -1,75 +1,80 @@
 <script lang="ts">
 	import { ConvertNumberBase } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroupItem, Textarea, TextViewer, MultiSelector, TextInputItem } from '$lib';
+	import { RadioGroupItem, TextViewer, TextInputItem } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
-	let inBase = '0123456789';
-	let toBases: Record<string, boolean> = {
-		'0123456789ABCDEF': true
-	};
+	let inBase = 0;
+	let toBase = 0;
+	let inBaseCharacters = '';
+	let toBaseCharacters = '';
 	let lowercase = false;
 	let warning: any = '';
-	let results: any = {};
-
-	async function convertNumberBase(inBase: string, toBase: string) {
-		if (lowercase) {
-			inBase = inBase.toLowerCase();
-			toBase = toBase.toLowerCase();
-		} else {
-			inBase = inBase.toUpperCase();
-			toBase = toBase.toUpperCase();
-		}
-
-		return await ConvertNumberBase({
-			Number: text,
-			LowerCase: lowercase,
-			InBaseCharacters: inBase,
-			ToBaseCharacters: toBase
-		});
-	}
+	let result = '';
 
 	async function calculate() {
+		if (inBase == 0 && inBaseCharacters == '') {
+			return;
+		}
+		if (toBase == 0 && toBaseCharacters == '') {
+			return;
+		}
+
 		warning = '';
-		for (const toBase in toBases) {
-			if (!toBases[toBase]) {
-				continue;
-			}
-			try {
-				const res = await convertNumberBase(inBase, toBase);
-				results[toBase] = res.Number;
-			} catch (err) {
-				warning = err;
-			}
+		if (inBase != 0) {
+			inBaseCharacters = '';
+		}
+		if (toBase != 0) {
+			toBaseCharacters = '';
+		}
+
+		try {
+			const res = await ConvertNumberBase({
+				Number: text,
+				LowerCase: lowercase,
+				InBase: inBase,
+				ToBase: toBase,
+				InBaseCharacters: inBaseCharacters,
+				ToBaseCharacters: toBaseCharacters
+			});
+			result = res.Number;
+		} catch (err) {
+			warning = err;
 		}
 	}
 
 	$: text, calculate();
 	$: lowercase, calculate();
 	$: inBase, calculate();
+	$: toBase, calculate();
+	$: inBaseCharacters, calculate();
+	$: toBaseCharacters, calculate();
 
 	const labelValues = [
 		{
 			label: '二进制',
-			value: '01'
+			value: 2
 		},
 		{
 			label: '八进制',
-			value: '01234567'
+			value: 8
 		},
 		{
 			label: '十进制',
-			value: '0123456789'
+			value: 10
 		},
 		{
 			label: '十六进制',
-			value: '0123456789ABCDEF'
+			value: 16
+		},
+		{
+			label: '自定义',
+			value: 0
 		}
 	];
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
-	<!-- <Title title="进制转换工具" /> -->
 	<div class="w-full text-token card p-4">
 		<RadioGroupItem
 			bind:group={lowercase}
@@ -98,24 +103,39 @@
 			items={labelValues}
 		/>
 
-		<MultiSelector
-			bind:values={toBases}
+		{#if inBase === 0}
+			<TextInputItem
+				title="输入进制字符集"
+				bind:value={inBaseCharacters}
+				on:input={calculate}
+				placeholder="输入进制字符集"
+				code={true}
+			/>
+		{/if}
+
+		<RadioGroupItem
+			bind:group={toBase}
+			name="mode"
 			icon="sync_alt"
-			title="输出进制类型"
+			title="输入进制类型"
 			description="选择输出的进制类型"
-			{labelValues}
-			on:select={(e) => {
-				if (e.detail.selected) {
-					calculate();
-				} else {
-					results[e.detail.value] = '';
-				}
-			}}
+			items={labelValues}
 		/>
+
+		{#if toBase === 0}
+			<TextInputItem
+				title="输出进制字符集"
+				bind:value={toBaseCharacters}
+				on:input={calculate}
+				placeholder="输出进制字符集"
+				code={true}
+			/>
+		{/if}
 	</div>
 
 	<div class="w-full text-token card p-4">
 		<TextInputItem
+			title="输入"
 			bind:value={text}
 			on:input={calculate}
 			placeholder="输入要转换的数字"
@@ -124,11 +144,9 @@
 		/>
 	</div>
 
-	{#each labelValues as labelValue}
-		{#if toBases[labelValue.value] && results[labelValue.value]}
-			<div class="w-full text-token card p-4">
-				<TextViewer title={labelValue.label} text={results[labelValue.value]} />
-			</div>
-		{/if}
-	{/each}
+	{#if result}
+		<div class="w-full text-token card p-4">
+			<TextViewer title="输出" text={result} />
+		</div>
+	{/if}
 </div>
