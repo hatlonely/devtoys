@@ -24,7 +24,7 @@
 	<span>
 		<RadioGroup active="variant-filled-primary" hover="hover:variant-soft-primary">
 			{#each items as item}
-				<RadioItem bind:group {name} value={item.value}>{item.label}</RadioItem>
+				<RadioItem class="text-sm" bind:group {name} value={item.value}>{item.label}</RadioItem>
 			{/each}
 		</RadioGroup>
 	</span>

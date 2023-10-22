@@ -22,7 +22,7 @@
 
 <div class="w-full text-token p-2 flex flex-row">
 	<span class="badge-icon p-4 variant-soft-secondary mt-2">
-		{#if iconSet == 'material-symbols'}
+		{#if icon && iconSet == 'material-symbols'}
 			<span class="material-symbols-outlined">{icon}</span>
 		{/if}
 	</span>
@@ -33,14 +33,13 @@
 	<div class="flex items-center space-x-2">
 		{#each labelValues as labelValue}
 			<button
-				class="chip {values[labelValue.value]
-					? 'variant-filled'
-					: 'variant-soft'} hover:variant-soft-secondary"
+				class="btn btn-sm {values[labelValue.value]
+					? 'variant-filled-primary'
+					: 'variant-soft'} hover:variant-soft-primary"
 				on:click={() => {
 					filter(labelValue.value);
 				}}
 			>
-				{#if values[labelValue.value]}<span class="material-symbols-outlined">done</span>{/if}
 				<span class="capitalize">{labelValue.label}</span>
 			</button>
 		{/each}
