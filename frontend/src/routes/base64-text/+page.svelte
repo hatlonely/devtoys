@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Base64Text } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroup, Textarea, TextViewer } from '$lib';
+	import { Title, RadioGroupItem, Textarea, TextViewer } from '$lib';
 	import { fade } from 'svelte/transition';
 	import '@fontsource/roboto-mono';
 
@@ -42,7 +42,7 @@
 	<!-- <Title title="Base64 文本编解/解码工具" /> -->
 
 	<div class="w-full text-token card p-4">
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={mode}
 			name="mode"
 			title="转换模式"
@@ -60,7 +60,7 @@
 			]}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={type_}
 			name="type_"
 			title="编码模式"
@@ -78,7 +78,7 @@
 			]}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={padding}
 			name="padding"
 			title="补齐模式"

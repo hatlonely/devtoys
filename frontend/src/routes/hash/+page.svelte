@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Hash } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroup, Textarea, TextViewer, Input } from '$lib';
+	import { Title, RadioGroupItem, Textarea, TextViewer, Input } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -61,7 +61,7 @@
 	<!-- <Title title="哈希散列工具" /> -->
 
 	<div class="w-full text-token card p-4">
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={encode}
 			name="encode"
 			icon="sync_alt"
@@ -79,7 +79,7 @@
 			]}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={type_}
 			name="type_"
 			icon="sync_alt"
@@ -88,7 +88,7 @@
 			items={labelValues}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={hmac}
 			name="hamc"
 			icon="sync_alt"

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { GeneratePassword } from '$lib/wailsjs/go/devtoys/App';
-	import { RadioGroup, TextViewer, Input, NumberInputItem } from '$lib';
+	import { RadioGroupItem, TextViewer, Input, NumberInputItem } from '$lib';
 
 	let length = 16;
 	let enableDigit = true;
@@ -63,7 +63,7 @@
 			icon="sync_alt"
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={enableDigit}
 			name="enableDigit"
 			title="使用数字"
@@ -81,7 +81,7 @@
 			]}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={enableUpper}
 			name="enableUpper"
 			title="使用大写字母"
@@ -99,7 +99,7 @@
 			]}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={enableLower}
 			name="enableLower"
 			title="使用小写字母"
@@ -117,7 +117,7 @@
 			]}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={enableSpecific}
 			name="enableSpecific"
 			title="使用特殊字符"

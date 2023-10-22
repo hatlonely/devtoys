@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ConvertTextBinary } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroup, Textarea, TextViewer, MultiSelector } from '$lib';
+	import { Title, RadioGroupItem, Textarea, TextViewer, MultiSelector } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -63,7 +63,7 @@
 	<!-- <Title title="文本二进制转换工具" /> -->
 
 	<div class="w-full text-token card p-4">
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={withoutSpace}
 			name="withoutSpace"
 			icon="sync_alt"
@@ -81,7 +81,7 @@
 			]}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={withoutFillZero}
 			name="withoutFillZero"
 			icon="sync_alt"
@@ -99,7 +99,7 @@
 			]}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={lowercase}
 			name="mode"
 			icon="sync_alt"

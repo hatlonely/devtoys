@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Escape } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroup as RadioGroup2, Textarea, TextViewer } from '$lib';
+	import { Title, RadioGroupItem as RadioGroup2, Textarea, TextViewer } from '$lib';
 	import { fade } from 'svelte/transition';
 	import '@fontsource/roboto-mono';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ConvertNumberBase } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroup, Textarea, TextViewer, MultiSelector, Input } from '$lib';
+	import { Title, RadioGroupItem, Textarea, TextViewer, MultiSelector, Input } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -71,7 +71,7 @@
 <div class="w-full text-token px-6 py-3 space-y-4">
 	<!-- <Title title="进制转换工具" /> -->
 	<div class="w-full text-token card p-4">
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={lowercase}
 			name="mode"
 			icon="sync_alt"
@@ -89,7 +89,7 @@
 			]}
 		/>
 
-		<RadioGroup
+		<RadioGroupItem
 			bind:group={inBase}
 			name="mode"
 			icon="sync_alt"
