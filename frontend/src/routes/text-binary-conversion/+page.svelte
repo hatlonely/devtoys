@@ -78,7 +78,7 @@
 			name="asByte"
 			icon="sync_alt"
 			title="文本模式"
-			description="二进制模式还是 Unicode 文本模式"
+			description="二进制模式（需要base64编码）还是 Unicode 文本模式"
 			items={[
 				{
 					label: '文本',
@@ -115,7 +115,7 @@
 			title="输入"
 			bind:value={in_}
 			on:input={calculate}
-			placeholder="输入要转换的文本"
+			placeholder={asByte ? '输入要转换的二进制的 base64 编码' : '输入要转换的文本'}
 			code={true}
 			{warning}
 		/>

@@ -4,8 +4,8 @@
 	import '@fontsource/roboto-mono';
 
 	let text = '';
-	let inBase = 0;
-	let toBase = 0;
+	let inBase = 10;
+	let toBase = 16;
 	let inBaseCharacters = '';
 	let toBaseCharacters = '';
 	let lowercase = false;

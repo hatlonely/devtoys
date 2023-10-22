@@ -99,6 +99,7 @@
 
 	<div class="w-full text-token card p-4">
 		<Textarea
+			title="输入"
 			bind:value={input}
 			on:input={calculate}
 			placeholder="输入要编码/解码的文本"
@@ -111,7 +112,7 @@
 
 	{#if output}
 		<div class="w-full text-token card p-4" in:fade out:fade>
-			<TextViewer bind:text={output} />
+			<TextViewer title="输出" bind:text={output} />
 		</div>
 	{/if}
 </div>

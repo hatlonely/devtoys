@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Hash } from '$lib/wailsjs/go/devtoys/App';
-	import { Title, RadioGroupItem, Textarea, TextViewer, TextInputItem } from '$lib';
+	import { RadioGroupItem, Textarea, TextViewer, TextInputItem } from '$lib';
 	import '@fontsource/roboto-mono';
 
 	let text = '';
@@ -58,8 +58,6 @@
 </script>
 
 <div class="w-full text-token px-6 py-3 space-y-4">
-	<!-- <Title title="哈希散列工具" /> -->
-
 	<div class="w-full text-token card p-4">
 		<RadioGroupItem
 			bind:group={encode}
@@ -121,6 +119,7 @@
 
 	<div class="w-full text-token card p-4">
 		<Textarea
+			title="输入"
 			bind:value={text}
 			on:input={calculate}
 			placeholder="输入要哈希的文本"
