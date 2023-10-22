@@ -98,6 +98,9 @@ func fetchCertificate(link string) (string, error) {
 	}
 	defer resp.Body.Close()
 
+	if resp.TLS == nil {
+		return "", errors.New("resp.TLS is nil")
+	}
 	certs := resp.TLS.PeerCertificates
 	if len(certs) == 0 {
 		return "", errors.New("no certificates found")
