@@ -13,12 +13,22 @@
 		}
 
 		warning = '';
-		try {
-			const obj = JSON.parse(text);
-			json = JSON.stringify(obj, null, indent);
-		} catch (err) {
-			warning = err;
-		}
+		json = '';
+
+		const lines = text.split(/\r?\n/);
+		lines.forEach((line) => {
+			if (line == '') {
+				return;
+			}
+			try {
+				const obj = JSON.parse(line);
+				json += JSON.stringify(obj, null, indent) + '\n';
+			} catch (err) {
+				json += line + '\n';
+				console.log(json);
+				warning = err;
+			}
+		});
 	}
 
 	$: text, calculate();
