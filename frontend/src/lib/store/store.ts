@@ -1,3 +1,4 @@
+import { write } from 'fs';
 import { writable } from 'svelte/store';
 
 const toolItems = [
@@ -63,3 +64,4 @@ export const store = {
 
 export const activeToolItemHref = writable('/');
 export const title = writable('所有工具');
+export const setting = writable({});

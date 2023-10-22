@@ -6,7 +6,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/hatlonely/go-kit/config"
 	"github.com/pkg/errors"
 )
 
@@ -48,48 +47,21 @@ func NewAppWithOptions(options *Options) *App {
 }
 
 func NewAppWithConfig(filename string) (*App, error) {
-	cfg, err := config.NewConfigWithSimpleFile(filename)
+	options, err := readSetting(filename)
 	if err != nil {
-		return nil, err
+		return nil, errors.WithMessage(err, "readSetting failed")
 	}
 
-	var options Options
-	if err := cfg.Unmarshal(&options); err != nil {
-		return nil, err
-	}
-
-	return NewAppWithOptions(&options), nil
+	return NewAppWithOptions(options), nil
 }
 
 func NewApp() (*App, error) {
-	configDir, err := os.UserConfigDir()
+	filename, err := getAppConfigPath()
 	if err != nil {
-		return nil, errors.Wrap(err, "os.UserConfigDir failed")
+		return nil, errors.WithMessage(err, "getAppConfigPath failed")
 	}
 
-	fp := filepath.Join(configDir, "devtoys", "setting.json")
-
-	// 如果文件不存在，则创建一个空的文件，文件内容为空的 options
-	if _, err := os.Stat(fp); os.IsNotExist(err) {
-		if err := os.MkdirAll(filepath.Dir(fp), 0755); err != nil {
-			return nil, errors.Wrap(err, "failed to create config directory")
-		}
-
-		f, err := os.Create(fp)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed to create config file")
-		}
-		defer f.Close()
-
-		options := &Options{}
-		enc := json.NewEncoder(f)
-		enc.SetIndent("", "  ")
-		if err := enc.Encode(options); err != nil {
-			return nil, errors.Wrap(err, "failed to write options to config file")
-		}
-	}
-
-	return NewAppWithConfig(fp)
+	return NewAppWithConfig(filename)
 }
 
 func (a *App) Startup(ctx context.Context) {
@@ -104,26 +76,58 @@ func (a *App) Startup(ctx context.Context) {
 	a.PasswordGeneratorApp.Startup(ctx)
 }
 
-func (a *App) ReadSetting() *Options {
+func (a *App) Shutdown(ctx context.Context) {
+	filename, err := getAppConfigPath()
+	if err != nil {
+		return
+	}
+
+	if err := saveSetting(filename, a.options); err != nil {
+		return
+	}
+}
+
+func (a *App) GetSetting() *Options {
 	return a.options
 }
 
-func (a *App) SaveSetting() error {
+func (a *App) SetSetting(options *Options) {
+	a.options = options
+}
+
+func getAppConfigPath() (string, error) {
 	configDir, err := os.UserConfigDir()
 	if err != nil {
-		return errors.Wrap(err, "os.UserConfigDir failed")
+		return "", errors.Wrap(err, "os.UserConfigDir failed")
 	}
 
-	fp := filepath.Join(configDir, "devtoys", "setting.json")
+	return filepath.Join(configDir, "devtoys", "setting.json"), nil
+}
 
-	// 如果文件不存在，则创建一个空的文件，文件内容为空的 options
-	if _, err := os.Stat(fp); os.IsNotExist(err) {
-		if err := os.MkdirAll(filepath.Dir(fp), 0755); err != nil {
+func readSetting(filename string) (*Options, error) {
+	f, err := os.Open(filename)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to open config file")
+	}
+	defer f.Close()
+
+	var options Options
+	if err := json.NewDecoder(f).Decode(&options); err != nil {
+		return nil, errors.Wrap(err, "failed to decode config file")
+	}
+
+	return &options, nil
+}
+
+func saveSetting(filename string, options *Options) error {
+	// 如果文件夹不存在，则创建文件夹
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		if err := os.MkdirAll(filepath.Dir(filename), 0755); err != nil {
 			return errors.Wrap(err, "failed to create config directory")
 		}
 	}
 
-	f, err := os.Create(fp)
+	f, err := os.Create(filename)
 	if err != nil {
 		return errors.Wrap(err, "failed to create config file")
 	}
@@ -131,7 +135,7 @@ func (a *App) SaveSetting() error {
 
 	enc := json.NewEncoder(f)
 	enc.SetIndent("", "  ")
-	if err := enc.Encode(a.options); err != nil {
+	if err := enc.Encode(options); err != nil {
 		return errors.Wrap(err, "failed to write options to config file")
 	}
 

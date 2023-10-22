@@ -26,20 +26,20 @@ export function GeneratePassword(arg1) {
   return window['go']['devtoys']['App']['GeneratePassword'](arg1);
 }
 
-export function Hash(arg1) {
-  return window['go']['devtoys']['App']['Hash'](arg1);
+export function GetSetting() {
+  return window['go']['devtoys']['App']['GetSetting']();
 }
 
-export function ReadSetting() {
-  return window['go']['devtoys']['App']['ReadSetting']();
+export function Hash(arg1) {
+  return window['go']['devtoys']['App']['Hash'](arg1);
 }
 
 export function SSLCertificate(arg1) {
   return window['go']['devtoys']['App']['SSLCertificate'](arg1);
 }
 
-export function SaveSetting() {
-  return window['go']['devtoys']['App']['SaveSetting']();
+export function SetSetting(arg1) {
+  return window['go']['devtoys']['App']['SetSetting'](arg1);
 }
 
 export function UnixTimestamp(arg1) {
