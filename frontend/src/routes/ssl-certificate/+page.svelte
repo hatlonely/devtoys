@@ -175,6 +175,7 @@
 			code={true}
 			warning={warningText}
 			enableUpload={true}
+			uploadAccept="application/x-x509-ca-cert"
 		/>
 	</div>
 

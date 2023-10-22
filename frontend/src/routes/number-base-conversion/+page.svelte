@@ -117,7 +117,7 @@
 			bind:group={toBase}
 			name="mode"
 			icon="sync_alt"
-			title="输入进制类型"
+			title="输出进制类型"
 			description="选择输出的进制类型"
 			items={labelValues}
 		/>
