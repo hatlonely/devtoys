@@ -44,7 +44,7 @@
 <div class="card p-4 w-60 shadow-xl" data-popup="theme">
 	<div class="space-y-4">
 		<section class="flex justify-between items-center">
-			<h6 class="h6">Mode</h6>
+			<h6 class="h6">颜色模式</h6>
 			<LightSwitch />
 		</section>
 		<hr />
