@@ -16,3 +16,4 @@ export { default as ThemeSelector } from './components/ThemeSelector.svelte';
 export { default as InputItem } from './components/InputItem.svelte';
 export { default as NumberInputItem } from './components/NumberInputItem.svelte';
 export { default as CodeViewer } from './components/CodeViewer.svelte';
+export { default as CodeEditor } from './components/CodeEditor.svelte';
