@@ -45,9 +45,9 @@ const toolItems = [
         href: '/string-conversion'
     },
     {
-        icon: 'https',
-        title: 'https 证书',
-        description: 'https 证书解析工具',
+        icon: 'HTTPS',
+        title: 'HTTPS 证书',
+        description: 'HTTPS 证书解析工具',
         href: '/ssl-certificate'
     },
     {
