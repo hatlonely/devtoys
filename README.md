@@ -7,7 +7,7 @@ DevToys 是一个开发者工具集合. 其灵感来自于有名的 [DevToys](ht
 
 当前正在开发中，暂时还没有 release 版本，以下是通过源码安装的方式
 
-1. 安装 [nodejs](https://nodejs.org/en/download)
+1. 安装 [nodejs 开发环境](https://nodejs.org/en/download)
 2. 安装 [golang 开发环境](https://go.dev/dl/)
 3. 安装 [wails 开发工具](https://wails.io/docs/gettingstarted/installation)
 
@@ -27,6 +27,8 @@ make build
 ## 开发
 
 参照安装步骤，安装必要的依赖后，执行 `wails dev` 即可进入开发模式。浏览器访问 `http://localhost:34115` 即可看到界面。
+
+推荐使用 vscode 开发。
 
 ## 参考链接
 
