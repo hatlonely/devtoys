@@ -1,16 +1,10 @@
 # README
 
-## About
+DevToys is 是一个开发者工具集合. 其灵感来自于有名的 [DevToys](https://github.com/veler/DevToys) 项目。
+使用 [Wails](https://wails.io/docs/introduction) 和 [Svelte](https://svelte.dev/) 开发，提供优美的界面和跨平台的能力
 
-This is the official Wails Svelte-TS template.
+## 参考链接
 
-## Live Development
-
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
-server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
-and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
-to this in your browser, and you can call your Go code from devtools.
-
-## Building
-
-To build a redistributable, production mode package, use `wails build`.
+- [DevToys](https://github.com/veler/DevToys)
+- [Wails](https://wails.io/docs/introduction)
+- [Svelte](https://svelte.dev/)
