@@ -10,7 +10,6 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	function shortcut(e: KeyboardEvent) {
-		console.log(e.code);
 		switch (e.code) {
 			// 按下 F11 全屏显示
 			case 'F11':

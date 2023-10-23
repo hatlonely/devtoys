@@ -1,6 +1,5 @@
 <script lang="ts">
 	import 'material-symbols';
-	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 
 	export let value: any;
 	export let title: string;
