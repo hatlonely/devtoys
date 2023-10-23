@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { CodeEditor, CodeViewer, RadioGroupItem, Warning } from '$lib';
+	import { DoHttp } from '$lib/wailsjs/go/devtoys/App';
 
 	let url = '';
 	let method = 'GET';
@@ -19,21 +20,17 @@
 	async function fetch() {
 		console.log('fetch');
 		try {
-			const res = await window.fetch(
-				url + '?' + (query ? new URLSearchParams(JSON.parse(query)) : ''),
-				{
-					method: method,
-					headers: header ? JSON.parse(header) : {},
-					body: method != 'GET' ? body : undefined
-				}
-			);
+			const res = await DoHttp({
+				Method: method,
+				URL: url,
+				Query: query ? JSON.parse(query) : undefined,
+				Headers: header ? JSON.parse(header) : undefined,
+				Body: body
+			});
 
-			resStatus = res.status;
-			resHeader = JSON.stringify(res.headers, null, 2);
-			resBody = await res.text();
-
-			console.log(resStatus);
-			console.log(resHeader);
+			resStatus = res.Status;
+			resHeader = JSON.stringify(res.Headers, null, 2);
+			resBody = res.Body;
 		} catch (err) {
 			console.log(err);
 		}

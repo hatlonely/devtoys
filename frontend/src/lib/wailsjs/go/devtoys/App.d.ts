@@ -10,6 +10,8 @@ export function ConvertString(arg1:devtoys.ConvertStringReq):Promise<devtoys.Con
 
 export function ConvertTextBinary(arg1:devtoys.TextBinaryConversionReq):Promise<devtoys.TextBinaryConversionRes>;
 
+export function DoHttp(arg1:devtoys.HttpClientReq):Promise<devtoys.HttpClientRes>;
+
 export function Escape(arg1:devtoys.EscapeReq):Promise<devtoys.EscapeRes>;
 
 export function GeneratePassword(arg1:devtoys.GeneratePasswordReq):Promise<devtoys.GeneratePasswordRes>;

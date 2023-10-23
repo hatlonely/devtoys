@@ -29,6 +29,7 @@ type App struct {
 	StringConversionApp
 	SSLCertificateApp
 	PasswordGeneratorApp
+	HttpClientApp
 }
 
 func NewAppWithOptions(options *Options) *App {
@@ -42,6 +43,7 @@ func NewAppWithOptions(options *Options) *App {
 		StringConversionApp:     *NewStringConversionApp(),
 		SSLCertificateApp:       *NewSSLCertificateApp(),
 		PasswordGeneratorApp:    *NewPasswordGeneratorApp(),
+		HttpClientApp:           *NewHttpClientApp(),
 		options:                 options,
 	}
 }
@@ -74,6 +76,7 @@ func (a *App) Startup(ctx context.Context) {
 	a.StringConversionApp.Startup(ctx)
 	a.SSLCertificateApp.Startup(ctx)
 	a.PasswordGeneratorApp.Startup(ctx)
+	a.HttpClientApp.Startup(ctx)
 }
 
 func (a *App) Shutdown(ctx context.Context) {

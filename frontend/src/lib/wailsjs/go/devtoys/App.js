@@ -18,6 +18,10 @@ export function ConvertTextBinary(arg1) {
   return window['go']['devtoys']['App']['ConvertTextBinary'](arg1);
 }
 
+export function DoHttp(arg1) {
+  return window['go']['devtoys']['App']['DoHttp'](arg1);
+}
+
 export function Escape(arg1) {
   return window['go']['devtoys']['App']['Escape'](arg1);
 }
