@@ -73,6 +73,12 @@ const toolItems = [
         title: 'JSON YAML 转换',
         description: 'JSON YAML 转换工具',
         href: '/json-to-yaml',
+    },
+    {
+        icon: 'http',
+        title: 'HTTP 客户端',
+        description: 'HTTP 转换工具',
+        href: '/http-client',
     }
 ];
 
