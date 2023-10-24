@@ -69,7 +69,7 @@
 	export let title = '';
 	export let value = '';
 	export let syntax = '';
-	export let withLineNumbers = true;
+	export let withLineNumbers = false;
 
 	export let warning = '';
 
