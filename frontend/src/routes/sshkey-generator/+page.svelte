@@ -5,14 +5,7 @@
 
 	let type_ = 'rsa';
 	let warning: any = '';
-	let privateKey = '';
-	let publicKey = '';
 	let result: any;
-
-	//     type SSHKeyGeneratorRes struct {
-	// 	PrivateKey string
-	// 	PublicKey  string
-	// }
 
 	async function calculate() {
 		warning = '';
@@ -35,8 +28,8 @@
 		<RadioGroupItem
 			bind:group={type_}
 			name="enableDigit"
-			title="使用数字"
-			description="数字包括（0123456789）"
+			title="加密算法"
+			description="生成 sshkey 的加密算法"
 			icon="sync_alt"
 			items={[
 				{

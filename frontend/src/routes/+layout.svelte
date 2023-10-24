@@ -6,6 +6,11 @@
 	import { storePopup } from '@skeletonlabs/skeleton';
 	import { store, activeToolItemHref, title, setting } from '$lib/store/store';
 	import { Icon, ThemeSelector } from '$lib';
+	import {
+		WindowFullscreen,
+		WindowIsFullscreen,
+		WindowUnfullscreen
+	} from '$lib/wailsjs/runtime/runtime';
 
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
@@ -13,9 +18,9 @@
 		switch (e.code) {
 			// 按下 F11 全屏显示
 			case 'F11':
-				document.fullscreenElement
-					? document.exitFullscreen()
-					: document.documentElement.requestFullscreen();
+				WindowIsFullscreen().then((isFullscreen) =>
+					isFullscreen ? WindowUnfullscreen() : WindowFullscreen()
+				);
 				break;
 		}
 	}
