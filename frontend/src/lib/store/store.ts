@@ -79,6 +79,12 @@ const toolItems = [
         title: 'HTTP 客户端',
         description: 'HTTP 转换工具',
         href: '/http-client',
+    },
+    {
+        icon: 'sshkey',
+        title: 'SSH KEY 生成器',
+        description: 'ssh-keygen 生成 SSH KEY 工具',
+        href: '/sshkey-generator',
     }
 ];
 

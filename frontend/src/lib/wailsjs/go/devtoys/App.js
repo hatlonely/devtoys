@@ -30,6 +30,10 @@ export function GeneratePassword(arg1) {
   return window['go']['devtoys']['App']['GeneratePassword'](arg1);
 }
 
+export function GenerateSSHKey(arg1) {
+  return window['go']['devtoys']['App']['GenerateSSHKey'](arg1);
+}
+
 export function GetSetting() {
   return window['go']['devtoys']['App']['GetSetting']();
 }

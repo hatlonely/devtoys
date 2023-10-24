@@ -16,6 +16,8 @@ export function Escape(arg1:devtoys.EscapeReq):Promise<devtoys.EscapeRes>;
 
 export function GeneratePassword(arg1:devtoys.GeneratePasswordReq):Promise<devtoys.GeneratePasswordRes>;
 
+export function GenerateSSHKey(arg1:devtoys.SSHKeyGeneratorReq):Promise<devtoys.SSHKeyGeneratorRes>;
+
 export function GetSetting():Promise<devtoys.Options>;
 
 export function Hash(arg1:devtoys.HashReq):Promise<devtoys.HashRes>;

@@ -30,6 +30,7 @@ type App struct {
 	SSLCertificateApp
 	PasswordGeneratorApp
 	HttpClientApp
+	SSHKeyGeneratorApp
 }
 
 func NewAppWithOptions(options *Options) *App {
@@ -44,6 +45,7 @@ func NewAppWithOptions(options *Options) *App {
 		SSLCertificateApp:       *NewSSLCertificateApp(),
 		PasswordGeneratorApp:    *NewPasswordGeneratorApp(),
 		HttpClientApp:           *NewHttpClientApp(),
+		SSHKeyGeneratorApp:      *NewSSHKeyGeneratorApp(),
 		options:                 options,
 	}
 }
@@ -77,6 +79,7 @@ func (a *App) Startup(ctx context.Context) {
 	a.SSLCertificateApp.Startup(ctx)
 	a.PasswordGeneratorApp.Startup(ctx)
 	a.HttpClientApp.Startup(ctx)
+	a.SSHKeyGeneratorApp.Startup(ctx)
 }
 
 func (a *App) Shutdown(ctx context.Context) {
