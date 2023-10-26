@@ -1,7 +1,6 @@
 package devtoys
 
 import (
-	"encoding/base64"
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
@@ -11,12 +10,11 @@ func TestAesCBC(t *testing.T) {
 	app := NewAESApp()
 
 	Convey("TestAESCBC", t, func() {
-		iv := base64.StdEncoding.EncodeToString([]byte("123456"))
 
 		eres, err := app.AES(&AESReq{
 			Function:       "encrypt",
 			Text:           "hello world",
-			IV:             iv,
+			IV:             "123456",
 			Base64Text:     false,
 			Key:            "1234567890123456",
 			Base64Key:      false,
@@ -30,7 +28,7 @@ func TestAesCBC(t *testing.T) {
 		dres, err := app.AES(&AESReq{
 			Function:       "decrypt",
 			Text:           eres.Text,
-			IV:             iv,
+			IV:             "123456",
 			Base64Text:     false,
 			Key:            "1234567890123456",
 			Base64Key:      false,
@@ -47,12 +45,10 @@ func TestAesCFB(t *testing.T) {
 	app := NewAESApp()
 
 	Convey("TestAESCFB", t, func() {
-		iv := base64.StdEncoding.EncodeToString([]byte("123456"))
-
 		eres, err := app.AES(&AESReq{
 			Function:       "encrypt",
 			Text:           "hello world hello world hello world hello world hello world hello world hello world hello world hello world",
-			IV:             iv,
+			IV:             "123456",
 			Base64Text:     false,
 			Key:            "1234567890123456",
 			Base64Key:      false,
@@ -66,7 +62,7 @@ func TestAesCFB(t *testing.T) {
 		dres, err := app.AES(&AESReq{
 			Function:       "decrypt",
 			Text:           eres.Text,
-			IV:             iv,
+			IV:             "123456",
 			Base64Text:     false,
 			Key:            "1234567890123456",
 			Base64Key:      false,
@@ -83,12 +79,10 @@ func TestAesCTR(t *testing.T) {
 	app := NewAESApp()
 
 	Convey("TestAESCFB", t, func() {
-		iv := base64.StdEncoding.EncodeToString([]byte("123456"))
-
 		eres, err := app.AES(&AESReq{
 			Function:       "encrypt",
 			Text:           "hello world hello world hello world hello world hello world hello world hello world hello world hello world",
-			IV:             iv,
+			IV:             "123456",
 			Base64Text:     false,
 			Key:            "1234567890123456",
 			Base64Key:      false,
@@ -102,7 +96,7 @@ func TestAesCTR(t *testing.T) {
 		dres, err := app.AES(&AESReq{
 			Function:       "decrypt",
 			Text:           eres.Text,
-			IV:             iv,
+			IV:             "123456",
 			Base64Text:     false,
 			Key:            "1234567890123456",
 			Base64Key:      false,
@@ -119,12 +113,10 @@ func TestAesOFB(t *testing.T) {
 	app := NewAESApp()
 
 	Convey("TestAESCFB", t, func() {
-		iv := base64.StdEncoding.EncodeToString([]byte("123456"))
-
 		eres, err := app.AES(&AESReq{
 			Function:       "encrypt",
 			Text:           "hello world hello world hello world hello world hello world hello world hello world hello world hello world",
-			IV:             iv,
+			IV:             "123456",
 			Base64Text:     false,
 			Key:            "1234567890123456",
 			Base64Key:      false,
@@ -138,7 +130,7 @@ func TestAesOFB(t *testing.T) {
 		dres, err := app.AES(&AESReq{
 			Function:       "decrypt",
 			Text:           eres.Text,
-			IV:             iv,
+			IV:             "123456",
 			Base64Text:     false,
 			Key:            "1234567890123456",
 			Base64Key:      false,

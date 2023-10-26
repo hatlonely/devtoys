@@ -85,6 +85,12 @@ const toolItems = [
         title: 'SSH KEY 生成器',
         description: 'ssh-keygen 生成 SSH KEY 工具',
         href: '/sshkey-generator',
+    },
+    {
+        icon: 'aes',
+        title: 'AES 加解密',
+        description: 'AES 加解密工具',
+        href: '/aes',
     }
 ];
 

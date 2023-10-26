@@ -31,6 +31,7 @@ type App struct {
 	PasswordGeneratorApp
 	HttpClientApp
 	SSHKeyGeneratorApp
+	AESApp
 }
 
 func NewAppWithOptions(options *Options) *App {
@@ -46,6 +47,7 @@ func NewAppWithOptions(options *Options) *App {
 		PasswordGeneratorApp:    *NewPasswordGeneratorApp(),
 		HttpClientApp:           *NewHttpClientApp(),
 		SSHKeyGeneratorApp:      *NewSSHKeyGeneratorApp(),
+		AESApp:                  *NewAESApp(),
 		options:                 options,
 	}
 }
@@ -80,6 +82,7 @@ func (a *App) Startup(ctx context.Context) {
 	a.PasswordGeneratorApp.Startup(ctx)
 	a.HttpClientApp.Startup(ctx)
 	a.SSHKeyGeneratorApp.Startup(ctx)
+	a.AESApp.Startup(ctx)
 }
 
 func (a *App) Shutdown(ctx context.Context) {

@@ -26,8 +26,9 @@ func (a *AESApp) Startup(ctx context.Context) {
 type AESReq struct {
 	Function       string `validate:"oneof=encrypt decrypt"`
 	Text           string `validate:"required"`
-	IV             string
 	Base64Text     bool
+	IV             string
+	Base64IV       bool
 	Key            string `validate:"required"`
 	Base64Key      bool
 	Type           string `validate:"oneof=AES128 AES192 AES256"`
@@ -124,15 +125,22 @@ func (a *AESApp) doAESEncrypt(req *AESReq) (*AESRes, error) {
 	// 加密
 	iv := make([]byte, blockSize)
 	if req.IV != "" {
-		buf, err := base64.StdEncoding.DecodeString(req.IV)
-		if err != nil {
-			return nil, errors.Wrap(err, "base64.StdEncoding.DecodeString failed")
+		var buf []byte
+		if req.Base64IV {
+			buf, err = base64.StdEncoding.DecodeString(req.IV)
+			if err != nil {
+				return nil, errors.Wrap(err, "base64.StdEncoding.DecodeString failed")
+			}
+		} else {
+			buf = []byte(req.IV)
 		}
+
 		if len(buf) > blockSize {
 			return nil, errors.New("iv length should not be greater than block size")
 		}
 		copy(iv, buf)
 	}
+
 	cipherText := make([]byte, len(padtext))
 	switch req.EncryptionMode {
 	case "cbc":
@@ -150,8 +158,6 @@ func (a *AESApp) doAESEncrypt(req *AESReq) (*AESRes, error) {
 	default:
 		return nil, errors.New("invalid encryption mode")
 	}
-
-	// 加密
 
 	return &AESRes{
 		Text: base64.StdEncoding.EncodeToString(cipherText),
@@ -175,22 +181,24 @@ func (a *AESApp) doAESDecrypt(req *AESReq) (*AESRes, error) {
 		return nil, errors.Wrap(err, "base64.StdEncoding.DecodeString failed")
 	}
 
-	// 创建加密块
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, errors.Wrap(err, "aes.NewCipher failed")
 	}
 
-	// 解密
 	plainText := make([]byte, len(cipherText))
-
-	// 创建加密器
 	iv := make([]byte, block.BlockSize())
 	if req.IV != "" {
-		buf, err := base64.StdEncoding.DecodeString(req.IV)
-		if err != nil {
-			return nil, errors.Wrap(err, "base64.StdEncoding.DecodeString failed")
+		var buf []byte
+		if req.Base64IV {
+			buf, err = base64.StdEncoding.DecodeString(req.IV)
+			if err != nil {
+				return nil, errors.Wrap(err, "base64.StdEncoding.DecodeString failed")
+			}
+		} else {
+			buf = []byte(req.IV)
 		}
+
 		if len(buf) > block.BlockSize() {
 			return nil, errors.New("iv length should not be greater than block size")
 		}
