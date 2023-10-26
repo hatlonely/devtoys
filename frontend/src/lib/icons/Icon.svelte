@@ -31,8 +31,8 @@
 			svg: `<path d="M828.8 565.76a259.84 259.84 0 0 1-177.92 160c-91.52 29.12-48 128 34.56 102.72 192-54.08 306.24-200 306.24-391.36C992 288 906.88 192 774.72 192s-215.04 79.68-215.04 203.52c0 177.28 167.68 219.52 269.12 170.24z m-527.68 0a259.84 259.84 0 0 1-177.92 160c-89.92 28.8-49.92 128 34.56 102.72 192-54.08 306.56-200 306.56-391.36C464.32 288 378.88 192 247.04 192S32 271.68 32 395.52c0 176.64 166.72 219.84 269.12 170.24z" fill="#231F20" p-id="7521"></path>`
 		},
 		text: {
-			box: 24,
-			svg: `<path d="M4 8H32" stroke="#333" stroke-width="4" stroke-linecap="round"/><path d="M28 21H44" stroke="#333" stroke-width="4" stroke-linecap="round"/><path d="M18 42L18 8" stroke="#333" stroke-width="4" stroke-linecap="round"/><path d="M36 42L36 21" stroke="#333" stroke-width="4" stroke-linecap="round"/>`
+			box: 1024,
+			svg: `<path d="M320 896c64 0 96-74.88 96-128V192H270.72a96 96 0 0 0-94.08 77.12L160 352H96V128a64 64 0 0 1 64-64h704a64 64 0 0 1 64 64v224h-64l-16.64-82.88A96 96 0 0 0 753.28 192H608v576c0 53.12 32 128 96 128v64H320z" fill="#231F20" p-id="2380"></path>`
 		},
 		number: {
 			box: 1024,
@@ -108,7 +108,16 @@
 	{width}
 	{height}
 	viewBox={displayIcon.viewBox ? displayIcon.viewBox : `0 0 ${displayIcon.box} ${displayIcon.box}`}
-	>{@html displayIcon.svg}
+>
+	<style>
+		path {
+			fill: black;
+		}
+		.dark path {
+			fill: white;
+		}
+	</style>
+	{@html displayIcon.svg}
 </svg>
 
 <style>
