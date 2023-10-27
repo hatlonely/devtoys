@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"time"
 )
 
 type HttpClientApp struct {
@@ -20,11 +21,12 @@ func (a *HttpClientApp) Startup(ctx context.Context) {
 }
 
 type HttpClientReq struct {
-	Method  string
-	URL     string
-	Query   map[string]string
-	Headers map[string]string
-	Body    string
+	Method        string
+	URL           string
+	Query         map[string]string
+	Headers       map[string]string
+	Body          string
+	TimeoutSecond int
 }
 
 type HttpClientRes struct {
@@ -57,8 +59,12 @@ func (a *HttpClientApp) DoHttp(req *HttpClientReq) (*HttpClientRes, error) {
 		}
 	}
 
+	cli := http.Client{
+		Timeout: time.Duration(req.TimeoutSecond) * time.Second,
+	}
+
 	// 发送 HTTP 请求
-	httpRes, err := http.DefaultClient.Do(httpReq)
+	httpRes, err := cli.Do(httpReq)
 	if err != nil {
 		return nil, err
 	}
